@@ -390,6 +390,58 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 				<?php
 					}
 				?>
+				<?php
+				// switch($sq_enq_info['enquiry_type']){
+					
+				// }
+				
+				?>
+				<h3 class="editor_title">Transaction Information</h3>
+						<div class="panel panel-default panel-body app_panel_style">
+							<div class="row">
+
+								<div class="col-md-12">
+
+									<div class="profile_box main_block">
+										<div class="row">
+										<div class="col-md-6">
+
+											<span class="main_block">
+
+												<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+												<?php echo "<label>Selling Amount <em>:</em></label> ".$enquiry_content_arr2['value']; ?>
+
+											</span>
+
+										</div>
+										<div class="col-md-6">
+
+											<span class="main_block">
+
+												<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+												<?php echo "<label>Purchase Amount <em>:</em></label> ".$enquiry_content_arr2['value']; ?>
+
+											</span>
+
+										</div>
+										<div class="col-md-6">
+
+											<span class="main_block">
+
+												<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+												<?php echo "<label>Supplier Name <em>:</em></label> ".$enquiry_content_arr2['value']; ?>
+
+											</span>
+
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>		
 				</div>
 
 				<!-- ********Tab1 End******** -->                    

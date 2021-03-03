@@ -329,6 +329,9 @@ $("#txt_name").autocomplete({
     select: function (event, ui) {
 	  $("#txt_name").val(ui.item.label);
     $('#txt_mobile_no').val(ui.item.contact_no);
+    $('#txt_landline_no').val(ui.item.landline_no);
+    $('#country_code').val(ui.item.country_code);
+    $('#country_code').trigger('change');
     $('#txt_email_id').val(ui.item.email_id);
     },
     open: function(event, ui) {

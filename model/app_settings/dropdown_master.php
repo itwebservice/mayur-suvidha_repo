@@ -471,7 +471,6 @@ function get_customer_hint(){
           "label" => $row_cust['company_name'],
           "contact_no" => $contact_no,
           "email_id" => $email_id,
-          "country_code" => $row_cust['country_code']
         );
       }
       else{
@@ -480,11 +479,23 @@ function get_customer_hint(){
           "label" =>$row_cust['first_name'].' '.$row_cust['last_name'],
           "contact_no" => $contact_no,
           "email_id" => $email_id,
-          "country_code" => $row_cust['country_code']
         );
       }
+      array_push($final_array, $to_be_push);
     }
-    array_push($final_array, $to_be_push);
+    $sq_query = mysql_query("select * from enquiry_master where branch_admin_id='$branch_admin_id'");
+    while($row_cust = mysql_fetch_assoc($sq_query))
+    { 
+      $to_be_push1 = array(
+        "value" =>$row_cust['name'],
+        "label" =>$row_cust['name'],
+        "contact_no" => $row_cust['mobile_no'],
+        "email_id" => $row_cust['email_id'],
+        "landline_no" => str_replace($row_cust['country_code'],"",$row_cust['landline_no']),
+        "country_code" => $row_cust['country_code']
+      );
+      array_push($final_array, $to_be_push1);
+    } 
 }
 else{     
    $sq_query = mysql_query("select * from customer_master where active_flag!='Inactive' order by customer_id desc");
@@ -499,7 +510,6 @@ else{
           "label" => $row_cust['company_name'],
           "contact_no" => $contact_no,
           "email_id" => $email_id,
-          "country_code" => $row_cust['country_code']
         );
       }
       else{
@@ -508,11 +518,23 @@ else{
           "label" =>$row_cust['first_name'].' '.$row_cust['last_name'],
           "contact_no" => $contact_no,
           "email_id" => $email_id,
-          "country_code" => $row_cust['country_code']
         );
       }
       array_push($final_array, $to_be_push);
-     }
+    }
+    $sq_query = mysql_query("select * from enquiry_master");
+    while($row_cust = mysql_fetch_assoc($sq_query))
+    { 
+      $to_be_push1 = array(
+        "value" =>$row_cust['name'],
+        "label" =>$row_cust['name'],
+        "contact_no" => $row_cust['mobile_no'],
+        "email_id" => $row_cust['email_id'],
+        "landline_no" => str_replace($row_cust['country_code'],"",$row_cust['landline_no']),
+        "country_code" => $row_cust['country_code']
+      );
+      array_push($final_array,$to_be_push1);
+    }    
  }
 echo json_encode($final_array);
 }
