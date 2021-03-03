@@ -27,6 +27,9 @@ public function dmc_save()
 	$side = $_POST['side'];
 	$supp_pan = $_POST['supp_pan'];
 	$as_of_date = $_POST['as_of_date'];
+  $username = mysql_real_escape_string($_POST['username']);
+  $portal_link = mysql_real_escape_string($_POST['portal_link']);
+  $password = mysql_real_escape_string($_POST['password']);
   $as_of_date = get_date_db($as_of_date);
 	$created_at = date('Y-m-d H:i:s');
   global $encrypt_decrypt, $secret_key;
@@ -45,7 +48,7 @@ public function dmc_save()
 	$sq_max = mysql_fetch_assoc(mysql_query("select max(dmc_id) as max from dmc_master"));
 	$dmc_id = $sq_max['max'] + 1;
 	$company_name = addslashes($company_name);
-	$sq_dmc = mysql_query("insert into dmc_master (dmc_id, company_name, mobile_no, landline_no, email_id, contact_person_name,immergency_contact_no, dmc_address, country, website, opening_balance, service_tax_no, bank_name,account_name,account_no,branch,ifsc_code, active_flag, created_at, city_id,state_id,side,pan_no,as_of_date) values ('$dmc_id', '$company_name', '$mobile_no', '$landline_no', '$email_id', '$contact_person_name','$immergency_contact_no' ,'$dmc_address','$country','$website', '$opening_balance','$service_tax_no','$bank_name','$account_name','$account_no','$branch','$ifsc_code', '$active_flag', '$created_at', '$cmb_city_id', '$state','$side','$supp_pan','$as_of_date') ");
+	$sq_dmc = mysql_query("insert into dmc_master (dmc_id, company_name, mobile_no, landline_no, email_id, contact_person_name,immergency_contact_no, dmc_address, country, website, opening_balance, service_tax_no, bank_name,account_name,account_no,branch,ifsc_code, active_flag, created_at, city_id,state_id,side,pan_no,as_of_date,portal_link,username,password) values ('$dmc_id', '$company_name', '$mobile_no', '$landline_no', '$email_id', '$contact_person_name','$immergency_contact_no' ,'$dmc_address','$country','$website', '$opening_balance','$service_tax_no','$bank_name','$account_name','$account_no','$branch','$ifsc_code', '$active_flag', '$created_at', '$cmb_city_id', '$state','$side','$supp_pan','$as_of_date','$portal_link','$username','$password') ");
 	sundry_creditor_balance_update();
 
 	if($sq_dmc){
@@ -92,6 +95,9 @@ public function dmc_update()
 	$ifsc_code = $_POST['ifsc_code'];
 	$state = $_POST['state'];
 	$side = $_POST['side'];
+  $username = mysql_real_escape_string($_POST['username']);
+  $portal_link = mysql_real_escape_string($_POST['portal_link']);
+  $password = mysql_real_escape_string($_POST['password']);
 	$supp_pan = $_POST['supp_pan'];
 	$as_of_date = $_POST['as_of_date'];
   $as_of_date = get_date_db($as_of_date);
@@ -108,7 +114,7 @@ public function dmc_update()
 	}
   
   $company_name = addslashes($company_name);
-	$sq_dmc = mysql_query("update dmc_master set company_name='$company_name', mobile_no='$mobile_no', landline_no='$landline_no', email_id='$email_id', contact_person_name='$contact_person_name', immergency_contact_no='$immergency_contact_no', city_id='$cmb_city_id1', dmc_address='$dmc_address', country='$country', website='$website', service_tax_no='$service_tax_no1', opening_balance='$opening_balance', bank_name='$bank_name',account_name='$account_name' ,account_no='$account_no', branch='$branch', ifsc_code='$ifsc_code', active_flag='$active_flag', state_id='$state', side='$side',pan_no='$supp_pan',as_of_date='$as_of_date' where dmc_id='$dmc_id' ");
+	$sq_dmc = mysql_query("update dmc_master set company_name='$company_name', mobile_no='$mobile_no', landline_no='$landline_no', email_id='$email_id', contact_person_name='$contact_person_name', immergency_contact_no='$immergency_contact_no', city_id='$cmb_city_id1', dmc_address='$dmc_address', country='$country', website='$website', service_tax_no='$service_tax_no1', opening_balance='$opening_balance', bank_name='$bank_name',account_name='$account_name' ,account_no='$account_no', branch='$branch', ifsc_code='$ifsc_code', active_flag='$active_flag', state_id='$state', side='$side',pan_no='$supp_pan',as_of_date='$as_of_date',portal_link='$portal_link',username='$username',password='$password' where dmc_id='$dmc_id' ");
 	sundry_creditor_balance_update();
 	if($sq_dmc){
 		$vendor_login_master = new vendor_login_master;

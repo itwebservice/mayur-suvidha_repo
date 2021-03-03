@@ -41,7 +41,6 @@ $email_id = $encrypt_decrypt->fnDecrypt($sq_dmc_info['email_id'], $secret_key);
                       <input type="text" class="form-control"  onchange="mobile_validate(this.id);" value="<?= $sq_dmc_info['landline_no'] ?>" id="landline_no1" name="landline_no1" placeholder="Landline Number" title="Landline Number">
                   </div>                 
                 </div>
-
                 <div class="row">                  
                   <div class="col-md-3 col-sm-6 mg_bt_10">
                       <input type="text" class="form-control" value="<?= $email_id ?>" id="email_id1" name="email_id1"  placeholder="Email ID" title="Email ID">
@@ -74,7 +73,18 @@ $email_id = $encrypt_decrypt->fnDecrypt($sq_dmc_info['email_id'], $secret_key);
                 <div class="col-md-3 col-sm-6 mg_bt_10">
                   <textarea id="website1" name="website1" placeholder="Website" title="Website" class="form-control" rows="1"><?= $sq_dmc_info['website'] ?></textarea>
                 </div>
-              </div>                 
+                <div class="col-md-3 col-sm-6 mg_bt_10 ">
+                  <input name="portal_link1" id="portal_link1" title="Portal Link" placeholder="Portal Link" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_dmc_info['portal_link'] ?>">
+                </div>
+              </div>   
+              <div class="row">  
+                <div class="col-md-3 col-sm-6 mg_bt_10">
+                  <input name="username1" id="username1" title="Username" placeholder="Username" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_dmc_info['username'] ?>">
+                </div>
+              <div class="col-md-3 col-sm-6 mg_bt_10">
+                <input name="password1" id="password1" title="Password" placeholder="Password" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_dmc_info['password'] ?>">
+              </div>
+              </div>          
             </div>
            <div class="panel panel-default panel-body app_panel_style feildset-panel">
              <legend>Bank Information</legend>
@@ -179,6 +189,9 @@ $(function(){
         var side = $('#side1').val();
         var supp_pan = $('#supp_pan').val();
         var as_of_date = $('#as_of_date1').val();
+        var username = $('#username1').val();
+        var portal_link = $('#portal_link1').val();
+        var password = $('#password1').val();
 
         var base_url = $('#base_url').val();
 
@@ -192,7 +205,7 @@ $(function(){
 
                $.post( 
                base_url+"controller/dmc/dmc_update.php",
-               { dmc_id : dmc_id, vendor_login_id : vendor_login_id, company_name : company_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, cmb_city_id1 : cmb_city_id1, dmc_address : dmc_address, country :country, website :website,  opening_balance : opening_balance, active_flag : active_flag,service_tax_no1:service_tax_no1, bank_name : bank_name, account_no:account_no, branch : branch, ifsc_code:ifsc_code, state : state,side :side, account_name : account_name, supp_pan : supp_pan,as_of_date : as_of_date },
+               { dmc_id : dmc_id, vendor_login_id : vendor_login_id, company_name : company_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, cmb_city_id1 : cmb_city_id1, dmc_address : dmc_address, country :country, website :website,  opening_balance : opening_balance, active_flag : active_flag,service_tax_no1:service_tax_no1, bank_name : bank_name, account_no:account_no, branch : branch, ifsc_code:ifsc_code, state : state,side :side, account_name : account_name, supp_pan : supp_pan,as_of_date : as_of_date ,username : username, portal_link : portal_link, password : password},
 
                function(data) {                  
                   msg_alert(data);

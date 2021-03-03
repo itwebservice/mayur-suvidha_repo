@@ -46,6 +46,17 @@
           <div class="col-md-3 col-sm-6 mg_bt_10">
             <input type="text" id="website" name="website" placeholder="Website" title="Website">
           </div>
+          <div class="col-md-3 col-sm-6 mg_bt_10 ">
+            <input name="portal_link" id="portal_link" title="Portal Link" placeholder="Portal Link" style='width:100%' style='width:100%' class="form-control">
+          </div>
+          <div class="col-md-3 col-sm-6 mg_bt_10">
+            <input name="username" id="username" title="Username" placeholder="Username" style='width:100%' style='width:100%' class="form-control">
+          </div>
+        </div>
+        <div class="row"> 
+          <div class="col-md-3 col-sm-6 mg_bt_10">
+            <input name="password" id="password" title="Password" placeholder="Password" style='width:100%' style='width:100%' class="form-control">
+          </div>
         </div>
       </div>
       <div class="panel panel-default panel-body app_panel_style feildset-panel mg_tp_30">
@@ -141,6 +152,9 @@ $('#frm_save').validate({
       var side = $('#side').val();
       var supp_pan = $('#supp_pan').val();
       var as_of_date = $('#as_of_date').val();
+      var username = $('#username').val();
+      var portal_link = $('#portal_link').val();
+      var password = $('#password').val();
       var add = validate_address('address');
       if(!add){
         error_msg_alert('More than 155 characters are not allowed.');
@@ -152,7 +166,7 @@ $('#frm_save').validate({
       $.ajax({
         type: 'post',
         url: base_url+'controller/visa_passport_ticket/ticket/vendor/vendor_save.php',
-        data:{ vendor_name : vendor_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, address : address, country : country, website : website, bank_name : bank_name, account_no : account_no, branch : branch, ifsc_code : ifsc_code, opening_balance : opening_balance, active_flag : active_flag, service_tax_no : service_tax_no, state : state, side:side,account_name:account_name,supp_pan : supp_pan,as_of_date : as_of_date},
+        data:{ vendor_name : vendor_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, address : address, country : country, website : website, bank_name : bank_name, account_no : account_no, branch : branch, ifsc_code : ifsc_code, opening_balance : opening_balance, active_flag : active_flag, service_tax_no : service_tax_no, state : state, side:side,account_name:account_name,supp_pan : supp_pan,as_of_date : as_of_date, username : username, portal_link : portal_link, password : password},
         success: function(result){
           $('#btn_save').button('reset');
           var msg = result.split('-');

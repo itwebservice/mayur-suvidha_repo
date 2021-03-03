@@ -81,6 +81,12 @@ $branch_admin_id = $_SESSION['branch_admin_id'];
               <div class="col-sm-4 col-xs-12">
                 <input type="text" id="cust_pan" onchange="validate_alphanumeric(this.id);" name="cust_pan"  placeholder="PAN/TAN No" title="PAN/TAN No" style="text-transform: uppercase;">
               </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="text" id="mem_hotel" name="mem_hotel"  placeholder="Hotel Membership Number" title="Hotel Membership Number">
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="text" id="mem_flight" name="mem_flight"  placeholder="Flight Membership Number" title="Flight Membership Number">
+              </div>
             </div>
           </div>
           <div class="panel panel-default panel-body app_panel_style mg_tp_30 feildset-panel">
@@ -167,6 +173,8 @@ $('#frm_customer_save').validate({
       var base_url = $('#base_url').val();
       var state = $('#cust_state').val();
       var cust_pan  = $('#cust_pan').val();
+      var mem_hotel  = $('#mem_hotel').val();
+      var mem_flight  = $('#mem_flight').val();
       var branch_admin_id = $('#branch_admin_id').val();
       var cust_source = $('#cust_source').val();
       $('#btn_save').button('loading');
@@ -174,7 +182,7 @@ $('#frm_customer_save').validate({
       $.ajax({
         type: 'post',
         url: base_url+'controller/customer_master/customer_save.php',
-        data:{ first_name : first_name, middle_name : middle_name, last_name : last_name, gender : gender, birth_date : birth_date, age : age, contact_no : contact_no, email_id : email_id, address : address,address2 : address2,city:city,  active_flag : active_flag ,service_tax_no : service_tax_no, landline_no : landline_no, alt_email_id : alt_email_id,company_name : company_name, cust_type : cust_type,state : state, cust_pan : cust_pan, branch_admin_id : branch_admin_id,cust_source:cust_source, country_code : country_code},
+        data:{ first_name : first_name, middle_name : middle_name, last_name : last_name, gender : gender, birth_date : birth_date, age : age, contact_no : contact_no, email_id : email_id, address : address,address2 : address2,city:city,  active_flag : active_flag ,service_tax_no : service_tax_no, landline_no : landline_no, alt_email_id : alt_email_id,company_name : company_name, cust_type : cust_type,state : state, cust_pan : cust_pan, branch_admin_id : branch_admin_id,cust_source:cust_source, country_code : country_code, mem_hotel : mem_hotel, mem_flight : mem_flight},
         success: function(result){
 
           var result_arr = result.split('==');

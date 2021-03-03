@@ -207,6 +207,9 @@ function hotel_master_save($city_id, $hotel_name, $mobile_no, $landline_no, $ema
   $cwb_to = mysql_real_escape_string($cwb_to);
   $cwob_from = mysql_real_escape_string($cwob_from);
   $cwob_to = mysql_real_escape_string($cwob_to);
+  $username = mysql_real_escape_string($_POST['username']);
+  $portal_link = mysql_real_escape_string($_POST['portal_link']);
+  $password = mysql_real_escape_string($_POST['password']);
 
   global $encrypt_decrypt, $secret_key;
   $mobile_no = $encrypt_decrypt->fnEncrypt($mobile_no, $secret_key);
@@ -227,7 +230,7 @@ function hotel_master_save($city_id, $hotel_name, $mobile_no, $landline_no, $ema
   $max_hotel_id1 = mysql_fetch_assoc(mysql_query("select max(hotel_id) as max from hotel_master"));
   $max_hotel_id = $max_hotel_id1['max']+1;
   
-  $sq = mysql_query("insert into hotel_master ( hotel_id, city_id, hotel_name, mobile_no, landline_no, email_id,alternative_email_1,alternative_email_2, contact_person_name, immergency_contact_no, hotel_address, country, website, opening_balance, rating_star,meal_plan,hotel_type, bank_name,account_name, account_no, branch, ifsc_code, service_tax_no,active_flag, state_id,side,pan_no,as_of_date,description,policies,amenities, `cwb_from`, `cwb_to`, `cwob_from`, `cwob_to`) values ( '$max_hotel_id', '$city_id', '$hotel_name', '$mobile_no', '$landline_no', '$email_id', '$email_id_1', '$email_id_2', '$contact_person_name', '$immergency_contact_no', '$hotel_address', '$country', '$website', '$opening_balance','$rating_star','$meal_plan','$hotel_type', '$bank_name','$account_name','$account_no','$branch','$ifsc_code', '$service_tax_no', '$active_flag','$state','$side','$supp_pan','$as_of_date','$description','$policies','$amenities', '$cwb_from', '$cwb_to', '$cwob_from', '$cwob_to')");
+  $sq = mysql_query("insert into hotel_master ( hotel_id, city_id, hotel_name, mobile_no, landline_no, email_id,alternative_email_1,alternative_email_2, contact_person_name, immergency_contact_no, hotel_address, country, website, opening_balance, rating_star,meal_plan,hotel_type, bank_name,account_name, account_no, branch, ifsc_code, service_tax_no,active_flag, state_id,side,pan_no,as_of_date,description,policies,amenities, `cwb_from`, `cwb_to`, `cwob_from`, `cwob_to`, portal_link,username,password) values ( '$max_hotel_id', '$city_id', '$hotel_name', '$mobile_no', '$landline_no', '$email_id', '$email_id_1', '$email_id_2', '$contact_person_name', '$immergency_contact_no', '$hotel_address', '$country', '$website', '$opening_balance','$rating_star','$meal_plan','$hotel_type', '$bank_name','$account_name','$account_no','$branch','$ifsc_code', '$service_tax_no', '$active_flag','$state','$side','$supp_pan','$as_of_date','$description','$policies','$amenities', '$cwb_from', '$cwb_to', '$cwob_from', '$cwob_to','$portal_link','$username','$password')");
 
   if(!$sq){
     rollback_t();
@@ -307,6 +310,9 @@ function hotel_master_update( $hotel_id, $vendor_login_id, $city_id, $hotel_name
   $cwb_to = mysql_real_escape_string($cwb_to);
   $cwob_from = mysql_real_escape_string($cwob_from);
   $cwob_to = mysql_real_escape_string($cwob_to);
+  $username = mysql_real_escape_string($_POST['username']);
+  $portal_link = mysql_real_escape_string($_POST['portal_link']);
+  $password = mysql_real_escape_string($_POST['password']);
   global $encrypt_decrypt, $secret_key;
   $mobile_no = $encrypt_decrypt->fnEncrypt($mobile_no, $secret_key);
   $email_id = $encrypt_decrypt->fnEncrypt($email_id, $secret_key);
@@ -315,7 +321,7 @@ function hotel_master_update( $hotel_id, $vendor_login_id, $city_id, $hotel_name
   begin_t();
    
   $hotel_name = addslashes($hotel_name);
-  $sq = mysql_query("update hotel_master set city_id='$city_id', hotel_name='$hotel_name', mobile_no='$mobile_no', landline_no='$landline_no', email_id='$email_id', alternative_email_1='$email_id_1', alternative_email_2='$email_id_2', contact_person_name='$contact_person_name', immergency_contact_no='$immergency_contact_no', hotel_address='$hotel_address', country='$country',website = '$website', opening_balance='$opening_balance',rating_star = '$rating_star',meal_plan='$meal_plan',hotel_type='$hotel_type', active_flag='$active_flag', bank_name='$bank_name',account_name='$account_name',account_no='$account_no', branch='$branch', ifsc_code='$ifsc_code',  service_tax_no='$service_tax_no', state_id='$state',side='$side1',pan_no='$supp_pan',as_of_date='$as_of_date',description='$description',policies='$policies',amenities='$amenities',cwb_from='$cwb_from', cwb_to='$cwb_to', cwob_from='$cwob_from', cwob_to='$cwob_to' where hotel_id='$hotel_id' ");
+  $sq = mysql_query("update hotel_master set city_id='$city_id', hotel_name='$hotel_name', mobile_no='$mobile_no', landline_no='$landline_no', email_id='$email_id', alternative_email_1='$email_id_1', alternative_email_2='$email_id_2', contact_person_name='$contact_person_name', immergency_contact_no='$immergency_contact_no', hotel_address='$hotel_address', country='$country',website = '$website', opening_balance='$opening_balance',rating_star = '$rating_star',meal_plan='$meal_plan',hotel_type='$hotel_type', active_flag='$active_flag', bank_name='$bank_name',account_name='$account_name',account_no='$account_no', branch='$branch', ifsc_code='$ifsc_code',  service_tax_no='$service_tax_no', state_id='$state',side='$side1',pan_no='$supp_pan',as_of_date='$as_of_date',description='$description',policies='$policies',amenities='$amenities',cwb_from='$cwb_from', cwb_to='$cwb_to', cwob_from='$cwob_from', cwob_to='$cwob_to',portal_link='$portal_link',username='$username',password='$password' where hotel_id='$hotel_id' ");
  
   if(!$sq){
     rollback_t();

@@ -24,6 +24,9 @@ public function vendor_save()
 	$side = $_POST['side'];
 	$supp_pan = $_POST['supp_pan'];
 	$as_of_date = $_POST['as_of_date'];
+	$username = mysql_real_escape_string($_POST['username']);
+	$portal_link = mysql_real_escape_string($_POST['portal_link']);
+	$password = mysql_real_escape_string($_POST['password']);
 	$as_of_date = get_date_db($as_of_date);
 
 	$created_at = date('Y-m-d H:i:s');
@@ -41,7 +44,7 @@ public function vendor_save()
 	$sq_max = mysql_fetch_assoc(mysql_query("select max(vendor_id) as max from ticket_vendor"));
 	$vendor_id = $sq_max['max'] + 1;
 	$vendor_name = addslashes($vendor_name);
-	$sq_vendor = mysql_query("insert into ticket_vendor (vendor_id, vendor_name, mobile_no, landline_no, contact_person_name, immergency_contact_no, email_id, address, country, website, opening_balance, bank_name,account_name, account_no, branch, ifsc_code, active_flag, created_at, service_tax_no, state_id, side,pan_no,as_of_date) values ('$vendor_id', '$vendor_name', '$mobile_no','$landline_no','$contact_person_name','$immergency_contact_no', '$email_id','$address','$country','$website','$opening_balance','$bank_name','$account_name' ,'$account_no','$branch','$ifsc_code', '$active_flag', '$created_at','$service_tax_no','$state','$side','$supp_pan','$as_of_date')");
+	$sq_vendor = mysql_query("insert into ticket_vendor (vendor_id, vendor_name, mobile_no, landline_no, contact_person_name, immergency_contact_no, email_id, address, country, website, opening_balance, bank_name,account_name, account_no, branch, ifsc_code, active_flag, created_at, service_tax_no, state_id, side,pan_no,as_of_date,portal_link,username,password) values ('$vendor_id', '$vendor_name', '$mobile_no','$landline_no','$contact_person_name','$immergency_contact_no', '$email_id','$address','$country','$website','$opening_balance','$bank_name','$account_name' ,'$account_no','$branch','$ifsc_code', '$active_flag', '$created_at','$service_tax_no','$state','$side','$supp_pan','$as_of_date','$portal_link','$username','$password')");
 	sundry_creditor_balance_update();
 	
 	if($sq_vendor){
@@ -85,6 +88,9 @@ public function vendor_update()
 	$service_tax_no = $_POST['service_tax_no1'];
 	$vendor_id = $_POST['vendor_id'];
 	$state = $_POST['state'];
+	$username = mysql_real_escape_string($_POST['username']);
+	$portal_link = mysql_real_escape_string($_POST['portal_link']);
+	$password = mysql_real_escape_string($_POST['password']);
 	$side = $_POST['side'];
 	$supp_pan = $_POST['supp_pan'];
 	$as_of_date = $_POST['as_of_date'];
@@ -100,7 +106,7 @@ public function vendor_update()
 		exit;
 	}
 	$vendor_name = addslashes($vendor_name);
-	$sq_vendor = mysql_query("update ticket_vendor set vendor_name='$vendor_name',landline_no = '$landline_no', mobile_no='$mobile_no',contact_person_name = '$contact_person_name',immergency_contact_no = '$immergency_contact_no', country = '$country', website ='$website', email_id='$email_id', address='$address',account_name='$account_name', account_no= '$account_no',branch = '$branch',ifsc_code= '$ifsc_code', opening_balance='$opening_balance', active_flag='$active_flag', bank_name='$bank_name', service_tax_no='$service_tax_no', state_id='$state', side='$side',pan_no='$supp_pan',as_of_date='$as_of_date' where vendor_id='$vendor_id'");
+	$sq_vendor = mysql_query("update ticket_vendor set vendor_name='$vendor_name',landline_no = '$landline_no', mobile_no='$mobile_no',contact_person_name = '$contact_person_name',immergency_contact_no = '$immergency_contact_no', country = '$country', website ='$website', email_id='$email_id', address='$address',account_name='$account_name', account_no= '$account_no',branch = '$branch',ifsc_code= '$ifsc_code', opening_balance='$opening_balance', active_flag='$active_flag', bank_name='$bank_name', service_tax_no='$service_tax_no', state_id='$state', side='$side',pan_no='$supp_pan',as_of_date='$as_of_date',portal_link='$portal_link',username='$username',password='$password' where vendor_id='$vendor_id'");
 	sundry_creditor_balance_update();
 	
 	if($sq_vendor){

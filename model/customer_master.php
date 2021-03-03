@@ -24,6 +24,8 @@ public function customer_master_save()
 	$cust_type = $_POST['cust_type'];
   $state = $_POST['state'];
   $cust_pan = $_POST['cust_pan'];
+  $mem_hotel = $_POST['mem_hotel'];
+  $mem_flight = $_POST['mem_flight'];
   $branch_admin_id=$_POST['branch_admin_id'];
   $cust_source = $_POST['cust_source'];
 
@@ -50,7 +52,7 @@ public function customer_master_save()
 	$sq_max = mysql_fetch_assoc(mysql_query("select max(customer_id) as max from customer_master"));
 	$customer_id = $sq_max['max'] + 1;
 
-  $sq_visa = mysql_query("insert into customer_master (customer_id,type,first_name, middle_name, last_name, gender, birth_date, age, country_code,contact_no,landline_no, email_id,alt_email,company_name, address, address2, city, active_flag, created_at,service_tax_no,state_id,pan_no, branch_admin_id,source) values ('$customer_id','$cust_type', '$first_name', '$middle_name', '$last_name', '$gender', '$birth_date', '$age', '$country_code','$contact_no','$landline_no', '$email_id','$alt_email_id','$company_name', '$address','$address2','$city', '$active_flag', '$created_at', '$service_tax_no','$state','$cust_pan','$branch_admin_id','$cust_source')");
+  $sq_visa = mysql_query("insert into customer_master (customer_id,type,first_name, middle_name, last_name, gender, birth_date, age, country_code,contact_no,landline_no, email_id,alt_email,company_name, address, address2, city, active_flag, created_at,service_tax_no,state_id,pan_no, branch_admin_id,source,mem_hotel,mem_flight) values ('$customer_id','$cust_type', '$first_name', '$middle_name', '$last_name', '$gender', '$birth_date', '$age', '$country_code','$contact_no','$landline_no', '$email_id','$alt_email_id','$company_name', '$address','$address2','$city', '$active_flag', '$created_at', '$service_tax_no','$state','$cust_pan','$branch_admin_id','$cust_source','$mem_hotel','$mem_flight')");
 
 
   $sq_max = mysql_fetch_assoc(mysql_query("select max(ledger_id) as max from ledger_master"));
@@ -97,6 +99,8 @@ public function customer_master_update(){
 	$cust_type = $_POST['cust_type'];
   $state = $_POST['cust_state'];
   $cust_pan = $_POST['cust_pan'];
+  $mem_hotel = $_POST['mem_hotel'];
+  $mem_flight = $_POST['mem_flight'];
   $cust_source = $_POST['cust_source'];
 
   $contact_no = $country_code.$contact_no;
@@ -115,7 +119,7 @@ public function customer_master_update(){
     exit;
   }
 
-	$sq_visa = mysql_query("update customer_master set type = '$cust_type',first_name='$first_name', middle_name='$middle_name', last_name='$last_name', gender='$gender', birth_date='$birth_date', age='$age', country_code = '$country_code', contact_no='$contact_no',landline_no = '$landline_no', email_id='$email_id',alt_email = '$alt_email_id',company_name = '$company_name', address='$address', address2='$address2', city='$city', active_flag='$active_flag', service_tax_no='$service_tax_no1', state_id='$state', pan_no ='$cust_pan',source='$cust_source' where customer_id='$customer_id'");
+	$sq_visa = mysql_query("update customer_master set type = '$cust_type',first_name='$first_name', middle_name='$middle_name', last_name='$last_name', gender='$gender', birth_date='$birth_date', age='$age', country_code = '$country_code', contact_no='$contact_no',landline_no = '$landline_no', email_id='$email_id',alt_email = '$alt_email_id',company_name = '$company_name', address='$address', address2='$address2', city='$city', active_flag='$active_flag', service_tax_no='$service_tax_no1', state_id='$state', pan_no ='$cust_pan',source='$cust_source',mem_hotel='$mem_hotel',mem_flight='$mem_flight' where customer_id='$customer_id'");
 
 	//update customer leder
 	if($cust_type == 'Corporate' || $cust_type == 'B2B'){

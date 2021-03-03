@@ -129,7 +129,16 @@ $email_id2 = $encrypt_decrypt->fnDecrypt($sq_hotel['alternative_email_2'], $secr
             </div>
             <div class="col-md-6 col-sm-6 mg_bt_10">
                 <textarea id="txt_hotel_address" name="txt_hotel_address"  onchange="validate_address(this.id);" placeholder="Hotel Address" title="Hotel Address" class="form-control" rows="1"><?= $sq_hotel['hotel_address'] ?></textarea>
-            </div> 
+            </div>
+            <div class="col-md-4 col-sm-6 ">
+              <input name="portal_link1" id="portal_link1" title="Portal Link" placeholder="Portal Link" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_hotel['portal_link'] ?>">
+            </div>
+            <div class="col-md-2 col-sm-6 ">
+              <input name="username1" id="username1" title="Username" placeholder="Username" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_hotel['username'] ?>">
+            </div>
+            <div class="col-md-2 col-sm-6 ">
+              <input name="password1" id="password1" title="Password" placeholder="Password" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_hotel['password'] ?>">
+            </div>
             <div class="col-md-2 col-sm-6 mg_bt_10">
               <select name="active_flag" id="active_flag" title="Status">
                 <option value="<?= $sq_hotel['active_flag'] ?>"><?= $sq_hotel['active_flag'] ?></option>
@@ -663,6 +672,9 @@ $(function(){
       var cwb_to = $('#cwb_to1').val();
       var cwob_from = $('#cwob_from1').val();
       var cwob_to = $('#cwob_to1').val();
+      var username = $('#username1').val();
+      var portal_link = $('#portal_link1').val();
+      var password = $('#password1').val();
 
       var add = validate_address('txt_hotel_address');
       
@@ -701,7 +713,7 @@ $(function(){
       
       $.post(
             base_url+"controller/hotel/hotel_master_update_c.php",
-            { hotel_id : hotel_id, vendor_login_id : vendor_login_id, city_id : city_id, hotel_name : hotel_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, hotel_address : hotel_address, country : country, website :website,  opening_balance : opening_balance,rating_star : rating_star,hotel_type:hotel_type,meal_plan:meal_plan, active_flag : active_flag, bank_name : bank_name, account_no: account_no, branch : branch, ifsc_code :ifsc_code, service_tax_no : service_tax_no, state : state,side1 : side1,account_name : account_name,supp_pan : supp_pan,as_of_date : as_of_date,description:description,policies:policies,amenities:amenities,cwb_from:cwb_from,cwb_to:cwb_to,cwob_from:cwob_from,cwob_to:cwob_to,email_id_1:email_id_1,email_id_2:email_id_2 },
+            { hotel_id : hotel_id, vendor_login_id : vendor_login_id, city_id : city_id, hotel_name : hotel_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, hotel_address : hotel_address, country : country, website :website,  opening_balance : opening_balance,rating_star : rating_star,hotel_type:hotel_type,meal_plan:meal_plan, active_flag : active_flag, bank_name : bank_name, account_no: account_no, branch : branch, ifsc_code :ifsc_code, service_tax_no : service_tax_no, state : state,side1 : side1,account_name : account_name,supp_pan : supp_pan,as_of_date : as_of_date,description:description,policies:policies,amenities:amenities,cwb_from:cwb_from,cwb_to:cwb_to,cwob_from:cwob_from,cwob_to:cwob_to,email_id_1:email_id_1,email_id_2:email_id_2, username : username, portal_link : portal_link, password : password },
 
             function(data) {  
                 msg_alert(data);

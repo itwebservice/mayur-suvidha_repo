@@ -85,6 +85,12 @@ $email_id = $encrypt_decrypt->fnDecrypt($sq_customer['email_id'], $secret_key);
               <div class="col-sm-4 col-xs-12">
                 <input type="text" id="cust_pan1" name="cust_pan1" onchange="validate_alphanumeric(this.id);" value="<?= $sq_customer['pan_no']  ?>" placeholder="PAN/TAN No" title="PAN/TAN No" style="text-transform: uppercase;">
               </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="text" id="mem_hotel1" name="mem_hotel1"  placeholder="Hotel Membership Number" title="Hotel Membership Number" value="<?= $sq_customer['mem_hotel']  ?>">
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <input type="text" id="mem_flight1" name="mem_flight1"  placeholder="Flight Membership Number" title="Flight Membership Number" value="<?= $sq_customer['mem_flight']  ?>">
+              </div>
           </div>
         </div>
         <div class="panel panel-default panel-body app_panel_style mg_tp_30 feildset-panel">
@@ -178,6 +184,8 @@ corporate_fields_reflect();
         var cust_type = $('#cust_type').val();
         var cust_state = $('#cust_state1').val();
         var cust_pan = $('#cust_pan1').val();
+        var mem_hotel  = $('#mem_hotel1').val();
+        var mem_flight  = $('#mem_flight1').val();
 	      var base_url = $('#base_url').val();
         var cust_source = $('#cust_source').val();
         $('#btn_update').button('loading');
@@ -185,7 +193,7 @@ corporate_fields_reflect();
 	      $.ajax({
 	        type: 'post',
 	        url: base_url+'controller/customer_master/customer_update.php',
-	        data:{ customer_id : customer_id, first_name : first_name, middle_name : middle_name, last_name : last_name, gender : gender, birth_date : birth_date, age : age, contact_no : contact_no, email_id : email_id, address : address,address2 : address2,city:city,active_flag : active_flag, service_tax_no1 : service_tax_no1, landline_no : landline_no, alt_email_id : alt_email_id,company_name : company_name, cust_type : cust_type, cust_state : cust_state,cust_pan : cust_pan,cust_source:cust_source, country_code : country_code },
+	        data:{ customer_id : customer_id, first_name : first_name, middle_name : middle_name, last_name : last_name, gender : gender, birth_date : birth_date, age : age, contact_no : contact_no, email_id : email_id, address : address,address2 : address2,city:city,active_flag : active_flag, service_tax_no1 : service_tax_no1, landline_no : landline_no, alt_email_id : alt_email_id,company_name : company_name, cust_type : cust_type, cust_state : cust_state,cust_pan : cust_pan,cust_source:cust_source, country_code : country_code, mem_hotel : mem_hotel, mem_flight : mem_flight },
 	        success: function(result){
           var msg = result.split('--');				
             if(msg[0]=='error'){

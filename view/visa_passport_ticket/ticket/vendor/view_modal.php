@@ -200,6 +200,30 @@ $email_id = $encrypt_decrypt->fnDecrypt($sq_vendor['email_id'], $secret_key);
 
 							        				</span>
 
+													<span class="main_block">
+
+							        					<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+							        				    <?php echo "<label>Portal Link <em>:</em></label> " .strtoupper($sq_vendor['portal_link']); ?>
+
+							        				</span>
+
+													<span class="main_block">
+
+							        					<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+							        				    <?php echo "<label>Username <em>:</em></label> " .strtoupper($sq_vendor['username']); ?>
+
+							        				</span>
+
+													<span class="main_block">
+
+							        					<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+							        				    <?php echo "<label>Password <em>:</em></label> " .strtoupper($sq_vendor['password']); ?>
+
+							        				</span>
+
 							        				<span class="main_block">
 
 							        					<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>

@@ -179,6 +179,22 @@
 
 	                </span>	 
 
+					<span class="main_block">
+
+	                  <i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+	                  <?php echo "<label>Hotel Membership Number <em>:</em></label> ".$row_customer['mem_hotel']; ?>
+
+	                </span>	
+
+					<span class="main_block">
+
+	                  <i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+	                  <?php echo "<label>Flight Membership Number <em>:</em></label> ".$row_customer['mem_flight']; ?>
+
+	                </span>	
+
 	                <span class="main_block">
 
 	                  <i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>

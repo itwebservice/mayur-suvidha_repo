@@ -175,6 +175,27 @@
 		        				    <?php echo "<label>Tax No <em>:</em></label> " .strtoupper($sq_hotel['service_tax_no']); ?>
 
 		        				</span>
+								<span class="main_block">
+
+		        					<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+		        				    <?php echo "<label>Portal Link <em>:</em></label> " .$sq_hotel['portal_link']; ?>
+
+		        				</span>
+								<span class="main_block">
+
+		        					<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+		        				    <?php echo "<label>Username <em>:</em></label> " .$sq_hotel['username']; ?>
+
+		        				</span>
+								<span class="main_block">
+
+		        					<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+		        				    <?php echo "<label>Password <em>:</em></label> " .$sq_hotel['password']; ?>
+
+		        				</span>
 		        				<span class="main_block">
 
 		        					<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>

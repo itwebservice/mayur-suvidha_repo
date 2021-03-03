@@ -87,6 +87,17 @@ $client_modal_type = $_POST['client_modal_type'];
               <textarea id="txt_hotel_address" onchange="validate_address(this.id);" name="txt_hotel_address" placeholder="Hotel Address" class="form-control" title="Hotel Address" rows="1"></textarea>
             </div>
           </div>
+          <div class="row mg_bt_10">
+            <div class="col-md-4 col-sm-6 ">
+              <input name="portal_link" id="portal_link" title="Portal Link" placeholder="Portal Link" style='width:100%' style='width:100%' class="form-control">
+            </div>
+            <div class="col-md-2 col-sm-6 ">
+              <input name="username" id="username" title="Username" placeholder="Username" style='width:100%' style='width:100%' class="form-control">
+            </div>
+            <div class="col-md-2 col-sm-6 ">
+              <input name="password" id="password" title="Password" placeholder="Password" style='width:100%' style='width:100%' class="form-control">
+            </div>
+          </div>
        </div>
       <div class="panel panel-default panel-body app_panel_style mg_tp_30 feildset-panel">
        <legend>Bank Information</legend>
@@ -535,6 +546,9 @@ $(function(){
       var cwb_to = $('#cwb_to').val();
       var cwob_from = $('#cwob_from').val();
       var cwob_to = $('#cwob_to').val();
+      var username = $('#username').val();
+      var portal_link = $('#portal_link').val();
+      var password = $('#password').val();
       
       var amenities = (function() {  var a = ''; $("input[name='amenities']:checked").each(function() { a += this.value+','; });  return a; })();
       amenities = amenities.slice(0,-1);
@@ -569,7 +583,7 @@ $(function(){
       $('#btn_save').button('loading');
       $.post( 
             base_url+"controller/hotel/hotel_master_save_c.php",
-            { city_id : city_id, hotel_name : hotel_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, hotel_address : hotel_address, country : country, website :website,  opening_balance : opening_balance,rating_star : rating_star,hotel_type:hotel_type,meal_plan:meal_plan, active_flag : active_flag, bank_name : bank_name, account_no: account_no, branch : branch, ifsc_code :ifsc_code, service_tax_no : service_tax_no, state : state,side :side ,account_name : account_name ,supp_pan : supp_pan,hotel_image_path : hotel_image_path,as_of_date : as_of_date,description:description,policies:policies,amenities:amenities,cwb_from:cwb_from,cwb_to:cwb_to,cwob_from:cwob_from,cwob_to:cwob_to,email_id_1:email_id_1,email_id_2:email_id_2},
+            { city_id : city_id, hotel_name : hotel_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, hotel_address : hotel_address, country : country, website :website,  opening_balance : opening_balance,rating_star : rating_star,hotel_type:hotel_type,meal_plan:meal_plan, active_flag : active_flag, bank_name : bank_name, account_no: account_no, branch : branch, ifsc_code :ifsc_code, service_tax_no : service_tax_no, state : state,side :side ,account_name : account_name ,supp_pan : supp_pan,hotel_image_path : hotel_image_path,as_of_date : as_of_date,description:description,policies:policies,amenities:amenities,cwb_from:cwb_from,cwb_to:cwb_to,cwob_from:cwob_from,cwob_to:cwob_to,email_id_1:email_id_1,email_id_2:email_id_2, username : username, portal_link : portal_link, password : password},
 
             function(data){ 
                 var msg = data.split('--');

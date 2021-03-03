@@ -67,7 +67,18 @@ $email_id = $encrypt_decrypt->fnDecrypt($sq_vendor['email_id'], $secret_key);
           <div class="col-md-3 col-sm-6 mg_bt_10">
             <input type="text" id="website1" name="website1" placeholder="Website" value="<?= $sq_vendor['website'] ?>" class="form-control" title="Website">
           </div>
+          <div class="col-md-3 col-sm-6 mg_bt_10 ">
+            <input name="portal_link1" id="portal_link1" title="Portal Link" placeholder="Portal Link" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_vendor['portal_link'] ?>">
+          </div>
+          <div class="col-md-3 col-sm-6 mg_bt_10">
+            <input name="username1" id="username1" title="Username" placeholder="Username" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_vendor['username'] ?>">
+          </div>
          </div>
+         <div class="row"> 
+          <div class="col-md-3 col-sm-6 mg_bt_10">
+            <input name="password1" id="password1" title="Password" placeholder="Password" style='width:100%' style='width:100%' class="form-control" value="<?= $sq_vendor['password'] ?>">
+          </div>
+        </div>
         </div>
         <div class="panel panel-default panel-body app_panel_style feildset-panel mg_tp_30">
         <legend>Bank Information</legend>
@@ -169,6 +180,9 @@ $('#frm_update').validate({
       var supp_pan = $('#supp_pan1').val();
       var as_of_date = $('#as_of_date1').val();
       var base_url = $('#base_url').val();
+      var username = $('#username1').val();
+      var portal_link = $('#portal_link1').val();
+      var password = $('#password1').val();
       var add = validate_address('address1');
       if(!add){
         error_msg_alert('More than 155 characters are not allowed.');
@@ -178,7 +192,7 @@ $('#frm_update').validate({
       $.ajax({
         type: 'post',
         url: base_url+'controller/visa_passport_ticket/ticket/vendor/vendor_update.php',
-        data:{ vendor_id : vendor_id, vendor_login_id : vendor_login_id, vendor_name : vendor_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, address : address, country :country, website :website, opening_balance : opening_balance, active_flag : active_flag, bank_name : bank_name, account_no : account_no, branch : branch, ifsc_code : ifsc_code, service_tax_no1:service_tax_no1, state : state, side: side,account_name:account_name,supp_pan : supp_pan,as_of_date : as_of_date },
+        data:{ vendor_id : vendor_id, vendor_login_id : vendor_login_id, vendor_name : vendor_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, address : address, country :country, website :website, opening_balance : opening_balance, active_flag : active_flag, bank_name : bank_name, account_no : account_no, branch : branch, ifsc_code : ifsc_code, service_tax_no1:service_tax_no1, state : state, side: side,account_name:account_name,supp_pan : supp_pan,as_of_date : as_of_date,username : username, portal_link : portal_link, password : password },
         success: function(result){
           $('#btn_update').button('reset');
           var msg = result.split('-');
