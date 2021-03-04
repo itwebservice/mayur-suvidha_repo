@@ -757,7 +757,7 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
     </div>
 
   </section>
-
+  &nbsp;Payment Gateway Link :&nbsp;<a href="https://www.payumoney.com/pay/#/merchant/F81BC25D7C4D8E81F99D84BDE4450E4B" class="no-marg itinerary-link" target="_blank"></a>
   <!-- Contact Page -->
     <section class="pageSection main_block">
       <!-- background Image -->

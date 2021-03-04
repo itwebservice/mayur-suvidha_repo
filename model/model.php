@@ -22,10 +22,10 @@ $localIP = getHostByName(getHostName());
 $connection=mysql_connect("localhost","root","");
 if(!$connection){ echo "Unable To make Connection."; }
 
-$db_connect=mysql_select_db("mayur_suvidha");
+$db_connect=mysql_select_db("v8");
 if(!$db_connect) { echo "Database Not Connected."; }
 
-define('BASE_URL', 'http://localhost/mayur-suvidha/');
+define('BASE_URL', 'http://localhost/mayur_suvidha/');
 
 mysql_query("SET SESSION sql_mode = ''");
 $b2b_index_url = BASE_URL.'Tours_B2B/view/index.php';
@@ -142,7 +142,7 @@ if($sq_count==1){
 }
 //***********Whatsapp Switch***************/
 global $whatsapp_switch;
-$whatsapp_switch = "off"; // 'off' for switch off and 'on' for switch on
+$whatsapp_switch = "on"; // 'off' for switch off and 'on' for switch on
 
 //**Currency Symbol Display******
 global $currency_logo,$currency_code;

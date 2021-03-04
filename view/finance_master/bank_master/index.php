@@ -20,6 +20,7 @@ include "../../../model/model.php";
 <div id="div_modal"></div>
 <div id="div_list_content"></div>
 <div id="div_view_modal"></div>
+<div id="bank_details"></div>
 
 <?= end_panel() ?>
 <script src="<?= BASE_URL ?>js/app/field_validation.js"></script>
@@ -51,6 +52,11 @@ function display_modal(bank_id)
 {
     $.post('../finance_master/bank_master/view/index.php', {bank_id : bank_id}, function(data){
         $('#div_view_modal').html(data);
+    });
+}
+function bank_detail_modal(bank_id){
+    $.post('../finance_master/bank_master/bank_details.php', {bank_id : bank_id}, function(data){
+        $('#bank_details').html(data);
     });
 }
 </script>

@@ -12,6 +12,7 @@ include "../../../model/model.php";
 			<th>Account_Type</th>
 			<th>view</th>
 			<th>Edit</th>
+			<th>Send Bank Details</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,6 +33,9 @@ include "../../../model/model.php";
 				</td>
 				<td>
 					<button class="btn btn-info btn-sm" onclick="update_modal(<?= $row_bank['bank_id'] ?>)" title="Update Bank"><i class="fa fa-pencil-square-o"></i></button>
+				</td>
+				<td>
+					<button class="btn btn-info btn-sm" onclick="bank_detail_modal(<?= $row_bank['bank_id'] ?>)" title="Send Bank Details"><i class="fa fa-paper-plane-o"></i></button>
 				</td>
 			</tr>
 			<?php
