@@ -4,12 +4,12 @@ $bankId = $_POST['bank_id'];
 ?>
 <input type="hidden" id="bank_id" value="<?= $bankId ?>">
 <form id="frm_save">
-<div class="modal fade" id="save_modal" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="send_details" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Bank Account</h4>
+        <h4 class="modal-title" id="myModalLabel">Send Bank Details</h4>
       </div>
       <div class="modal-body">
         
@@ -39,7 +39,7 @@ $bankId = $_POST['bank_id'];
 
 <script>
 $('#country_code').select2();
-$('#save_modal').modal('show');
+$('#send_details').modal('show');
 $('#as_of_date').datetimepicker({ timepicker:false, format:'d-m-Y' });
 $(function(){
   $('#frm_save').validate({

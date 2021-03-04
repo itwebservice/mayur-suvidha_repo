@@ -116,7 +116,6 @@ public function bank_master_save()
 		$emailId = $_POST['emailId'];
 		$bankId = $_POST['bankId'];
 		$bankDetails = mysql_fetch_assoc(mysql_query("SELECT * FROM `bank_master` WHERE `bank_id`=".$bankId));
-		echo "SELECT * FROM `bank_master` WHERE `bank_id`=".$bankId;
 		$subject = "Bank Details";
 		$content = '
 			<tr>
@@ -130,6 +129,7 @@ public function bank_master_save()
 		';
 		global $model;
 		$model->app_email_master($emailId, $content, $subject, '1');
+		echo "Bank Details Sent!";
 	}
 	public function send_whatsapp(){
 	   

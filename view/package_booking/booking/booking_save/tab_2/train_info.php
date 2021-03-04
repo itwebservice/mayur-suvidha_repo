@@ -48,8 +48,8 @@
 </div>  </div> </div>   
 <script>
 $(document).ready(function(){
-    city_lzloading('.train_from','*From');
-    city_lzloading('.train_to','*To');
+    city_lzloading('.train_from','*From',true);
+    city_lzloading('.train_to','*To',true);
 });
     
 </script>
@@ -79,6 +79,6 @@ $(document).ready(function(){
         </div>
     </div>
     <script>
-        city_lzloading('#txt_train_from_location1', "*To");
-        city_lzloading('#txt_train_to_location1', "*From");
+        city_lzloading('#txt_train_from_location1', "*To",true);
+        city_lzloading('#txt_train_to_location1', "*From",true);
     </script>
