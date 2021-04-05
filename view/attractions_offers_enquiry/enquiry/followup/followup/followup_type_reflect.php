@@ -19,6 +19,7 @@ $followup_status = $_POST['followup_status']; ?>
 elseif($followup_status=='Converted'){  ?>
 	<option value="Advance Received">Advance Received</option>
 	<option value="Cancel & Refund">Cancel & Refund</option>
+	<option>Confirmation received</option>
 	<script>
 	$('#followup_stage').addClass('hidden');
 	$('#followup_date').removeClass('hidden');

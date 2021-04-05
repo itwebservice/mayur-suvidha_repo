@@ -92,6 +92,9 @@ $branch_status = $_POST['branch_status'];
                 </div>
 
                 <div class="row">
+                    <div class="col-md-4 col-sm-6 mg_bt_10_xs mg_bt_10">
+                      <input type="text" class="form-control" id="ref_detail" name="ref_detail" placeholder="Reference Details" title="Reference Details">
+                    </div>
                     <div class="col-md-4 col-sm-6 mg_bt_10_xs">
                         <select name="assigned_emp_id" id="assigned_emp_id" title="Allocate To" style="width:100%">
                             <option value="">*Allocate To</option>
@@ -139,7 +142,10 @@ $branch_status = $_POST['branch_status'];
                         <option value="<?= "Cold" ?>">Cold</option>
                       </select>
                     </div>
-                    <div class="col-md-4">
+                    
+                </div>
+                <div class="row">
+                <div class="col-md-4 col-sm-6 mg_tp_10_xs">
                         <textarea class="form-control" id="txt_enquiry_specification" onchange="validate_spaces(this.id);" name="txt_enquiry_specification" placeholder="Other Enquiry specification (If any)" title="Enquiry Specification"></textarea>
                     </div>
                 </div>
@@ -206,6 +212,7 @@ $(function(){
        var enquiry_date = $("#txt_enquiry_date").val(); 
        var followup_date = $("#txt_followup_date").val();
        var reference_id = $('#reference_id').val();
+       var ref_detail = $('#ref_detail').val();
        var branch_admin_id = $('#branch_admin_id').val();
        var financial_year_id = $('#financial_year_id').val();
        
@@ -259,7 +266,7 @@ $(function(){
        }
        
        $('#btn_enq_save').button('loading');
-       var obj = { login_id : login_id, enquiry_type : enquiry_type, name : name, mobile_no : mobile_no, email_id : email_id,location : location, assigned_emp_id : assigned_emp_id , enquiry_specification : enquiry_specification, enquiry_date : enquiry_date, followup_date : followup_date, reference_id : reference_id, enquiry_content : enquiry_content, landline_no : landline_no,enquiry : enquiry , branch_admin_id : branch_admin_id,financial_year_id : financial_year_id, country_code : country_code};
+       var obj = { login_id : login_id, enquiry_type : enquiry_type, name : name, mobile_no : mobile_no, email_id : email_id,location : location, assigned_emp_id : assigned_emp_id , enquiry_specification : enquiry_specification, enquiry_date : enquiry_date, followup_date : followup_date, reference_id : reference_id, enquiry_content : enquiry_content, landline_no : landline_no,enquiry : enquiry , branch_admin_id : branch_admin_id,financial_year_id : financial_year_id, country_code : country_code, ref_detail : ref_detail};
        $.post(
             base_url+"controller/attractions_offers_enquiry/enquiry_master_save_v.php",
             {  mobile_no : mobile_no, email_id : email_id },

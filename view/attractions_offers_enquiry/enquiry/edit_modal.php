@@ -113,6 +113,9 @@ $enq_details = mysql_fetch_assoc(mysql_query("Select * from enquiry_master where
                 </div>
 
                 <div class="row">
+                    <div class="col-md-4 col-sm-6 mg_bt_10">
+                      <input type="text" class="form-control" id="ref_detail_u"  name="ref_detail_u" placeholder="Reference Detail" title="Reference Detail" value="<?= $enq_details['ref_detail']  ?>">
+                    </div>
                     <div class="col-md-4 col-sm-6 mg_bt_10_xs">
                         <select name="assigned_emp_id_u" id="assigned_emp_id_u" title="Allocate To" style="width:100%">
                         <?php 
@@ -177,7 +180,9 @@ $enq_details = mysql_fetch_assoc(mysql_query("Select * from enquiry_master where
                         <option value="<?= "Cold" ?>">Cold</option>
                       </select>
                     </div>
-                    <div class="col-md-4">
+                </div>
+                <div class="row">
+                <div class="col-md-4">
                         <textarea class="form-control" id="txt_enquiry_specification_u" onchange="validate_spaces(this.id);" name="txt_enquiry_specification_u" placeholder="Other Enquiry specification (If any)" title="Enquiry Specification"><?php
                             if($enq_details['enquiry_specification'] != "NA") echo $enq_details['enquiry_specification']; ?></textarea>
                     </div>
@@ -296,6 +301,7 @@ $(function(){
       var enquiry_date = $("#txt_enquiry_date_u").val();
       var followup_date = $("#txt_followup_date_u").val();
       var reference  = $('#reference_id_u').val();
+      var ref_detail = $('#ref_detail_u').val()
       var assigned_emp_id = $("#assigned_emp_id_u").val();
       var enquiry_specification = $('#txt_enquiry_specification_u').val();
       var err_msg = "";
@@ -323,7 +329,7 @@ $(function(){
       $('#btn_enq_edit').button('loading');
       $.post( 
         base_url+"controller/attractions_offers_enquiry/enquiry_master_update_c.php",
-        { enquiry_id : enquiry_id, mobile_no : mobile_no, email_id : email_id,location :location, landline_no : landline_no ,enquiry : enquiry, enquiry_date : enquiry_date , followup_date : followup_date, reference : reference,enquiry_content : enquiry_content, enquiry_specification : enquiry_specification,assigned_emp_id : assigned_emp_id, name : name, country_code : country_code},
+        { enquiry_id : enquiry_id, mobile_no : mobile_no, email_id : email_id,location :location, landline_no : landline_no ,enquiry : enquiry, enquiry_date : enquiry_date , followup_date : followup_date, reference : reference,enquiry_content : enquiry_content, enquiry_specification : enquiry_specification,assigned_emp_id : assigned_emp_id, name : name, country_code : country_code, ref_detail : ref_detail},
         function(data){
               $('#enquiry_edit_modal').modal('hide');
                 $('#btn_enq_edit').button('reset');

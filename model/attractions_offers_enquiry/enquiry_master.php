@@ -18,6 +18,7 @@ function enquiry_master_save(){
   $enquiry_date = $_POST["enquiry_date"]; 
   $followup_date = $_POST["followup_date"];
   $reference_id = $_POST['reference_id'];
+  $ref_detail = $_POST['ref_detail'];
   $enquiry_content = $_POST['enquiry_content'];
   $branch_admin_id = $_POST['branch_admin_id'];
   $financial_year_id = $_POST['financial_year_id'];
@@ -42,7 +43,7 @@ function enquiry_master_save(){
 
     $name = addslashes($name);
     $enquiry_specification = addslashes($enquiry_specification);
-    $sq_enquiry = mysql_query("insert into enquiry_master (enquiry_id, login_id,branch_admin_id,financial_year_id, enquiry_type,enquiry, name, mobile_no, landline_no, country_code,email_id,location, assigned_emp_id, enquiry_specification, enquiry_date, followup_date, reference_id, enquiry_content ) values ('$enquiry_id', '$login_id', '$branch_admin_id','$financial_year_id', '$enquiry_type','$enquiry', '$name', '$mobile_no', '$landline_no', '$country_code','$email_id','$location', '$assigned_emp_id', '$enquiry_specification', '$enquiry_date', '$followup_date', '$reference_id', '$enquiry_content')");
+    $sq_enquiry = mysql_query("insert into enquiry_master (enquiry_id, login_id,branch_admin_id,financial_year_id, enquiry_type,enquiry, name, mobile_no, landline_no, country_code,email_id,location, assigned_emp_id, enquiry_specification, enquiry_date, followup_date, reference_id, ref_detail,enquiry_content ) values ('$enquiry_id', '$login_id', '$branch_admin_id','$financial_year_id', '$enquiry_type','$enquiry', '$name', '$mobile_no', '$landline_no', '$country_code','$email_id','$location', '$assigned_emp_id', '$enquiry_specification', '$enquiry_date', '$followup_date', '$reference_id', '$ref_detail','$enquiry_content')");
 
     $sq_max = mysql_fetch_assoc(mysql_query("select max(entry_id) as max from enquiry_master_entries"));
     $entry_id = $sq_max['max'] + 1;
@@ -218,6 +219,7 @@ function enquiry_master_update()
   $enquiry_content = json_encode($enquiry_content);
   $enquiry_specification = $_POST['enquiry_specification'];
   $assigned_emp_id = $_POST['assigned_emp_id'];
+  $ref_detail = $_POST['ref_detail'];
   $name = $_POST['name'];
   
   $landline_no = $country_code.$landline_no;
@@ -227,7 +229,7 @@ function enquiry_master_update()
   $name = addslashes($name);
   $enquiry_specification = addslashes($enquiry_specification);
 
-  $sq_enquiry = mysql_query("update enquiry_master set name='$name', country_code = '$country_code', mobile_no='$mobile_no',landline_no = '$landline_no',email_id='$email_id',location='$location', enquiry = '$enquiry', enquiry_date='$enquiry_date', followup_date='$followup_date', reference_id='$reference_id', enquiry_content='$enquiry_content', enquiry_specification='$enquiry_specification', assigned_emp_id ='$assigned_emp_id' where enquiry_id='$enquiry_id'");
+  $sq_enquiry = mysql_query("update enquiry_master set name='$name', country_code = '$country_code', mobile_no='$mobile_no',landline_no = '$landline_no',email_id='$email_id',location='$location', enquiry = '$enquiry', enquiry_date='$enquiry_date', followup_date='$followup_date', reference_id='$reference_id', ref_detail = '$ref_detail',enquiry_content='$enquiry_content', enquiry_specification='$enquiry_specification', assigned_emp_id ='$assigned_emp_id' where enquiry_id='$enquiry_id'");
 
   if(!$sq_enquiry){
     echo "error--Enquiry Information Not Updated.";

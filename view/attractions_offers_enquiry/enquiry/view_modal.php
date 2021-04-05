@@ -160,6 +160,14 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 
 								                </span>
 
+												<span class="main_block">
+
+<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+
+<?php echo "<label>Reference Detail<em>:</em></label> ".$sq_enq_info['ref_detail']; ?>
+
+</span>
+
 								                <span class="main_block">
 
 								                  <i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
