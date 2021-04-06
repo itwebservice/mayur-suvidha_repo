@@ -54,7 +54,16 @@ $branch_status = $_POST['branch_status'];
 $('#enquiry_id').select2();
 $('#quotation_date').datetimepicker({ timepicker:false, format:'d-m-Y' });
 $('#traveling_date').datetimepicker({ format:'d-m-Y H:i' });
-
+$(document).ready(function(){
+	let searchParams = new URLSearchParams(window.location.search);
+	if( searchParams.get('enquiry_id') ){
+		$("#quotation_save_modal").on("shown.bs.modal", function(){
+			$('#enquiry_id').val(searchParams.get('enquiry_id'));
+			$('#enquiry_id').trigger('change');
+		});
+		
+	}
+});
 $('#quotation_save_modal').modal('show');
 </script>
 <script src="<?php echo BASE_URL ?>view/package_booking/quotation/car_flight/js/quotation.js"></script>

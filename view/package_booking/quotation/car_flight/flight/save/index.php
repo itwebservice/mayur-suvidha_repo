@@ -54,6 +54,16 @@ $('#enquiry_id, #currency_code').select2();
 $('#from_date, #to_date, #quotation_date').datetimepicker({ timepicker:false, format:'d-m-Y' });
 $('#txt_arrval1,#txt_dapart1, #train_arrival_date,#train_departure_date').datetimepicker({ format:'d-m-Y H:i:s' });
 $('#quotation_save_modal').modal('show');
+$(document).ready(function(){
+	let searchParams = new URLSearchParams(window.location.search);
+	if( searchParams.get('enquiry_id') ){
+		$("#quotation_save_modal").on("shown.bs.modal", function(){
+			$('#enquiry_id').val(searchParams.get('enquiry_id'));
+			$('#enquiry_id').trigger('change');
+		});
+		
+	}
+});
 </script>
 <script src="<?php echo BASE_URL ?>view/package_booking/quotation/car_flight/js/quotation.js"></script>
 <script src="<?php echo BASE_URL ?>js/app/footer_scripts.js"></script>

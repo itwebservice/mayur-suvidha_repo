@@ -18,9 +18,7 @@
 
 				$query = "select * from enquiry_master where enquiry_type in('Flight Ticket') and status!='Disabled' and assigned_emp_id='$emp_id' order by enquiry_id desc";
 
-				if($role=='Admin'){
-				    $sq_enq = mysql_query("select * from enquiry_master where enquiry_type in('Flight Ticket') and status!='Disabled' order by enquiry_id desc");
-				}	
+					
 				if($branch_status=='yes'){
 					if($role=='Branch Admin'){
 						$sq_enq = mysql_query("select * from enquiry_master where enquiry_type in('Flight Ticket') and status!='Disabled' and branch_admin_id='$branch_admin_id' order by enquiry_id desc");
@@ -35,13 +33,16 @@
 					
 				}
 				else{
-					if($role!='Admin' && $role!='Branch Admin' && $role_id!='7' && $role_id<'7'){
+					if($role!='Admin' && $role!='Branch Admin' && $role_id!='50' && $role_id<'50'){
 						$q = "select * from enquiry_master where enquiry_type in('Flight Ticket') and assigned_emp_id='$emp_id' and status!='Disabled' order by enquiry_id desc";
 						$sq_enq = mysql_query($q);
 					}
 					else{
 						 $sq_enq = mysql_query("select * from enquiry_master where enquiry_type in('Flight Ticket') and status!='Disabled' order by enquiry_id desc");
 					}
+				}
+				if($role=='Admin'){
+				    $sq_enq = mysql_query("select * from enquiry_master where enquiry_type in('Flight Ticket') and status!='Disabled' order by enquiry_id desc");
 				}
 
 				while($row_enq = mysql_fetch_assoc($sq_enq)){

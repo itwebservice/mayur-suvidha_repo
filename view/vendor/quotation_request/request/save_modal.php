@@ -35,9 +35,7 @@ $year = date('Y');
                   $query = "SELECT * FROM `enquiry_master` where enquiry_type='Package Booking'";
                   $query .=" and status!='Disabled'";
                   
-                  if($role=='Admin'){
-                      $sq_enq = mysql_query("select * from enquiry_master where enquiry_type in('Package Booking') and status!='Disabled' order by enquiry_id desc");
-                  }
+                  
                   if($branch_status=='yes'){
                     if($role=='Branch Admin' || $role=='Accountant' || $role_id>'7'){
                       $sq_enq = mysql_query("select * from enquiry_master where enquiry_type in('Package Booking') and status!='Disabled' and branch_admin_id='$branch_admin_id' order by enquiry_id desc");
@@ -51,6 +49,9 @@ $year = date('Y');
                     $q = "select * from enquiry_master where enquiry_type in('Package Booking') and assigned_emp_id='$emp_id' and status!='Disabled' order by enquiry_id desc";
                     $sq_enq = mysql_query($q);
                   }
+                  if($role=='Admin'){
+                    $sq_enq = mysql_query("select * from enquiry_master where enquiry_type in('Package Booking') and status!='Disabled' order by enquiry_id desc");
+                }
                   while($row_enq = mysql_fetch_assoc($sq_enq)){
 
                   $booking_date = $row_enq['enquiry_date'];
@@ -151,6 +152,16 @@ $('#save_modal').modal('show');
 $(document).ready(function() {
 $('#enquiry_id, #service_id1, #city_name').select2();
 $('#quotation_date,#from_date,#to_date').datetimepicker({ timepicker:false, format:'d-m-Y' });
+});
+$(document).ready(function(){
+	let searchParams = new URLSearchParams(window.location.search);
+	if( searchParams.get('enquiry_id') ){
+		$("#save_modal").on("shown.bs.modal", function(){
+			$('#enquiry_id').val(searchParams.get('enquiry_id'));
+			$('#enquiry_id').trigger('change');
+		});
+		
+	}
 });
 function load_supplier()
 {

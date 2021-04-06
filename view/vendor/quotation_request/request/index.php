@@ -49,6 +49,12 @@ $branch_status = $sq['branch_status'];
 <script>
 $('#quotation_for_filter').select2();
 $('#from_date1, #to_date1').datetimepicker({ timepicker:false, format:'d-m-Y' });
+$(document).ready(function(){
+	let searchParams = new URLSearchParams(window.location.search);
+	if( searchParams.get('enquiry_id') ){
+		save_modal();
+	}
+});
 function save_modal(){
 	$('#quot_btn').button('loading');
 	$.post('request/save_modal.php', {}, function(data){

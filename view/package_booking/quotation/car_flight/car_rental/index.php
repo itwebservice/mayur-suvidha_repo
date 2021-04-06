@@ -84,7 +84,12 @@ $branch_status = $sq['branch_status'];
 <script>
 $('#quotation_id').select2();
 $('#from_date_filter, #to_date_filter').datetimepicker({ timepicker:false, format:'d-m-Y' });
-
+$(document).ready(function(){
+	let searchParams = new URLSearchParams(window.location.search);
+	if( searchParams.get('enquiry_id') ){
+		save_modal();
+	}
+});
 column = [
 	{ title : "S_No." },
 	{ title : "ID", className:"text-center" },
