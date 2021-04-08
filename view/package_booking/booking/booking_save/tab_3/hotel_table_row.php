@@ -55,6 +55,7 @@
                             <option value="Non AC">Non AC</option>
                     </select></td>
                     <td><input type="text" id="txt_hotel_acm_confirmation_no1" onchange="validate_specialChar(this.id)" name="txt_hotel_acm_confirmation_no" placeholder="Confirmation no" title="Confirmation no" style="width: 110px;"></td>
+                    <td><input type="text" id="vendor_id1" name="vendor_id1" placeholder="Vendor ID" title="Vendor ID" style="width: 110px;"></td>
                 </tr>
             </table>
         </div>

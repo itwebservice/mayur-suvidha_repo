@@ -356,7 +356,12 @@ function hotel_save_modal() {
 	var target = '_blank';
 	window.open(base_url + 'view/hotels/master/index.php', target);
 }
-
+function hotel_save_modal_direct(table_id){
+	var base_url = $('#base_url').val();
+	$.post(base_url+'view/hotels/master/hotel/save_modal.php', {table_id : table_id}, function(data){
+		$('#hotel_save_modal_direct').html(data);
+	});
+}
 function hotel_dropdown_reload(hotel_id = '') {
 	var base_url = $('#base_url').val();
 

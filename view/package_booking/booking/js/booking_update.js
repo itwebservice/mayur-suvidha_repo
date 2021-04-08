@@ -258,6 +258,7 @@ $(function () {
 			var room_type = new Array();
 			var hotel_meal_plan = new Array();
 			var confirmation_no = new Array();
+			var vendor_id = new Array();
 			var hotel_acc_id = new Array();
 
 			var table = document.getElementById('tbl_package_hotel_infomration');
@@ -278,9 +279,10 @@ $(function () {
 					var room_type1 = row.cells[9].childNodes[0].value;
 					var meal_plan1 = row.cells[8].childNodes[0].value;
 					var confirmation_no1 = row.cells[10].childNodes[0].value;
+					var vendor_id1 = row.cells[11].childNodes[0].value;
 
-					if (row.cells[11]) {
-						var hotel_acc_id1 = row.cells[11].childNodes[0].value;
+					if (row.cells[12]) {
+						var hotel_acc_id1 = row.cells[12].childNodes[0].value;
 					}
 					else {
 						var hotel_acc_id1 = '';
@@ -294,6 +296,7 @@ $(function () {
 					room_type.push(room_type1);
 					hotel_meal_plan.push(meal_plan1);
 					confirmation_no.push(confirmation_no1);
+					vendor_id.push(vendor_id1);
 					hotel_acc_id.push(hotel_acc_id1);
 				}
 			}
@@ -567,6 +570,7 @@ $(function () {
 								transfer_arr: transfer_arr,
 								exc_entry_id_arr: exc_entry_id_arr,
 								confirmation_no: confirmation_no,
+								vendor_id: vendor_id,
 								'hotel_acc_id[]': hotel_acc_id,
 								visa_country_name: visa_country_name,
 								visa_amount: visa_amount,

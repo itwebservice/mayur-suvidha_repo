@@ -1,5 +1,19 @@
 <form id="frm_tour_master_save2">
-
+<!--=======Header panel======-->
+<div class="app_panel_head mg_bt_20">
+      <div class="container">
+          <h2 class="pull-left"></h2>
+          <div class="pull-right header_btn">
+            <button>
+                <a>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </button>
+          </div>
+      </div>
+    </div> 
+<!--=======Header panel end======-->
+<div class="container">
 	<div class="row">
 		<div class="col-md-12 app_accordion">
   			<div class="panel-group main_block" id="accordion" role="tablist" aria-multiselectable="true">
@@ -8,11 +22,11 @@
 				<div class="accordion_content main_block mg_bt_10">
 					<div class="panel panel-default main_block">
 						<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
-					        <div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1" id="collapsed1">                  
+					        <div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="true" aria-controls="collapse5" id="collapsed1">                  
 					        	<div class="col-md-12"><span>Train Information</span></div>
 					        </div>
 					    </div>
-					      <div id="collapse1" class="panel-collapse collapse in main_block" role="tabpanel" aria-labelledby="heading1">
+					      <div id="collapse5" class="panel-collapse collapse in main_block" role="tabpanel" aria-labelledby="heading1">
 					          <div class="panel-body">
 					            <div class="row mg_bt_10">
 					                <div class="col-md-12 text-right text_center_xs">
@@ -82,8 +96,9 @@
 		                <div class="panel-body">
 		                  <div class="row mg_bt_10">
 		                      <div class="col-md-12 text-right text_center_xs">
-		                          <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_hotel_master');city_lzloading('select[name^=city_name]')"><i class="fa fa-plus"></i></button>
-		                          <button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_package_hotel_master')"><i class="fa fa-trash"></i></button>
+								  <button class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct('tbl_package_hotel_master')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+								  <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="addRow('tbl_package_hotel_master');city_lzloading('select[name^=city_name]')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+              					  <button type="button" class="btn btn-danger btn-sm ico_left mg_bt_10" onClick="deleteRow('tbl_package_hotel_master')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
 		                      </div>
 		                  </div>
 		                  <div class="row mg_bt_10">
@@ -93,12 +108,12 @@
 									<tr>
 											<td><input id="chk_dest" type="checkbox" checked></td>
 											<td><input maxlength="15" value="1" type="text" name="no" placeholder="Sr. No." class="form-control" disabled /></td>
-											<td><select id="city_name" name="city_name1" onchange="hotel_name_list_load(this.id);" class="city_master_dropdown app_select2" style="width:100%" title="Select City Name">
+											<td><select id="city_name" name="city_name1"  class="city_master_dropdown app_select2" style="width:100%" title="Select City Name">
 												</select></td>
 											<td><select id="hotel_name" name="hotel_name1" onchange="hotel_type_load(this.id);" style="width:100%" title="Select Hotel Name">
 													<option value="">*Hotel Name</option>
 												</select></td>
-											<td><input type="text" id="hotel_type" name="hotel_type1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
+											<td><input type="text" id="hotel_type_master" name="hotel_type_master1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
 											<td><input type="text" id="hotel_tota_days1" onchange="validate_balance(this.id)" name="hotel_tota_days1" placeholder="*Total Night" title="Total Night"></td></td>
                   						</tr>                                
 		                            </table>
@@ -199,7 +214,7 @@
 			</div> 
 		</div>
 	</div>
-
+	<div id="hotel_save_modal_direct"></div>
 	<div class="row text-center mg_tp_20">
 		<div class="col-md-12">
 			<button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab1()" ><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous</button>
@@ -207,10 +222,12 @@
 			<button class="btn btn-sm btn-info ico_right" id="btn_quotation_save">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
 		</div>
 	</div>
+	</div>
 </form>
 
 <script> 
 // App_accordion
+
 jQuery(document).ready(function() {			
 			jQuery(".panel-heading").click(function(){ 
 				jQuery('#accordion .panel-heading').not(this).removeClass('isOpen');
@@ -219,11 +236,18 @@ jQuery(document).ready(function() {
 				jQuery('#accordion .panel-collapse').not('.thePanel').slideUp("slow"); 
 		    	jQuery(".thePanel").slideToggle("slow").removeClass('thePanel'); 
 			});
-			
+			$('.city_master_dropdown').on('change', function(){
+    			hotel_name_list_load($(this).attr('id'));
+  			});
 		});
 
-function switch_to_tab1(){ $('a[href="#tab1"]').tab('show');
-}
+function switch_to_tab1(){ 
+	$('#tab2_head').removeClass('active');
+	$('#tab1_head').addClass('active');
+	$('.bk_tab').removeClass('active');
+	$('#tab1').addClass('active');
+	$('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
+ }
 event_airport('tbl_group_tour_quotation_dynamic_plane');
 city_lzloading('select[name^="city_name"]');
 $(function(){
@@ -473,7 +497,11 @@ $('#frm_tour_master_save2').validate({
 	    }      
 	  }
 		$('.accordion_content').removeClass("indicator");
-		$('a[href="#tab3"]').tab('show');
+		$('#tab2_head').addClass('done');
+		$('#tab_daywise_head').addClass('active');
+		$('.bk_tab').removeClass('active');
+		$('#tab_daywise').addClass('active');
+		$('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
 
 		}
 	});
@@ -486,7 +514,7 @@ function hotel_name_list_load(id)
 
   var count = id.substring(9);
 
-  $.get( "../../../view/custom_packages/master/package/hotel/hotel_name_load.php" , { city_id : city_id } , function ( data ) {
+  $.get( "../../../../view/custom_packages/master/package/hotel/hotel_name_load.php" , { city_id : city_id } , function ( data ) {
         $ ("#hotel_name"+count).html( data ) ;                            
   } ) ;   
 
@@ -499,9 +527,9 @@ function hotel_type_load(id)
 
   var count = id.substring(10);
 
-  $.get( "../../../view/custom_packages/master/package/hotel/hotel_type_load.php" , { hotel_id : hotel_id } , function ( data ) {
+  $.get( "../../../../view/custom_packages/master/package/hotel/hotel_type_load.php" , { hotel_id : hotel_id } , function ( data ) {
 
-        $ ("#hotel_type"+count).val( data ) ;                            
+        $ ("#hotel_type_master"+count).val( data ) ;                            
 
   } ) ;
 

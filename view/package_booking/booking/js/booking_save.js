@@ -313,6 +313,7 @@ $(function () {
 			var room_type = new Array();
 			var meal_plan = new Array();
 			var confirmation_no = new Array();
+			var vendor_id = new Array();
 
 			var table = document.getElementById('tbl_package_hotel_infomration');
 			var rowCount = table.rows.length;
@@ -332,6 +333,7 @@ $(function () {
 					var room_type1 = row.cells[9].childNodes[0].value;
 					var meal_plan1 = row.cells[8].childNodes[0].value;
 					var confirmation_no1 = row.cells[10].childNodes[0].value;
+					var vendor_id1 = row.cells[11].childNodes[0].value;
 
 					city_id.push(city_id1);
 					hotel_id.push(hotel_id1);
@@ -342,6 +344,7 @@ $(function () {
 					room_type.push(room_type1);
 					meal_plan.push(meal_plan1);
 					confirmation_no.push(confirmation_no1);
+					vendor_id.push(vendor_id1);
 				}
 			}
 
@@ -746,6 +749,7 @@ $(function () {
 															exc_date_arr:exc_date_arr,
 															transfer_arr:transfer_arr,
 															confirmation_no: confirmation_no,
+															vendor_id : vendor_id,
 															visa_country_name: visa_country_name,
 															visa_amount: visa_amount,
 															visa_service_charge: visa_service_charge,

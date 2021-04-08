@@ -131,6 +131,27 @@ function vendor_estimate_cancel(estimate_id)
         }
   	});
 }
+function vendor_estimate_delete(estimate_id)
+{
+	$('#vi_confirm_box').vi_confirm_box({
+        message: 'Are you sure?',
+      	callback: function(data1){
+          if(data1=="yes"){
+            
+              $.ajax({
+                type: 'post',
+                url: base_url()+'controller/vendor/dashboard/estimate/vendor_estimate_delete.php',
+                data:{ estimate_id : estimate_id },
+                success: function(result){
+                  msg_alert(result);
+                  vendor_estimate_list_reflect();
+                }
+              });
+
+          }
+        }
+  	});
+}
 function calculate_estimate_amount(offset='')
 {
 	var basic_cost = $('#basic_cost'+offset).val();

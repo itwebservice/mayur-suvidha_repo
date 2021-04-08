@@ -94,7 +94,7 @@
                         <input type="text" id="txt_package_to_date" name="txt_package_to_date" placeholder="To Date" title="To Date" value="<?php echo get_date_user($sq_booking_info['tour_to_date']) ?>" readonly>
                     </div>           
                     <div class="col-md-3 col-sm-4 col-xs-12 mg_bt_10_sm_xs">
-                       <input type="text" id="txt_tour_total_days" name="txt_tour_total_days" placeholder="Total Tour Days" title="Total Tour Days" onchange="validate_balance(this.id);" value="<?php echo $sq_booking_info['total_tour_days'] ?>" readonly> 
+                       <input type="text" id="txt_tour_total_days" name="txt_tour_total_days" placeholder="Total Tour Nights" title="Total Tour Nights" onchange="validate_balance(this.id);" value="<?php echo $sq_booking_info['total_tour_days'] ?>" readonly> 
                     </div> 
                     <div class="col-md-3 col-sm-4 col-xs-12 hidden">
                       <select name="taxation_type" id="taxation_type" title="Taxation Type">

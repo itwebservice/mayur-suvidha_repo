@@ -121,7 +121,7 @@
                         <input class="pck-tour-tab-txt" type="text" id="txt_package_to_date" name="txt_package_to_date" placeholder="To Date" title="To Date"  onchange="validate_issueDate('txt_package_from_date','txt_package_to_date');total_days_reflect();">
                     </div>    
                     <div class="col-md-3 col-sm-6 col-xs-12 mg_bt_10_xs">
-                        <input class="pck-tour-tab-txt" type="text" id="txt_tour_total_days" name="txt_tour_total_days" placeholder="Tour Total Days" title="Tour Total Days" onchange="validate_balance(this.id);" readonly>
+                        <input class="pck-tour-tab-txt" type="text" id="txt_tour_total_days" name="txt_tour_total_days" placeholder="Tour Total Nights" title="Tour Total Nights" onchange="validate_balance(this.id);" readonly>
                     </div> 
                     <div class="col-md-3 col-sm-6 col-xs-12 hidden">
                       <select name="taxation_type" id="taxation_type" title="Taxation Type">

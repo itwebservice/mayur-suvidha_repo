@@ -1,4 +1,19 @@
 <form id="frm_tour_master_save1"> 
+<!--=======Header panel======-->
+<div class="app_panel_head mg_bt_20">
+      <div class="container">
+          <h2 class="pull-left"></h2>
+          <div class="pull-right header_btn">
+            <button>
+                <a>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </button>
+          </div>
+      </div>
+    </div> 
+<!--=======Header panel end======-->
+<div class="container">
         <div class="row mg_tp_20">
              <div class="col-md-3 col-sm-6 mg_bt_10 col-md-offset-2">
                  <select id="cmb_tour_type" name="cmb_tour_type" class="form-control" title="Tour Type" onchange="incl_reflect(this.id);">
@@ -63,6 +78,7 @@
         <div class="row mg_bt_10 mg_tp_20 text-center">
                 <button class="btn btn-sm btn-info ico_right" id="btn_save">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
         </div>
+        </div>
 </form>
 <script src="<?= BASE_URL ?>js/ajaxupload.3.5.js"></script>
 
@@ -88,8 +104,13 @@ $(function(){
         var valid_state1 = table_date_validate();
         if((valid_state==false) || (valid_state1==false)){ return false; }
 
-      $('a[href="#tab2"]').tab('show');
+      // $('a[href="#tab2"]').tab('show');
 
+      $('#tab1_head').addClass('done');
+      $('#tab2_head').addClass('active');
+      $('.bk_tab').removeClass('active');
+      $('#tab2').addClass('active');
+      $('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
       return false;
 
     }
@@ -240,7 +261,7 @@ function generate_list()
       $('#div_list1').html('');
       return false;
     }else{
-      $.post('inc/generate_program_list.php', {from_date : from_date,to_date : to_date }, function(data){
+      $.post('../inc/generate_program_list.php', {from_date : from_date,to_date : to_date }, function(data){
           $('#div_list1').html(data);
       });
     }
@@ -248,7 +269,7 @@ function generate_list()
 function incl_reflect(cmb_tour_type)
 {
   var tour_type = $("#"+cmb_tour_type).val();
-  $.post('inc/inclusion_reflect.php', {tour_type : tour_type }, function(data){
+  $.post('../inc/inclusion_reflect.php', {tour_type : tour_type }, function(data){
         var incl_arr = JSON.parse(data); 
          
         var $iframe = $('#inclusions-wysiwyg-iframe');

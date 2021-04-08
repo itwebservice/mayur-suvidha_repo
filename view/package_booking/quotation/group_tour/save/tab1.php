@@ -79,7 +79,7 @@ $role_id = $_SESSION['role_id'];
 
 		<div class="col-md-3 col-sm-6 col-xs-12 mg_bt_10">
 
-			<input type="text" id="total_days" name="total_days" placeholder="Total Days" title="Total Days" readonly>
+			<input type="text" id="total_days" name="total_days" placeholder="Total Nights" title="Total Nights" readonly>
 
 		</div>	
 

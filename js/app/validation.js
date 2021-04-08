@@ -727,12 +727,15 @@ function foo(tableID, quot_table_id) {
 		row.cells[0].childNodes[0].setAttribute('id', 'chk_dest' + prefix + foo.counter);
 		row.cells[2].childNodes[0].setAttribute('id', 'city_name' + prefix + foo.counter);
 		row.cells[3].childNodes[0].setAttribute('id', 'hotel_name' + prefix + foo.counter);
-		row.cells[4].childNodes[0].setAttribute('id', 'hotel_type' + prefix + foo.counter);
+		row.cells[4].childNodes[0].setAttribute('id', 'hotel_type_master' + prefix + foo.counter);
 		row.cells[5].childNodes[0].setAttribute('id', 'hotel_tota_days1' + prefix + foo.counter);
 		if (row.cells[6]) {
 			row.cells[6].childNodes[0].setAttribute('value', '');
 			$(row.cells[6]).addClass('hidden');
 		}
+		$('.city_master_dropdown').on('change', function(){
+			hotel_name_list_load($(this).attr('id'));
+		});
 	}
 
 	if (tableID == 'tbl_tour_entities') {
@@ -896,11 +899,12 @@ function foo(tableID, quot_table_id) {
 		row.cells[9].childNodes[0].setAttribute('id', 'room_type' + foo.counter);
 		row.cells[8].childNodes[0].setAttribute('id', 'cmb_meal_plan' + foo.counter);
 		row.cells[10].childNodes[0].setAttribute('id', 'txt_hotel_acm_confirmation_no' + foo.counter);
+		row.cells[11].childNodes[0].setAttribute('id', 'vendor_id' + foo.counter);
 
 		$('#' + row.cells[7].childNodes[0].id).select2().trigger("change");
 
-		if (row.cells[11]) {
-			row.cells[11].style.display = 'none';
+		if (row.cells[12]) {
+			row.cells[12].style.display = 'none';
 		}
 	}
 

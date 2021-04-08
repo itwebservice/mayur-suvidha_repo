@@ -104,6 +104,7 @@
                                     <option value="Non AC">Non AC</option>
                             </select></td>
                             <td><input type="text" id="txt_hotel_acm_confirmation_no<?= $count_ht ?>_t" name="txt_hotel_acm_confirmation_no" placeholder="Confirmation no" onchange=" validate_specialChar(this.id)" value="<?= $row_hotel_acc['confirmation_no'] ?>" title="Confirmation no" style="width:120px"></td>
+                            <td><input type="text" id="vendor_id<?= $count_ht ?>_t" name="vendor_id" placeholder="Vendor ID"  value="<?= $row_hotel_acc['vendor_id'] ?>" title="Vendor ID" style="width:120px"></td>
                             <td style="display:none"><input type="text" value="<?php echo $row_hotel_acc['id'] ?>"></td>
                         </tr>
                     <?php } ?>

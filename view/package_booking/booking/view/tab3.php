@@ -19,6 +19,7 @@ if($sq_c_hotel != '0'){
 							<th>Meal_Plan</th>
 							<th>Room_Type</th>
 							<th>Confirmation_No</th>
+							<th>Vendor_ID</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,6 +45,7 @@ if($sq_c_hotel != '0'){
 							<td><?php echo $row_entry['meal_plan']; ?></td>
 							<td><?php echo $row_entry['room_type']; ?></td>
 							<td><?php echo $row_entry['confirmation_no']; ?></td>
+							<td><?php echo $row_entry['vendor_id']; ?></td>
 						</tr>  
 						<script>
 							$("#birth_date<?= $offset.$count ?>_d, #expiry_date<?= $offset ?>1").datetimepicker({ timepicker:false, format:'d-m-Y' });

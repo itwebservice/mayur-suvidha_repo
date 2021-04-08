@@ -20,7 +20,7 @@
 					<td><select id="hotel_name" name="hotel_name1" onchange="hotel_type_load(this.id);" style="width:100%" title="Select Hotel Name">
 					<option value="">*Hotel Name</option>
 					</select></td>
-					<td><input type="text" id="hotel_type" name="hotel_type1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
+					<td><input type="text" id="hotel_type_master" name="hotel_type_master1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
 					<td><input type="text" id="hotel_tota_days1" onchange="validate_balance(this.id)" name="hotel_tota_days1" placeholder="*Total Night" title="Total Night"></td></td>
                 </tr>
 				<?php
@@ -44,7 +44,7 @@
                         <?php $sq_hotel = mysql_fetch_assoc(mysql_query("select hotel_name from hotel_master where hotel_id='$row_q_hotel[hotel_id]'")); ?>
                         <option value="<?php echo $row_q_hotel['hotel_id'] ?>"><?php echo $sq_hotel['hotel_name'] ?></option>
                         </select></td>
-                        <td><input type="text" id="hotel_type<?= $offset.$count?>_d" name="hotel_type1<?= $offset.$count?>_d" placeholder="*Hotel Type" title="Hotel Type" value="<?php echo $row_q_hotel['hotel_type'] ?>" readonly></td>
+                        <td><input type="text" id="hotel_type_master<?= $offset.$count?>_d" name="hotel_type_master1<?= $offset.$count?>_d" placeholder="*Hotel Type" title="Hotel Type" value="<?php echo $row_q_hotel['hotel_type'] ?>" readonly></td>
                         <td><input type="text" id="hotel_tota_days1<?= $offset.$count?>_d" onchange="validate_balance(this.id)" name="hotel_tota_days1<?= $offset.$count?>_d" placeholder="*Total Night" title="Total Night" value="<?php echo $row_q_hotel['total_nights'] ?>" ></td></td>
                         <td><input type="hidden" id="hotel_entry_id" name="hotel_entry_id" value="<?php echo ($row_q_hotel['id']); ?>"></td>
                     </tr>

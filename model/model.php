@@ -22,7 +22,7 @@ $localIP = getHostByName(getHostName());
 $connection=mysql_connect("localhost","root","");
 if(!$connection){ echo "Unable To make Connection."; }
 
-$db_connect=mysql_select_db("v8");
+$db_connect=mysql_select_db("mayur_suvidha");
 if(!$db_connect) { echo "Database Not Connected."; }
 
 define('BASE_URL', 'http://localhost/mayur_suvidha/');

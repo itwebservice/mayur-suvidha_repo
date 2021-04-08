@@ -7,7 +7,10 @@ require_once('../../layouts/admin_header.php');
 <div class="header_bottom">
   <div class="row mg_tp_10">
       <div class="col-md-12 text-right">
-          <button class="btn btn-info btn-sm ico_left" id="btn_save_modal" onclick="save_modal()"><i class="fa fa-plus" title="Add New Tour"></i>&nbsp;&nbsp;Group Tour</button>
+        <form action="save/save_group_tour.php" class="no-marg pull-right" method="POST">
+        &nbsp;&nbsp;<button class="btn btn-info btn-sm ico_left" id="btn_save_modal"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add New Tour</button>&nbsp;&nbsp;
+      </form>
+          <!-- <button class="btn btn-info btn-sm ico_left" id="btn_save_modal" onclick="save_modal()"><i class="fa fa-plus" title="Add New Tour"></i>&nbsp;&nbsp;Group Tour</button> -->
       </div>
   </div>
 </div> 
@@ -32,14 +35,14 @@ function list_reflect()
 }
 list_reflect();
 
-function save_modal()
-{
-	$('#btn_save_modal').button('loading');
-	$.post('save/save_group_tour.php', {}, function(data){
-		$('#btn_save_modal').button('reset');
-		$('#div_modal_content').html(data);
-	});
-}
+// function save_modal()
+// {
+// 	$('#btn_save_modal').button('loading');
+// 	$.post('save/save_group_tour.php', {}, function(data){
+// 		$('#btn_save_modal').button('reset');
+// 		$('#div_modal_content').html(data);
+// 	});
+// }
 
 function update_modal(tour_id)
 {

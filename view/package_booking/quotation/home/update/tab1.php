@@ -114,7 +114,7 @@
 
 		<div class="col-md-4 col-sm-6 col-xs-12">
 
-	      <input type="text" id="total_days12" name="total_days12" placeholder="Total Days" title="Total Days" value="<?= $sq_quotation['total_days'] ?>" disabled>
+	      <input type="text" id="total_days12" name="total_days12" placeholder="Total NIghts" title="Total Nights" value="<?= $sq_quotation['total_days'] ?>" disabled>
 
 	    </div>
 	</div>	

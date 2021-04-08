@@ -194,6 +194,8 @@ function package_tour_booking_master_save()
     $meal_plan = $_POST['meal_plan'];
 
     $confirmation_no = $_POST['confirmation_no'];
+
+    $vendor_id = $_POST['vendor_id'];
   
     // Transport
     $transp_vehicle_arr =$_POST['transp_vehicle_arr'];
@@ -375,7 +377,7 @@ function package_tour_booking_master_save()
 
     //** This function stores the hotel accomodation information
 
-    $this->package_tour_hotel_accomodation_information_save($max_booking_id, $city_id, $hotel_id, $hotel_from_date, $hotel_to_date, $hotel_rooms, $hotel_catagory, $room_type, $meal_plan, $confirmation_no);
+    $this->package_tour_hotel_accomodation_information_save($max_booking_id, $city_id, $hotel_id, $hotel_from_date, $hotel_to_date, $hotel_rooms, $hotel_catagory, $room_type, $meal_plan, $confirmation_no, $vendor_id);
 
     //** This function stores the transport information
     $this->package_tour_tranpsort_information_save($max_booking_id, $transp_vehicle_arr, $transp_start_date,$trans_pickuptype_arr,$trans_pickup_arr,$trans_droptype_arr,$trans_drop_arr,$trans_count_arr);
@@ -765,7 +767,7 @@ function package_tour_traveling_information_save( $max_booking_id, $train_travel
 
 
 
-function package_tour_hotel_accomodation_information_save($max_booking_id, $city_id, $hotel_id, $hotel_from_date, $hotel_to_date, $hotel_rooms, $hotel_catagory, $room_type, $meal_plan, $confirmation_no)
+function package_tour_hotel_accomodation_information_save($max_booking_id, $city_id, $hotel_id, $hotel_from_date, $hotel_to_date, $hotel_rooms, $hotel_catagory, $room_type, $meal_plan, $confirmation_no, $vendor_id)
 
 {
 
@@ -797,6 +799,8 @@ function package_tour_hotel_accomodation_information_save($max_booking_id, $city
 
     $confirmation_no[$i] = mysql_real_escape_string($confirmation_no[$i]);
 
+    $vendor_id[$i] = mysql_real_escape_string($vendor_id[$i]);
+
 
 
     $sq = mysql_query("select max(id) as max from package_hotel_accomodation_master");
@@ -805,7 +809,7 @@ function package_tour_hotel_accomodation_information_save($max_booking_id, $city
 
     $max_hotel_id = $value['max'] + 1;
 
-    $sq_hotel = mysql_query("insert into package_hotel_accomodation_master (id, booking_id, city_id, hotel_id, from_date, to_date, rooms, catagory, room_type, meal_plan, confirmation_no) value ('$max_hotel_id', '$max_booking_id', '$city_id[$i]', '$hotel_id[$i]', '$hotel_from_date[$i]', '$hotel_to_date[$i]', '$hotel_rooms[$i]', '$hotel_catagory[$i]', '$room_type[$i]', '$meal_plan[$i]', '$confirmation_no[$i]')");
+    $sq_hotel = mysql_query("insert into package_hotel_accomodation_master (id, booking_id, city_id, hotel_id, from_date, to_date, rooms, catagory, room_type, meal_plan, confirmation_no, vendor_id) value ('$max_hotel_id', '$max_booking_id', '$city_id[$i]', '$hotel_id[$i]', '$hotel_from_date[$i]', '$hotel_to_date[$i]', '$hotel_rooms[$i]', '$hotel_catagory[$i]', '$room_type[$i]', '$meal_plan[$i]', '$confirmation_no[$i]','$vendor_id[$i]')");
 
     if(!$sq_hotel)
 

@@ -15,7 +15,7 @@ $role_id = $_SESSION['role_id'];
 $array_s = array();
 $temp_arr = array();
 
-$query = "select * from vendor_estimate where financial_year_id='$financial_year_id' ";
+$query = "select * from vendor_estimate where financial_year_id='$financial_year_id' and status != 'Inactive' ";
 if($estimate_type!=""){
 	$query .= "and estimate_type='$estimate_type'";
 }
@@ -80,7 +80,9 @@ while($row_estimate = mysql_fetch_assoc($sq_estimate)){
 
 		'.$evidence.'
 
-		<button class="btn btn-danger btn-sm" onclick="vendor_estimate_cancel('.$row_estimate['estimate_id'] .')" data-toggle="tooltip" title="Cancel this Purchase"><i class="fa fa-ban"></i></button>',
+		<button class="btn btn-danger btn-sm" onclick="vendor_estimate_cancel('.$row_estimate['estimate_id'] .')" data-toggle="tooltip" title="Cancel this Purchase"><i class="fa fa-ban"></i></button>
+		
+		<button class="btn btn-danger btn-sm" onclick="vendor_estimate_delete('.$row_estimate['estimate_id'] .')" data-toggle="tooltip" title="Delete this Purchase"><i class="fa fa-trash"></i></button>',
 		$emp_name 
 		), "bg" =>$bg);
 	array_push($array_s,$temp_arr); 					

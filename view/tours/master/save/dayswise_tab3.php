@@ -1,4 +1,17 @@
 <form id="frm_tab_2">
+<!--=======Header panel======-->
+<div class="app_panel_head mg_bt_20">
+      <div class="container">
+          <h2 class="pull-left"></h2>
+          <div class="pull-right header_btn">
+            <button>
+                <a>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </button>
+          </div>
+      </div>
+    </div> 
 <!--=======Header panel end======-->
    <div class="container">
 
@@ -98,7 +111,7 @@ return false;
 
 
 
-  $.post('inc/image_list_reflect.php', {dest_id : dest_id}, function(data){
+  $.post('../inc/image_list_reflect.php', {dest_id : dest_id}, function(data){
 
         $('#image_div').html(data);
 
@@ -114,12 +127,22 @@ $(function(){
 
         var daywise_url = $('#daywise_url').val();
 
-       $('a[href="#tab4"]').tab('show');
+        $('#tab_daywise_head').addClass('done');
+        $('#tab3_head').addClass('active');
+        $('.bk_tab').removeClass('active');
+        $('#tab3').addClass('active');
+        $('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);  
 
       return false;
 
     }
   });
 });
-function switch_to_tab2(){ $('a[href="#tab2"]').tab('show'); }
+function switch_to_tab2(){ 
+	$('#tab_daywise_head').removeClass('active');
+	$('#tab2_head').addClass('active');
+	$('.bk_tab').removeClass('active');
+	$('#tab2').addClass('active');
+	$('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200); 
+} 
 </script>

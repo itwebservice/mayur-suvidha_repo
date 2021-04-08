@@ -1,5 +1,20 @@
 <form id="frm_tour_master_save"> 
-
+<!--=======Header panel======-->
+<div class="app_panel_head mg_bt_20">
+      <div class="container">
+          <h2 class="pull-left"></h2>
+          <div class="pull-right header_btn">
+            <button>
+                <a>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </button>
+          </div>
+      </div>
+    </div> 
+<!--=======Header panel end======-->
+    <div class="container">
+    
         <h3 class="editor_title">Costing Details</h3>
         <div class="panel panel-default panel-body app_panel_style">
             <div class="row text-center">   
@@ -86,13 +101,19 @@
                 <button class="btn btn-sm btn-success" id="btn_save" ><i class="fa fa-floppy-o"></i>&nbsp;&nbsp;Save</button>
 
         </div>
-
+        </div>
 </form>
 
 
 
 <script>
 
-function switch_to_tab3(){ $('a[href="#tab3"]').tab('show'); }
+function switch_to_tab3(){ 
+	$('#tab3_head').removeClass('active');
+	$('#tab_daywise_head').addClass('active');
+	$('.bk_tab').removeClass('active');
+	$('#tab_daywise').addClass('active');
+	$('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200); 
+} 
 
 </script>

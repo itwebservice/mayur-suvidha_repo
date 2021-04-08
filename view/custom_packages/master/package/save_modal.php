@@ -99,7 +99,7 @@
            <small class="note">Note -  Pls ensure you added city wise hotel & tariff using Supplier Master</small>
           <div class="bg_white main_block panel-default-inner">
             <div class="col-xs-12 text-right mg_tp_10">
-              <button class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+              <button class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct('tbl_package_hotel_master')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
               <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="addRow('tbl_package_hotel_master');city_lzloading('select[name^=city_name1]')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
               <button type="button" class="btn btn-danger btn-sm ico_left mg_bt_10" onClick="deleteRow('tbl_package_hotel_master')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
             </div> 
@@ -109,12 +109,12 @@
                   <tr>
                       <td><input id="chk_dest1" type="checkbox" checked></td>
                       <td><input maxlength="15" value="1" type="text" name="no" placeholder="Sr. No." class="form-control" disabled /></td>
-                      <td><select id="city_name" name="city_name1" onchange="hotel_name_list_load(this.id);" class="city_master_dropdown app_select2" style="width:100%" title="Select City Name">
+                      <td><select id="city_name" name="city_name1" class="city_master_dropdown app_select2" style="width:100%" title="Select City Name">
                           </select></td>
                       <td><select id="hotel_name" name="hotel_name1" onchange="hotel_type_load(this.id);" style="width:100%" title="Select Hotel Name">
                             <option value="">*Hotel Name</option>
                           </select></td>
-                      <td><input type="text" id="hotel_type" name="hotel_type1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
+                      <td><input type="text" id="hotel_type_master" name="hotel_type_master1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
                       <td><input type="text" id="hotel_tota_days1" onchange="validate_balance(this.id)" name="hotel_tota_days1" placeholder="*Total Night" title="Total Night"></td></td>
                   </tr>
                 </table>  
@@ -175,7 +175,7 @@ destinationLoading('select[name^=drop_to]', 'Drop-off Location');"><i class="fa 
 </div>
 
 <div id="div_modal_content"></div>
-
+<div id="hotel_save_modal_direct"></div>
 </form>
 
 <script>
@@ -183,6 +183,11 @@ $('#dest_name_s,#vehicle_name1,#currency_code').select2();
 city_lzloading('select[name^="city_name1"]');
 destinationLoading('select[name^="pickup_from"]', "Pickup Location");
 destinationLoading('select[name^="drop_to"]', "Drop-off Location");
+$(document).ready(function(){
+  $('.city_master_dropdown').on('change', function(){
+    hotel_name_list_load($(this).attr('id'));
+  });
+});
 function generate_list(){
 
     var total_days = $("#total_days").val();
@@ -360,7 +365,7 @@ function hotel_type_load(id)
 
   $.get( "hotel/hotel_type_load.php" , { hotel_id : hotel_id } , function ( data ) {
 
-        $ ("#hotel_type"+count).val( data ) ;                            
+        $ ("#hotel_type_master"+count).val( data ) ;                            
 
   } ) ;
 

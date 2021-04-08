@@ -232,6 +232,7 @@ function hotel_master_save($city_id, $hotel_name, $mobile_no, $landline_no, $ema
   
   $sq = mysql_query("insert into hotel_master ( hotel_id, city_id, hotel_name, mobile_no, landline_no, email_id,alternative_email_1,alternative_email_2, contact_person_name, immergency_contact_no, hotel_address, country, website, opening_balance, rating_star,meal_plan,hotel_type, bank_name,account_name, account_no, branch, ifsc_code, service_tax_no,active_flag, state_id,side,pan_no,as_of_date,description,policies,amenities, `cwb_from`, `cwb_to`, `cwob_from`, `cwob_to`, portal_link,username,password) values ( '$max_hotel_id', '$city_id', '$hotel_name', '$mobile_no', '$landline_no', '$email_id', '$email_id_1', '$email_id_2', '$contact_person_name', '$immergency_contact_no', '$hotel_address', '$country', '$website', '$opening_balance','$rating_star','$meal_plan','$hotel_type', '$bank_name','$account_name','$account_no','$branch','$ifsc_code', '$service_tax_no', '$active_flag','$state','$side','$supp_pan','$as_of_date','$description','$policies','$amenities', '$cwb_from', '$cwb_to', '$cwob_from', '$cwob_to','$portal_link','$username','$password')");
 
+  $city_name = mysql_fetch_assoc(mysql_query('select city_name from city_master where city_id='.$city_id));
   if(!$sq){
     rollback_t();
     echo "error--Hotel details not saved!";
@@ -261,7 +262,7 @@ function hotel_master_save($city_id, $hotel_name, $mobile_no, $landline_no, $ema
 
     if($GLOBALS['flag']){
       commit_t();
-      echo "Hotel has been successfully saved.";
+      echo $max_hotel_id.';'.$hotel_name.':'.$city_id.';'.$city_name['city_name']."--Hotel has been successfully saved.";
       exit;
     }
     else{

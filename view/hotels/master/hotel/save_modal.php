@@ -1,8 +1,10 @@
 <?php
 include "../../../../model/model.php";
 $client_modal_type = $_POST['client_modal_type'];
+$table_id = $_POST['table_id'];
 ?>
 <input type="hidden" id="client_modal_type" name="client_modal_type" value="<?= $client_modal_type ?>">
+<input type="hidden" id="table_id_show" name="table_id_show" value="<?= $table_id ?>">
 <div class="modal fade" id="save_modal" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document" style='width:80%'>
     <div class="modal-content">
@@ -461,13 +463,13 @@ upload_hotel_pic_attch();
 function upload_hotel_pic_attch()
 {
     var img_array = new Array(); 
-
+    var base_url = $("#base_url").val();
     var btnUpload=$('#hotel_upload_btn');
     $(btnUpload).find('span').text('Upload Images');
     $("#hotel_upload_url").val('');
-
+    
     new AjaxUpload(btnUpload, {
-      action: 'hotel/upload_hotel_images.php',
+      action: base_url+'view/hotels/master/hotel/upload_hotel_images.php',
       name: 'uploadfile',
       onSubmit: function(file, ext){  
         if (! (ext && /^(jpg|png|jpeg)$/.test(ext))){ 
@@ -586,6 +588,7 @@ $(function(){
             { city_id : city_id, hotel_name : hotel_name, mobile_no : mobile_no, landline_no : landline_no, email_id : email_id, contact_person_name : contact_person_name, immergency_contact_no : immergency_contact_no, hotel_address : hotel_address, country : country, website :website,  opening_balance : opening_balance,rating_star : rating_star,hotel_type:hotel_type,meal_plan:meal_plan, active_flag : active_flag, bank_name : bank_name, account_no: account_no, branch : branch, ifsc_code :ifsc_code, service_tax_no : service_tax_no, state : state,side :side ,account_name : account_name ,supp_pan : supp_pan,hotel_image_path : hotel_image_path,as_of_date : as_of_date,description:description,policies:policies,amenities:amenities,cwb_from:cwb_from,cwb_to:cwb_to,cwob_from:cwob_from,cwob_to:cwob_to,email_id_1:email_id_1,email_id_2:email_id_2, username : username, portal_link : portal_link, password : password},
 
             function(data){ 
+              console.log(data);
                 var msg = data.split('--');
                 var result_arr = data.split('==');
                 var error_arr = data.split('--');
@@ -603,7 +606,28 @@ $(function(){
                       hotel_dropdown_reload(result_arr[1]);  
                     }
                   }
-                  success_msg_alert(data);
+                  if($('#city_name').length != 0){
+                    var city_hotel = msg[0].split(':');
+                    var hotel = city_hotel[0].split(';');
+                    var city = city_hotel[1].split(';');
+
+                    var table=document.getElementById($('#table_id_show').val());
+                    var rowlength = table.rows.length;
+                    
+                    var newOption = new Option(city[1], city[0], true, true);
+                    $('#'+table.rows[rowlength-1].cells[2].childNodes[0].id).append(newOption).trigger('change.select2');
+                    $('#'+table.rows[rowlength-1].cells[3].childNodes[0].id).html(
+                    '<option value="' +
+                    hotel[0] +
+                    '" selected="selected">' +
+                    hotel[1] +
+                    '</option>'
+                  );
+                    $('#'+table.rows[rowlength-1].cells[3].childNodes[0].id).trigger('change');
+
+                    
+                  }
+                  success_msg_alert(msg[1]);
                   $('#btn_save').button('reset');
                   $('#save_modal').modal('hide');
                   list_reflect();

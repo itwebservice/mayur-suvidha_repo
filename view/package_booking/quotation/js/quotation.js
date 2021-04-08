@@ -18,7 +18,7 @@ function total_days_reflect(offset = '') {
 	var difference_ms = to_date_ms - from_date_ms;
 	var total_days = Math.round(Math.abs(difference_ms) / one_day);
 
-	total_days = parseFloat(total_days) + 1;
+	total_days = parseFloat(total_days);
 	$('#total_days' + offset).val(total_days);
 }
 

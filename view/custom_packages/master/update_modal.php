@@ -170,7 +170,7 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
                             <td><select id="hotel_name" name="hotel_name1" onchange="hotel_type_load(this.id);" style="width:100%" title="Select Hotel Name">
                                   <option value="">*Hotel Name</option>
                                 </select></td>
-                            <td><input type="text" id="hotel_type" name="hotel_type1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
+                            <td><input type="text" id="hotel_type_master" name="hotel_type_master1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
                             <td><input type="text" id="hotel_tota_days1" onchange="validate_balance(this.id)" name="hotel_tota_days1" placeholder="*Total Night" title="Total Night"></td>
                         </tr>
                         <script type="text/javascript">
@@ -193,7 +193,7 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
                             <td><select id="hotel_name<?php echo $count_hotel; ?>-u" name="hotel_name1" onchange="hotel_type_load(this.id);" style="width:100%" title="Select Hotel Name">
                                   <option value="<?php echo $sq_pckgh['hotel_id']; ?>"><?php echo $sq_pckgh['hotel_name']; ?></option>
                               </select></td>
-                            <td><input type="text" id="hotel_type<?php echo $count_hotel; ?>-u" name="hotel_type1" value="<?php echo $row_hotel['hotel_type']; ?>" placeholder="Hotel Type" title="Hotel Type" readonly></td>
+                            <td><input type="text" id="hotel_type_master<?php echo $count_hotel; ?>-u" name="hotel_type_master1" value="<?php echo $row_hotel['hotel_type']; ?>" placeholder="Hotel Type" title="Hotel Type" readonly></td>
                             <td><input type="text" id="hotel_tota_days1" value="<?php echo $row_hotel['total_days']; ?>" name="hotel_tota_days1" placeholder="Total Night" onchange="validate_balance(this.id);" title="Total Night"></td>
                             <td class="hidden"><input type="text" value="<?php echo $row_hotel['entry_id']; ?>"></td>
                         </tr> 
@@ -608,7 +608,7 @@ function hotel_type_load(id)
   var count = id.substring(10);
 
   $.get( "package/hotel/hotel_type_load.php" , { hotel_id : hotel_id } , function ( data ) {
-        $ ("#hotel_type"+count).val( data ) ;                            
+        $ ("#hotel_type_master"+count).val( data ) ;                            
   } ) ;   
 }
 
