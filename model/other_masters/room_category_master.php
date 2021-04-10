@@ -17,7 +17,7 @@ public function category_save()
 	$entry_id = $sq_max['max'] + 1;
 	$sq_insert = mysql_query("insert into room_category_master ( entry_id, room_category, active_status ) values ( '$entry_id', '$room_category', '$status' )");
 	if($sq_insert){
-		echo "Room Category has been successfully saved.";
+		echo $room_category.":"."--Room Category has been successfully saved.";
 		exit;
 	}
 	else{

@@ -2,7 +2,6 @@
 
 include "../../../../model/model.php";
 $att_id = $_POST['att_id'];
-echo "hi".$att_id;
 $sq_img = mysql_query("select * from fourth_coming_att_images where fourth_id='$att_id'");
 ?>
 

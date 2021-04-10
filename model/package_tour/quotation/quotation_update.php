@@ -31,6 +31,7 @@ public function quotation_master_update()
 	$child_with = $_POST['child_with'];
 	$child_without = $_POST['child_without'];
 	$price_str_url = $_POST['price_str_url'];
+	$currency_code = $_POST['currency_code'];
 
 	//Train
     $train_from_location_arr = $_POST['train_from_location_arr'];
@@ -139,7 +140,7 @@ public function quotation_master_update()
 	$from_date = get_date_db($from_date);
 	$to_date = get_date_db($to_date);
 
-	$sq_quotation = mysql_query("update package_tour_quotation_master set tour_name = '$tour_name', from_date = '$from_date', to_date = '$to_date', total_days = '$total_days', customer_name = '$customer_name', email_id='$email_id',mobile_no='$mobile_no', total_adult = '$total_adult', total_infant = '$total_infant', total_passangers = '$total_passangers', children_without_bed = '$children_without_bed', children_with_bed = '$children_with_bed', quotation_date='$quotation_date', booking_type = '$booking_type', train_cost = '$train_cost', flight_cost = '$flight_cost',cruise_cost='$cruise_cost', visa_cost = '$visa_cost', guide_cost= '$guide_cost',misc_cost='$misc_cost', price_str_url= '$price_str_url', enquiry_id= '$enquiry_id',inclusions='$inclusions',exclusions='$exclusions',costing_type='$costing_type' where quotation_id = '$quotation_id'");
+	$sq_quotation = mysql_query("update package_tour_quotation_master set tour_name = '$tour_name', from_date = '$from_date', to_date = '$to_date', total_days = '$total_days', customer_name = '$customer_name', email_id='$email_id',mobile_no='$mobile_no', total_adult = '$total_adult', total_infant = '$total_infant', total_passangers = '$total_passangers', children_without_bed = '$children_without_bed', children_with_bed = '$children_with_bed', quotation_date='$quotation_date', booking_type = '$booking_type', train_cost = '$train_cost', flight_cost = '$flight_cost',cruise_cost='$cruise_cost', visa_cost = '$visa_cost', guide_cost= '$guide_cost',misc_cost='$misc_cost', price_str_url= '$price_str_url', enquiry_id= '$enquiry_id',inclusions='$inclusions',exclusions='$exclusions',costing_type='$costing_type',currency_code='$currency_code' where quotation_id = '$quotation_id'");
 	
 	$sq_info = mysql_fetch_assoc(mysql_query("select * from package_tour_quotation_master where quotation_id = '$quotation_id'"));
 

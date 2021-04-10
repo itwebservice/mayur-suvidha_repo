@@ -76,7 +76,7 @@ $table_id = $_POST['table_id'];
               </select>
             </div>
             <div class="col-md-2 col-sm-6 ">
-              <select name="hotel_type" id="hotel_type" title="Hotel Type" style='width:100%' style='width:100%' class="form-control">
+              <select name="hotel_type_master" id="hotel_type_master" title="Hotel Type" style='width:100%' style='width:100%' class="form-control">
               <?php get_hotel_type_dropdown(); ?>
               </select>
             </div>
@@ -148,11 +148,11 @@ $table_id = $_POST['table_id'];
     <div class="accordion_content package_content" style="width: 100% !important;">
       <div class="panel panel-default main_block">
         <div class="panel-heading main_block" role="tab" id="heading1">
-          <div class="Normal collapsed main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1" id="collapsed1">                  
+          <div class="Normal collapsed main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse12" aria-expanded="false" aria-controls="collapse12" id="collapsed12">                  
             <div class="col-md-12"><span><em style="margin-left: 15px;"><?php echo "Hotel Amenities and Policies"; ?></em></span></div>
           </div>
         </div>
-        <div id="collapse1" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading1">
+        <div id="collapse12" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading1">
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12 col-sm-6 ">
@@ -456,7 +456,7 @@ $table_id = $_POST['table_id'];
 <script>
 $('#save_modal').modal('show');
 $('#as_of_date').datetimepicker({ timepicker:false, format:'d-m-Y' });
-$("#state,#rating_star,#hotel_type,#side,#meal_plan").select2();
+$("#state,#rating_star,#hotel_type_master,#side,#meal_plan").select2();
 city_lzloading('#cmb_city_id');
 ///////////////////////***Hotel Master Save start*********//////////////
 upload_hotel_pic_attch();
@@ -533,7 +533,7 @@ $(function(){
       var account_name = $("#account_name").val();
       var opening_balance = $('#opening_balance').val();
       var rating_star = $('#rating_star').val();
-      var hotel_type = $('#hotel_type').val();
+      var hotel_type = $('#hotel_type_master').val();
       var meal_plan = $('#meal_plan').val();
       var active_flag = $('#active_flag').val();
       var service_tax_no = $('#service_tax_no').val();
@@ -606,7 +606,7 @@ $(function(){
                       hotel_dropdown_reload(result_arr[1]);  
                     }
                   }
-                  if($('#city_name').length != 0){
+                  if($('#table_id_show').val() != ''){
                     var city_hotel = msg[0].split(':');
                     var hotel = city_hotel[0].split(';');
                     var city = city_hotel[1].split(';');

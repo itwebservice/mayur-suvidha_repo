@@ -727,7 +727,7 @@ function foo(tableID, quot_table_id) {
 		row.cells[0].childNodes[0].setAttribute('id', 'chk_dest' + prefix + foo.counter);
 		row.cells[2].childNodes[0].setAttribute('id', 'city_name' + prefix + foo.counter);
 		row.cells[3].childNodes[0].setAttribute('id', 'hotel_name' + prefix + foo.counter);
-		row.cells[4].childNodes[0].setAttribute('id', 'hotel_type_master' + prefix + foo.counter);
+		row.cells[4].childNodes[0].setAttribute('id', 'hotel_type' + prefix + foo.counter);
 		row.cells[5].childNodes[0].setAttribute('id', 'hotel_tota_days1' + prefix + foo.counter);
 		if (row.cells[6]) {
 			row.cells[6].childNodes[0].setAttribute('value', '');
@@ -1036,6 +1036,9 @@ function foo(tableID, quot_table_id) {
 			row.cells[15].innerHTML = '';
 			row.cells[15].style.display = 'none';
 		}
+		$('.city_master_dropdown').on('change', function(){
+			hotel_name_list_load($(this).attr('id'));
+		});
 	}
 
 	if (tableID == 'tbl_package_tour_quotation_dynamic_transport' || tableID == 'tbl_package_tour_quotation_dynamic_transport_u') {
@@ -1226,7 +1229,30 @@ function foo(tableID, quot_table_id) {
 			row.cells[8].innerHTML = '';
 		}
 	}
+	if (tableID == 'dynamic_table_list_h_' + quot_table_id || tableID == 'hotel_quotation_update') {
+		if(tableID == 'hotel_quotation_update'){
+			offset = 'u_' + foo.counter;
+		}
+		else{
+			offset = quot_table_id+'-' + foo.counter;
+		}
+		row.cells[0].childNodes[0].setAttribute('id', 'chk_program-');
+		row.cells[0].childNodes[1].setAttribute('for', 'chk_program-'+offset);
 
+		row.cells[2].childNodes[0].setAttribute('id', 'city_name-'+offset);
+		$(row.cells[2].childNodes[0]).next("span").remove();
+		row.cells[3].childNodes[0].setAttribute('id', 'hotel_name-'+offset);
+		row.cells[4].childNodes[0].setAttribute('id', 'room_cat-'+offset);
+		row.cells[5].childNodes[0].setAttribute('id', 'meal_plan-'+offset);
+		row.cells[6].childNodes[0].setAttribute('id', 'check_in-'+offset);
+		row.cells[7].childNodes[0].setAttribute('id', 'check_out-'+offset);
+		row.cells[8].childNodes[0].setAttribute('id', 'hotel_type-'+offset);
+		row.cells[9].childNodes[0].setAttribute('id', 'hotel_stay_days-'+offset);
+		row.cells[10].childNodes[0].setAttribute('id', 'no_of_rooms-'+offset);
+		row.cells[11].childNodes[0].setAttribute('id', 'extra_bed-'+offset);
+		row.cells[12].childNodes[0].setAttribute('id', 'hotel_cost-'+offset);
+		$(row.cells[12]).addClass('hidden');
+	}
 	if (tableID == 'tbl_vendor_quotation_services_entries') {
 		row.cells[0].childNodes[0].setAttribute('id', 'chk_service' + foo.counter);
 

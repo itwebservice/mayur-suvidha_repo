@@ -99,7 +99,7 @@
            <small class="note">Note -  Pls ensure you added city wise hotel & tariff using Supplier Master</small>
           <div class="bg_white main_block panel-default-inner">
             <div class="col-xs-12 text-right mg_tp_10">
-              <button class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct('tbl_package_hotel_master')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+              <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct('tbl_package_hotel_master')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
               <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="addRow('tbl_package_hotel_master');city_lzloading('select[name^=city_name1]')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
               <button type="button" class="btn btn-danger btn-sm ico_left mg_bt_10" onClick="deleteRow('tbl_package_hotel_master')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
             </div> 
@@ -114,7 +114,7 @@
                       <td><select id="hotel_name" name="hotel_name1" onchange="hotel_type_load(this.id);" style="width:100%" title="Select Hotel Name">
                             <option value="">*Hotel Name</option>
                           </select></td>
-                      <td><input type="text" id="hotel_type_master" name="hotel_type_master1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
+                      <td><input type="text" id="hotel_type" name="hotel_type1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
                       <td><input type="text" id="hotel_tota_days1" onchange="validate_balance(this.id)" name="hotel_tota_days1" placeholder="*Total Night" title="Total Night"></td></td>
                   </tr>
                 </table>  
@@ -128,6 +128,9 @@
           <legend>Transport Information</legend>
           <div class="row mg_bt_20">
             <div class="col-xs-12 text-right mg_tp_10">
+              <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+              <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+              <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="transport_save_direct('tbl_package_tour_transport')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Transport</button>
               <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="addRow('tbl_package_tour_transport');destinationLoading('select[name^=pickup_from]', 'Pickup Location');
 destinationLoading('select[name^=drop_to]', 'Drop-off Location');"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
               <button type="button" class="btn btn-danger btn-sm ico_left mg_bt_10" onClick="deleteRow('tbl_package_tour_transport')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
@@ -139,7 +142,7 @@ destinationLoading('select[name^=drop_to]', 'Drop-off Location');"><i class="fa 
                       <tr>
                           <td class="col-md-1"><input class="css-checkbox labelauty" id="chk_transport1" type="checkbox" checked="" autocomplete="off" data-original-title="" title="" aria-hidden="true" style="display: none;"><label for="chk_transport1"><span class="labelauty-unchecked-image"></span><span class="labelauty-checked-image"></span></label><label class="css-label" for="chk_transport1"> </label></td>
                           <td class="col-md-1"><input maxlength="15" value="1" type="text" name="username" placeholder="Sr No." class="form-control" disabled="" autocomplete="off" data-original-title="" title=""></td>
-                          <td class="col-md-3"><select name="vehicle_name1" id="vehicle_name1" style="width:100%" class="form-control app_select2">
+                          <td class="col-md-3"><select name="vehicle_name1" id="vehicle_name1" style="width:100%" class="vehicle_name form-control app_select2">
                           <option value="">Select Vehicle</option>
                           <?php
                           $sq_query = mysql_query("select * from b2b_transfer_master where status != 'Inactive'"); 
@@ -176,6 +179,8 @@ destinationLoading('select[name^=drop_to]', 'Drop-off Location');"><i class="fa 
 
 <div id="div_modal_content"></div>
 <div id="hotel_save_modal_direct"></div>
+<div id="transfer_save_modal_direct"></div>
+<div id="airport_save_modal_direct"></div>
 </form>
 
 <script>
@@ -365,7 +370,7 @@ function hotel_type_load(id)
 
   $.get( "hotel/hotel_type_load.php" , { hotel_id : hotel_id } , function ( data ) {
 
-        $ ("#hotel_type_master"+count).val( data ) ;                            
+        $ ("#hotel_type"+count).val( data ) ;                            
 
   } ) ;
 
@@ -577,4 +582,3 @@ function booking_save_message(data){
 }
 </script>
 <script src="<?php echo BASE_URL ?>js/app/footer_scripts.js"></script>
-

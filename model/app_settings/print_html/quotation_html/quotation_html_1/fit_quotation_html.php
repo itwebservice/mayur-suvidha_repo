@@ -8,6 +8,9 @@ $quotation_id = $_GET['quotation_id'];
 $sq_terms_cond = mysql_fetch_assoc(mysql_query("select * from terms_and_conditions where type='Package Quotation' and active_flag ='Active'")); 
 
 $sq_quotation = mysql_fetch_assoc(mysql_query("select * from package_tour_quotation_master where quotation_id='$quotation_id'"));
+$currency=$sq_quotation['currency_code'];
+$currency_r=mysql_fetch_assoc(mysql_query("select currency_rate from roe_master where currency_id='$currency'"));
+$currency_rate=$currency_r['currency_rate'];
 $quotation_date = $sq_quotation['quotation_date'];
 $yr = explode("-", $quotation_date);
 $year = $yr[0];
@@ -52,7 +55,7 @@ if($bsmValues[0]->service != ''){   //inclusive service charge
 }
 else{
   // $tax_show = $service_tax_amount;
-  $tax_show =  rtrim($name, ', ').' : ' . ($service_tax_amount);
+  $tax_show =  rtrim($name, ', ').' : ' . ($service_tax_amount*$currency_rate);
   $newBasic = $tour_cost;
 }
 
@@ -122,7 +125,7 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
                     <div class="print_quo_detail_block">
                       <i class="fa fa-tags" aria-hidden="true"></i><br>
                       <span>PRICE</span><br>
-                      <?= number_format($quotation_cost,2) ?><br>
+                      <?= $currency . number_format($quotation_cost*$currency_rate,2) ?><br>
                     </div>
                   </li>
                 </ul>
@@ -179,16 +182,16 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
           <div class="print_info_block">
             <ul class="main_block">
             <?php if($sq_quotation['costing_type'] == 1){ ?>
-              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>TOUR COST : </span><?= round($newBasic) ?></li>
+              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>TOUR COST : </span><?= $currency .' '. round($newBasic*$currency_rate) ?></li>
               <li class="col-md-12 mg_tp_10 mg_bt_10"><span>TAX : </span><?= $tax_show ?></li>
-              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>TRAVEL COST : </span><?= number_format($sq_quotation['train_cost'] + $sq_quotation['flight_cost'] + $sq_quotation['cruise_cost'] + $sq_quotation['visa_cost']+ $sq_quotation['guide_cost']+ $sq_quotation['misc_cost'],2) ?></li>
-              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>QUOTATION COST : </span><?= number_format($quotation_cost,2) ?></li>
+              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>TRAVEL COST : </span><?= $currency .' '. number_format(($sq_quotation['train_cost'] + $sq_quotation['flight_cost'] + $sq_quotation['cruise_cost'] + $sq_quotation['visa_cost']+ $sq_quotation['guide_cost']+ $sq_quotation['misc_cost'])*$currency_rate,2) ?></li>
+              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>QUOTATION COST : </span><?= $currency .' '. number_format($quotation_cost*$currency_rate,2) ?></li>
             <?php }
             else{?>
-              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>ADULT COST : </span><?= number_format($sq_costing['adult_cost'],2) ?></li>
-              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>CWB : </span><?= number_format($sq_costing['child_with'],2) ?></li>
-              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>CWOB : </span><?= number_format($sq_costing['child_without'],2) ?></li>
-              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>INFANT COST : </span><?= number_format($sq_costing['infant_cost'],2) ?></li>
+              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>ADULT COST : </span><?= $currency .' '. number_format($sq_costing['adult_cost']*$currency_rate,2) ?></li>
+              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>CWB : </span><?= $currency .' '. number_format($sq_costing['child_with']*$currency_rate,2) ?></li>
+              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>CWOB : </span><?= $currency .' '. number_format($sq_costing['child_without']*$currency_rate,2) ?></li>
+              <li class="col-md-12 mg_tp_10 mg_bt_10"><span>INFANT COST : </span><?= $currency .' '. number_format($sq_costing['infant_cost']*$currency_rate,2) ?></li>
               <?php } ?>
             </ul>
           </div>

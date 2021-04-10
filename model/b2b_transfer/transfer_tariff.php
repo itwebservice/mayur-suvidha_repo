@@ -19,7 +19,7 @@ class transfer_tariff{
         $entry_id = $sq_max['max'] + 1;
         $sq_query = mysql_query("INSERT INTO `b2b_transfer_master`(`entry_id`,`vehicle_type`,`vehicle_name`, `seating_capacity`,`image_url`, `cancellation_policy`, `status`) VALUES ('$entry_id','$vehicle_type','$vehicle_name','$seating_capacity','$image','$canc_policy','Active')");
         if($sq_query){
-            echo 'Vehicle Details added succesfully';
+            echo $entry_id.':'.$vehicle_name.'--Vehicle Details added succesfully';
             exit;
         }else{
             echo 'error--Vehicle Details not added succesfully';

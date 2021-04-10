@@ -1,6 +1,7 @@
 <form id="frm_tour_master_save1"> 
+<div class="app_panel">
 <!--=======Header panel======-->
-<div class="app_panel_head mg_bt_20">
+    <div class="app_panel_head mg_bt_20">
       <div class="container">
           <h2 class="pull-left"></h2>
           <div class="pull-right header_btn">
@@ -12,73 +13,73 @@
           </div>
       </div>
     </div> 
-<!--=======Header panel end======-->
-<div class="container">
-        <div class="row mg_tp_20">
-             <div class="col-md-3 col-sm-6 mg_bt_10 col-md-offset-2">
-                 <select id="cmb_tour_type" name="cmb_tour_type" class="form-control" title="Tour Type" onchange="incl_reflect(this.id);">
-                    <option value="">*Tour Type</option>
-                    <option value="Domestic">Domestic</option>
-                    <option value="International">International</option>
-                </select>
-             </div>   
-             <div class="col-md-3 col-sm-6 mg_bt_10">
-                <input class="form-control" type="text" onchange="fname_validate(this.id)" id="txt_tour_name" name="txt_tour_name" placeholder="*Tour Name" title="Tour Name"/>
-             </div>
-             <div class="col-md-3 col-sm-6 mg_bt_10 ">
-                <select id="dest_name_s"  name="dest_name_s" title="Select Destination" class="form-control"  style="width:100%" required> 
-                    <option value="">*Destination</option>
-                    <?php 
-                    $sq_query = mysql_query("select * from destination_master where status != 'Inactive'"); 
-                    while($row_dest = mysql_fetch_assoc($sq_query)){ ?>
-                        <option value="<?php echo $row_dest['dest_id']; ?>"><?php echo $row_dest['dest_name']; ?></option>
-                        <?php } ?>
-                </select>
-             </div>
-            
-        </div>  
+    <div class="container">
+      <div class="row mg_tp_20">
+          <div class="col-md-3 col-sm-6 mg_bt_10 col-md-offset-2">
+              <select id="cmb_tour_type" name="cmb_tour_type" class="form-control" title="Tour Type" onchange="incl_reflect(this.id);">
+                <option value="">*Tour Type</option>
+                <option value="Domestic">Domestic</option>
+                <option value="International">International</option>
+            </select>
+          </div>   
+          <div class="col-md-3 col-sm-6 mg_bt_10">
+            <input class="form-control" type="text" onchange="fname_validate(this.id)" id="txt_tour_name" name="txt_tour_name" placeholder="*Tour Name" title="Tour Name"/>
+          </div>
+          <div class="col-md-3 col-sm-6 mg_bt_10 ">
+            <select id="dest_name_s"  name="dest_name_s" title="Select Destination" class="form-control"  style="width:100%" required> 
+                <option value="">*Destination</option>
+                <?php 
+                $sq_query = mysql_query("select * from destination_master where status != 'Inactive'"); 
+                while($row_dest = mysql_fetch_assoc($sq_query)){ ?>
+                    <option value="<?php echo $row_dest['dest_id']; ?>"><?php echo $row_dest['dest_name']; ?></option>
+                <?php } ?>
+            </select>
+          </div>
+          
+      </div>  
 
-        <div class="panel panel-default panel-body app_panel_style feildset-panel mg_tp_20">
-        <div class="row mg_bt_10">
-             <div class="col-md-12 text-right mg_tp_10">
-                <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('tbl_dynamic_tour_group')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
-                <button type="button" class="btn btn-danger btn-sm ico_left" onClick="deleteRow('tbl_dynamic_tour_group')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
-            </div>
-        </div>
-        <legend>Tour Dates</legend>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                <table id="tbl_dynamic_tour_group" name="tbl_dynamic_tour_group" class="table border_0 no-marg" style="padding: 0 !important;">
-                    <tr>
-                        <td><input class="css-checkbox" id="chk_tour_group1" type="checkbox" checked><label class="css-label" for="chk_tour_group1"> <label></td>
-                        <td><input maxlength="15" value="1" type="text" name="username" placeholder="Sr. No." class="form-control" disabled /></td>
-                        <td><input type="text" id="txt_from_date1" name="txt_from_date1" placeholder="*From Date" title="From Date"  value="<?= date('d-m-Y')?>" onchange="get_to_date(this.id,'txt_to_date1')"></td>
-                        <td><input type="text" id="txt_to_date1" name="txt_to_date1" placeholder="*To Date" title=" To Date" value="<?= date('d-m-Y')?>" onchange="generate_list();"></td>
-                        <td><input type="text" id="txt_capacity1" name="txt_capacity1" class="form-control" placeholder="*Tour Capacity" onchange="validate_balance(this.id);validate_tourCapacity(this.id)" title="Tour Capacity" /></td>
-                    </tr>                                
-                </table>
-                </div>
-            </div>
-        </div>      
-        </div>
-        <div class="row">
-            <div class="col-md-12" id="div_list1">
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-3 col-sm-6 mg_bt_10_xs"> 
-              <select name="active_flag" id="active_flag" title="Status" class="hidden">
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-              </select>
-            </div>    
-        </div>
-        <div class="row mg_bt_10 mg_tp_20 text-center">
-                <button class="btn btn-sm btn-info ico_right" id="btn_save">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
-        </div>
-        </div>
+      <div class="panel panel-default panel-body app_panel_style feildset-panel mg_tp_20">
+      <div class="row mg_bt_10">
+          <div class="col-md-12 text-right mg_tp_10">
+              <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('tbl_dynamic_tour_group')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+              <button type="button" class="btn btn-danger btn-sm ico_left" onClick="deleteRow('tbl_dynamic_tour_group')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
+          </div>
+      </div>
+      <legend>Tour Dates</legend>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="table-responsive">
+              <table id="tbl_dynamic_tour_group" name="tbl_dynamic_tour_group" class="table border_0 no-marg" style="padding: 0 !important;">
+                  <tr>
+                      <td><input class="css-checkbox" id="chk_tour_group1" type="checkbox" checked><label class="css-label" for="chk_tour_group1"> <label></td>
+                      <td><input maxlength="15" value="1" type="text" name="username" placeholder="Sr. No." class="form-control" disabled /></td>
+                      <td><input type="text" id="txt_from_date1" name="txt_from_date1" placeholder="*From Date" title="From Date"  value="<?= date('d-m-Y')?>" onchange="get_to_date(this.id,'txt_to_date1')"></td>
+                      <td><input type="text" id="txt_to_date1" name="txt_to_date1" placeholder="*To Date" title=" To Date" value="<?= date('d-m-Y')?>" onchange="generate_list();"></td>
+                      <td><input type="text" id="txt_capacity1" name="txt_capacity1" class="form-control" placeholder="*Tour Capacity" onchange="validate_balance(this.id);validate_tourCapacity(this.id)" title="Tour Capacity" /></td>
+                  </tr>                                
+              </table>
+              </div>
+          </div>
+      </div>      
+      </div>
+      <div class="row">
+          <div class="col-md-12" id="div_list1">
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-md-3 col-sm-6 mg_bt_10_xs"> 
+            <select name="active_flag" id="active_flag" title="Status" class="hidden">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>    
+      </div>
+      <div class="row mg_bt_10 mg_tp_20 text-center">
+          <button class="btn btn-sm btn-info ico_right" id="btn_save">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
+      </div>
+    </div>
+</div>
 </form>
 <script src="<?= BASE_URL ?>js/ajaxupload.3.5.js"></script>
 
@@ -104,14 +105,13 @@ $(function(){
         var valid_state1 = table_date_validate();
         if((valid_state==false) || (valid_state1==false)){ return false; }
 
-      // $('a[href="#tab2"]').tab('show');
+        $('#tab1_head').addClass('done');
+        $('#tab2_head').addClass('active');
+        $('.bk_tab').removeClass('active');
+        $('#tab2').addClass('active');
+        $('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
 
-      $('#tab1_head').addClass('done');
-      $('#tab2_head').addClass('active');
-      $('.bk_tab').removeClass('active');
-      $('#tab2').addClass('active');
-      $('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
-      return false;
+        return false;
 
     }
   });

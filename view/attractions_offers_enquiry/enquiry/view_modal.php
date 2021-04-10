@@ -160,9 +160,9 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 
 								                </span>
 
-												<span class="main_block">
+								                <span class="main_block">
 
-<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
+								                  <i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
 
 <?php echo "<label>Reference Detail<em>:</em></label> ".$sq_enq_info['ref_detail']; ?>
 
@@ -205,17 +205,30 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 							</div>
 						</div>
 
+<?php if($sq_enq_info['enquiry_type']=='Hotel'){
+	// $sq_hotel= mysql_query("select * from enquiry_master where enquiry_id='".$sq_enq_info['enquiry_id']);
+	$enquiry_content = json_decode($sq_enq_info['enquiry_content'], true);
+	foreach($enquiry_content as $values){
+		if($values['name'] == 'hotel_requirements'){
+			$hotel_requirements = $values['value'];
+			break;
+		}
+	}
+?>
+<div class="row mg_tp_30">
+	<div class="col-md-12">
+		<h3 class="editor_title">Hotel Requirements</h3>
+		<div class="panel panel-default panel-body app_panel_style">
+			<?= $hotel_requirements ?>
+		</div>
+	</div>
+</div>
+<?php
+}?>
 
 
-						<?php if($sq_enq_info['enquiry_type']=='Flight Ticket'){
-
-							?>
-
-
-
-
-
-
+<?php if($sq_enq_info['enquiry_type']=='Flight Ticket'){
+?>
 <h3 class="editor_title main_block">Flight Information</h3>
 <table class="table table-bordered">
 	<thead>
@@ -236,8 +249,7 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 		$count = 0;
 		$sq_plane= mysql_query("select * from enquiry_master where enquiry_id='".$sq_enq_info['enquiry_id']);
 		$enquiry_content = json_decode($sq_enq_info['enquiry_content'], true);
-		// while($row_train = mysql_fetch_assoc($sq_plane))
-		// {
+
 			foreach($enquiry_content as $values){
 				$sq_airline = mysql_fetch_assoc(mysql_query("SELECT * from airline_master where airline_id=".$values['preffered_airline']))
 			?>
@@ -259,8 +271,8 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 </table>
 
 <?php
-						}
-						else if($sq_enq_info['enquiry_type']!='Flight Ticket' && $sq_enq_info['enquiry_type']!='Passport'){
+	}
+		else if($sq_enq_info['enquiry_type']!='Flight Ticket' && $sq_enq_info['enquiry_type']!='Passport'){
 ?>
 
 						<h3 class="editor_title">Tour Information</h3>
@@ -346,6 +358,18 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 
 											}
 
+											if($name=="Total cwob"){
+
+												$name="Child Without Bed";
+
+											}
+
+											if($name=="Total cwb"){
+
+												$name="Child With Bed";
+
+											}
+
 											if($name=="City id"){
 
 												$name="City Name";
@@ -366,6 +390,10 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 
 												$name="Accommodation Type";
 
+											}
+											
+											if($name == "Hotel requirements"){
+												continue;
 											}
 
 										?>
@@ -398,58 +426,6 @@ $enquiry_content_arr1 = json_decode($enquiry_content, true);
 				<?php
 					}
 				?>
-				<?php
-				// switch($sq_enq_info['enquiry_type']){
-					
-				// }
-				
-				?>
-				<h3 class="editor_title">Transaction Information</h3>
-						<div class="panel panel-default panel-body app_panel_style">
-							<div class="row">
-
-								<div class="col-md-12">
-
-									<div class="profile_box main_block">
-										<div class="row">
-										<div class="col-md-6">
-
-											<span class="main_block">
-
-												<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
-
-												<?php echo "<label>Selling Amount <em>:</em></label> ".$enquiry_content_arr2['value']; ?>
-
-											</span>
-
-										</div>
-										<div class="col-md-6">
-
-											<span class="main_block">
-
-												<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
-
-												<?php echo "<label>Purchase Amount <em>:</em></label> ".$enquiry_content_arr2['value']; ?>
-
-											</span>
-
-										</div>
-										<div class="col-md-6">
-
-											<span class="main_block">
-
-												<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
-
-												<?php echo "<label>Supplier Name <em>:</em></label> ".$enquiry_content_arr2['value']; ?>
-
-											</span>
-
-										</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>		
 				</div>
 
 				<!-- ********Tab1 End******** -->                    

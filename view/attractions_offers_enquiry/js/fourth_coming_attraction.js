@@ -44,16 +44,16 @@ $(function(){
         var valid_date = $('#txt_valid_date').val();
         $('#save_button').button('loading');
         $.post( 
-                 base_url+"controller/attractions_offers_enquiry/fourth_coming_attraction_master_save_c.php",
-                 { title : title, description : description, valid_date : valid_date },
-                 function(data) {  
-                        msg_alert(data);
-                        $('#save_button').button('reset');
-                       // reset_form('frm_fourth_coming_attraction_save');
-                        $('#fouth_coming_attractions_save_modal').modal('hide');
-                        fourth_coming_attractions_list_reflect();
+          base_url+"controller/attractions_offers_enquiry/fourth_coming_attraction_master_save_c.php",
+          { title : title, description : description, valid_date : valid_date },
+          function(data) {  
+                msg_alert(data);
+                $('#save_button').button('reset');
+                reset_form('frm_fourth_coming_attraction_save');
+                $('#fouth_coming_attractions_save_modal').modal('hide');
+                fourth_coming_attractions_list_reflect();
 
-                 });
+          });
     }
   });
 });

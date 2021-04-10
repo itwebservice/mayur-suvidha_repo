@@ -105,7 +105,10 @@ $package_name = $sq_package['package_name'];
 					        <div class="panel-body">
 					        <div class="row">
 							    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
-							        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_tour_quotation_dynamic_transport_u');destinationLoading('.pickup_from', 'Pickup Location');destinationLoading('.drop_to', 'Drop-off Location');"><i class="fa fa-plus"></i></button>
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="transport_save_direct('tbl_package_tour_quotation_dynamic_transport_u')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Transport</button>
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="addRow('tbl_package_tour_quotation_dynamic_transport_u');destinationLoading('.pickup_from', 'Pickup Location');destinationLoading('.drop_to', 'Drop-off Location');"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
 							    </div>
 							</div>
 				      <div class="row">
@@ -381,7 +384,7 @@ $package_name = $sq_package['package_name'];
 
 <?= end_panel(); ?>
 
-
+<div id="transfer_save_modal_direct"></div>
 <script>
 destinationLoading(".pickup_from", 'Pickup Location');
 destinationLoading(".drop_to", 'Drop-off Location');	

@@ -123,12 +123,6 @@ function tour_master_save($tour_type, $tour_name, $adult_cost, $child_with_cost,
           $value = mysql_fetch_assoc($sq);
 
           $max_group_id = $value['max'] + 1;
-
-          //$day_program_arr[$i] = mysql_real_escape_string($day_program_arr[$i]);
-
-          //$special_attaraction_arr[$i] = mysql_real_escape_string($special_attaraction_arr[$i]);
-
-          //$overnight_stay_arr[$i] = mysql_real_escape_string($overnight_stay_arr[$i]);
           $meal_plan_arr[$i] = mysql_real_escape_string($meal_plan_arr[$i]);
 
           $special_attaraction_arr[$i] = addslashes($special_attaraction_arr[$i]);
@@ -337,9 +331,6 @@ function tour_master_update($tour_id,$tour_type, $tour_name, $adult_cost, $child
 
   $company_name = mysql_real_escape_string($company_name);
 
-  //$inclusions = mysql_real_escape_string($inclusions);
-  //$exclusions = mysql_real_escape_string($exclusions);
-
   $inclusions = addslashes($inclusions);
   $exclusions = addslashes($exclusions);
 
@@ -470,9 +461,6 @@ function tour_master_update($tour_id,$tour_type, $tour_name, $adult_cost, $child
 
        {
 
-          //$day_program_arr[$i] = mysql_real_escape_string($day_program_arr[$i]);
-          //$special_attaraction_arr[$i] = mysql_real_escape_string($special_attaraction_arr[$i]);
-          //$overnight_stay_arr[$i] = mysql_real_escape_string($overnight_stay_arr[$i]);
           
           $entry_id_arr[$i] = mysql_real_escape_string($entry_id_arr[$i]);
           $meal_plan_arr[$i] = mysql_real_escape_string($meal_plan_arr[$i]);
@@ -591,8 +579,7 @@ public function train_entries_update($tour_id, $train_from_location_arr, $train_
 public function hotel_entries_update($tour_id,$city_name_arr,$hotel_name_arr,$hotel_type_arr,$total_days_arr,$hotel_entry_id_arr){
   for($i=0; $i<sizeof($city_name_arr); $i++){
     if($hotel_entry_id_arr[$i] != ""){
-      $q = "update group_tour_hotel_entries set city_id = '$city_name_arr[$i]', hotel_id = '$hotel_name_arr[$i]', hotel_type = '$hotel_type_arr[$i]', total_nights = '$total_days_arr[$i]' where id='$hotel_entry_id_arr[$i]'";
-        $sq_hotel = mysql_query($q);
+        $sq_hotel = mysql_query("update group_tour_hotel_entries set city_id = '$city_name_arr[$i]', hotel_id = '$hotel_name_arr[$i]', hotel_type = '$hotel_type_arr[$i]', total_nights = '$total_days_arr[$i]' where id='$hotel_entry_id_arr[$i]'");
       
       if(!$sq_hotel){
 
@@ -604,9 +591,8 @@ public function hotel_entries_update($tour_id,$city_name_arr,$hotel_name_arr,$ho
     else{
       $sq_max = mysql_fetch_assoc(mysql_query("select max(id) as max from group_tour_hotel_entries"));
       $id = $sq_max['max']+1;
-      $q = "insert into group_tour_hotel_entries ( id, tour_id,city_id, hotel_id, 
-      hotel_type,  total_nights) values ( '$id','$tour_id', '$city_name_arr[$i]', '$hotel_name_arr[$i]', '$hotel_type_arr[$i]', '$total_days_arr[$i]')";
-      $sq_hotel = mysql_query($q);
+      $sq_hotel = mysql_query("insert into group_tour_hotel_entries ( id, tour_id,city_id, hotel_id, 
+      hotel_type,  total_nights) values ( '$id','$tour_id', '$city_name_arr[$i]', '$hotel_name_arr[$i]', '$hotel_type_arr[$i]', '$total_days_arr[$i]')");
       if(!$sq_hotel){
 
         echo "error--Hotel information not saved!";
@@ -751,8 +737,7 @@ function upload_tour_adnary_save($tour_id, $adnary_url)
       
       $entry_id = $_POST['entry_id'];
       //$url = $_POST['image_url'];
-      $q = "update group_tour_program set daywise_images='' where entry_id='$entry_id'";
-      $sq1 = mysql_query($q);
+      $sq1 = mysql_query("update group_tour_program set daywise_images='' where entry_id='$entry_id'");
       if(!sq1){
         echo "error-- Image not deleted";
       }

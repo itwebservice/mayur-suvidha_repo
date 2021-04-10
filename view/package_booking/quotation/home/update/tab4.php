@@ -183,12 +183,28 @@
 	</div>
 	<div class="row mg_tp_20">
 	  <div class="col-md-6 col-sm-12">
-		<div class="col-md-8 col-sm-12">
+		<div class="col-md-6 col-sm-12">
 			<select name="costing_type1" id="costing_type1" title="Select Costing type" class="form-control">
 			<?php  $costing_type = ($sq_quotation['costing_type'] == 1) ? 'Group Costing':'Per Person costing';?>
 				<option value="<?= $sq_quotation['costing_type'] ?>"><?= $costing_type ?></option>
 				<option value="1">Group Costing</option>
 				<option value="2">Per Person costing</option>
+			</select>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12 mg_bt_10">
+			<select name="currency_code1" id="currency_code1" title="Currency" style="width:100%" data-toggle="tooltip" required>
+			<?php
+			$sq_currency = mysql_fetch_assoc(mysql_query("select * from currency_name_master where id=$sq_quotation[currency_code]"));
+					?>
+			<option value="<?= $sq_quotation['currency_code'] ?>"><?= $sq_currency['currency_code'] ?></option>
+
+				<option value=''>*Select Currency</option>
+				<?php
+				$sq_currency = mysql_query("select * from currency_name_master order by currency_code");
+				while($row_currency = mysql_fetch_assoc($sq_currency)){
+				?>
+				<option value="<?= $row_currency['id'] ?>"><?= $row_currency['currency_code'] ?></option>
+				<?php } ?>
 			</select>
 		</div>
 	  </div>
@@ -219,6 +235,7 @@
 </form>
 <?= end_panel(); ?>
 <script>
+$('#currency_code1').select2();
 function get_business(id, flag, change = false){
 
 	get_auto_values('quotation_date','basic_amount','payment_mode','service_charge','markup','update',flag,'markup','discount','',change);
@@ -330,7 +347,7 @@ e.preventDefault();
 		var to_date = $('#to_date12').val();
 
 		var total_days = $('#total_days12').val();
-
+		var currency_code = $('#currency_code1').val();
 		var customer_name = $('#customer_name12').val();
 
 		var email_id = $('#email_id12').val();
@@ -753,7 +770,7 @@ e.preventDefault();
 
 				type:'post',
 				url: base_url+'controller/package_tour/quotation/quotation_update.php',
-				data:{ quotation_id : quotation_id,package_id : package_id, tour_name : tour_name, from_date : from_date, to_date : to_date, total_days : total_days, customer_name : customer_name, email_id : email_id,mobile_no : mobile_no, total_adult : total_adult, total_infant : total_infant, total_passangers : total_passangers, children_without_bed : children_without_bed, children_with_bed : children_with_bed, quotation_date : quotation_date, booking_type : booking_type,train_cost : train_cost,flight_cost : flight_cost,cruise_cost:cruise_cost, visa_cost : visa_cost, train_from_location_arr : train_from_location_arr, train_to_location_arr : train_to_location_arr, train_class_arr : train_class_arr, train_arrival_date_arr : train_arrival_date_arr, train_departure_date_arr : train_departure_date_arr, train_id_arr : train_id_arr,plane_from_city_arr : plane_from_city_arr,plane_to_city_arr : plane_to_city_arr, plane_from_location_arr : plane_from_location_arr, plane_to_location_arr : plane_to_location_arr, plane_id_arr : plane_id_arr,airline_name_arr : airline_name_arr, plane_class_arr : plane_class_arr, arraval_arr : arraval_arr, dapart_arr : dapart_arr,cruise_departure_date_arr : cruise_departure_date_arr, cruise_arrival_date_arr : cruise_arrival_date_arr, route_arr : route_arr,cabin_arr : cabin_arr,sharing_arr : sharing_arr,c_entry_id_arr : c_entry_id_arr, city_name_arr: city_name_arr, hotel_name_arr : hotel_name_arr,hotel_cat_arr:hotel_cat_arr, hotel_type_arr : hotel_type_arr, hotel_stay_days_arr : hotel_stay_days_arr,package_name_arr : package_name_arr,total_rooms_arr : total_rooms_arr,hotel_cost_arr : hotel_cost_arr,extra_bed_arr : extra_bed_arr,extra_bed_cost_arr : extra_bed_cost_arr,hotel_id_arr : hotel_id_arr,check_in_arr:check_in_arr,check_out_arr:check_out_arr,vehicle_name_arr:vehicle_name_arr,start_date_arr:start_date_arr,pickup_arr:pickup_arr,drop_arr:drop_arr,vehicle_count_arr:vehicle_count_arr,transport_cost_arr1:transport_cost_arr1,package_name_arr1:package_name_arr1,pickup_type_arr:pickup_type_arr,drop_type_arr:drop_type_arr,tour_cost_arr : tour_cost_arr,basic_amount_arr : basic_amount_arr,service_charge_arr : service_charge_arr,service_tax_subtotal_arr : service_tax_subtotal_arr,total_tour_cost_arr : total_tour_cost_arr,package_name_arr2 : package_name_arr2,transport_cost_arr : transport_cost_arr,costing_id_arr : costing_id_arr, enquiry_id : enquiry_id ,transport_id_arr : transport_id_arr,city_name_arr_e : city_name_arr_e,excursion_name_arr : excursion_name_arr,exc_date_arr_e:exc_date_arr_e,transfer_option_arr:transfer_option_arr,excursion_amt_arr : excursion_amt_arr,excursion_id_arr : excursion_id_arr,excursion_cost_arr : excursion_cost_arr,guide_cost : guide_cost,misc_cost :misc_cost,adult_cost : adult_cost,infant_cost :infant_cost,child_with :child_with,child_without: child_without,price_str_url : price_str_url,attraction_arr : attraction_arr,program_arr : program_arr,stay_arr : stay_arr,meal_plan_arr : meal_plan_arr,package_p_id_arr : package_p_id_arr,inclusions : inclusions,exclusions : exclusions,checked_programe_arr : checked_programe_arr,day_count_arr:day_count_arr,costing_type :costing_type,train_status_arr:train_status_arr,plane_status_arr:plane_status_arr,cruise_status_arr:cruise_status_arr,hotel_status_arr:hotel_status_arr,transport_status_arr:transport_status_arr,exc_status_arr:exc_status_arr,updated_url:updated_url,image_url_id:image_url_id,bsmValues:bsmValues},
+				data:{ quotation_id : quotation_id,package_id : package_id, tour_name : tour_name, from_date : from_date, to_date : to_date, total_days : total_days, customer_name : customer_name, email_id : email_id,mobile_no : mobile_no, total_adult : total_adult, total_infant : total_infant, total_passangers : total_passangers, children_without_bed : children_without_bed, children_with_bed : children_with_bed, quotation_date : quotation_date, booking_type : booking_type,train_cost : train_cost,flight_cost : flight_cost,cruise_cost:cruise_cost, visa_cost : visa_cost, train_from_location_arr : train_from_location_arr, train_to_location_arr : train_to_location_arr, train_class_arr : train_class_arr, train_arrival_date_arr : train_arrival_date_arr, train_departure_date_arr : train_departure_date_arr, train_id_arr : train_id_arr,plane_from_city_arr : plane_from_city_arr,plane_to_city_arr : plane_to_city_arr, plane_from_location_arr : plane_from_location_arr, plane_to_location_arr : plane_to_location_arr, plane_id_arr : plane_id_arr,airline_name_arr : airline_name_arr, plane_class_arr : plane_class_arr, arraval_arr : arraval_arr, dapart_arr : dapart_arr,cruise_departure_date_arr : cruise_departure_date_arr, cruise_arrival_date_arr : cruise_arrival_date_arr, route_arr : route_arr,cabin_arr : cabin_arr,sharing_arr : sharing_arr,c_entry_id_arr : c_entry_id_arr, city_name_arr: city_name_arr, hotel_name_arr : hotel_name_arr,hotel_cat_arr:hotel_cat_arr, hotel_type_arr : hotel_type_arr, hotel_stay_days_arr : hotel_stay_days_arr,package_name_arr : package_name_arr,total_rooms_arr : total_rooms_arr,hotel_cost_arr : hotel_cost_arr,extra_bed_arr : extra_bed_arr,extra_bed_cost_arr : extra_bed_cost_arr,hotel_id_arr : hotel_id_arr,check_in_arr:check_in_arr,check_out_arr:check_out_arr,vehicle_name_arr:vehicle_name_arr,start_date_arr:start_date_arr,pickup_arr:pickup_arr,drop_arr:drop_arr,vehicle_count_arr:vehicle_count_arr,transport_cost_arr1:transport_cost_arr1,package_name_arr1:package_name_arr1,pickup_type_arr:pickup_type_arr,drop_type_arr:drop_type_arr,tour_cost_arr : tour_cost_arr,basic_amount_arr : basic_amount_arr,service_charge_arr : service_charge_arr,service_tax_subtotal_arr : service_tax_subtotal_arr,total_tour_cost_arr : total_tour_cost_arr,package_name_arr2 : package_name_arr2,transport_cost_arr : transport_cost_arr,costing_id_arr : costing_id_arr, enquiry_id : enquiry_id ,transport_id_arr : transport_id_arr,city_name_arr_e : city_name_arr_e,excursion_name_arr : excursion_name_arr,exc_date_arr_e:exc_date_arr_e,transfer_option_arr:transfer_option_arr,excursion_amt_arr : excursion_amt_arr,excursion_id_arr : excursion_id_arr,excursion_cost_arr : excursion_cost_arr,guide_cost : guide_cost,misc_cost :misc_cost,adult_cost : adult_cost,infant_cost :infant_cost,child_with :child_with,child_without: child_without,price_str_url : price_str_url,attraction_arr : attraction_arr,program_arr : program_arr,stay_arr : stay_arr,meal_plan_arr : meal_plan_arr,package_p_id_arr : package_p_id_arr,inclusions : inclusions,exclusions : exclusions,checked_programe_arr : checked_programe_arr,day_count_arr:day_count_arr,costing_type :costing_type,train_status_arr:train_status_arr,plane_status_arr:plane_status_arr,cruise_status_arr:cruise_status_arr,hotel_status_arr:hotel_status_arr,transport_status_arr:transport_status_arr,exc_status_arr:exc_status_arr,updated_url:updated_url,image_url_id:image_url_id,bsmValues:bsmValues, currency_code : currency_code},
 
 				success: function(message){
 	                	$('#btn_quotation_update').button('reset');

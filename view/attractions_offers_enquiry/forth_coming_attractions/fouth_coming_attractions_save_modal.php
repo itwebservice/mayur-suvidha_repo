@@ -8,37 +8,39 @@
 	        <h4 class="modal-title" id="myModalLabel">New Sightseeing Attraction</h4>
 	      </div>
 	      <div class="modal-body text-center">
-	        
-			<div class="row">
-				<div class="col-md-6 mg_bt_10">
-					<input class="form-control" type="text" id="txt_title" onchange="validate_spaces(this.id);fname_validate(this.id);" name="txt_title" placeholder="*Title">	
-				</div>
-        <div class="col-md-6 mg_bt_10">
-          <input type="text" class="form-control" id="txt_valid_date" name="txt_valid_date" placeholder="Valid Date" title="*Valid Date" value="<?= date('d-m-Y')?>"/>    
+          <div class="row">
+            <div class="col-md-6 mg_bt_10">
+              <input class="form-control" type="text" id="txt_title" onchange="validate_spaces(this.id);fname_validate(this.id);" name="txt_title" placeholder="*Title">	
+            </div>
+            <div class="col-md-6 mg_bt_10">
+              <input type="text" class="form-control" id="txt_valid_date" name="txt_valid_date" placeholder="Valid Date" title="*Valid Date" value="<?= date('d-m-Y')?>"/>    
+            </div>
+            <div class="col-md-12 mg_bt_10">
+              <textarea class="form-control" id="txt_description"  onchange="validate_spaces(this.id);validate_limit(this.id);" name="txt_description" placeholder="*Description" title="Description"></textarea>  
+            </div>
         </div>
-        <div class="col-md-12 mg_bt_10">
-          <textarea class="form-control" id="txt_description"  onchange="validate_spaces(this.id);validate_limit(this.id);" name="txt_description" placeholder="*Description" title="Description"></textarea>  
-        </div>
-     </div>
-			<div class="row mg_bt_10">  
+        <div class="row mg_bt_10">  
+          <div class="col-md-4 no-pad"> 
             <div class="div-upload">
               <div id="upload_btn" class="upload-button1"><span>Upload Images</span></div>
               <span id="id_proof_status" ></span>
               <ul id="files" ></ul>
               <input type="hidden" id="upload_url" name="upload_url">
-            </div>   (Upload Maximum 3 photos)
+          </div>
+          </div>
+          <div class="col-md-8 no-pad"> 
+            <div style="color: red;">Note : Upload Image size below 300KB, resolution : 900X450.</div>
+          </div>
+        </div>
+        <div class="row text-center"> 
+          <div class="col-md-12">
+            <button class="btn btn-sm btn-success" id="save_button"><i class="fa fa-floppy-o"></i>&nbsp;&nbsp;Save</button>
+          </div>	
+        </div>
       </div>
-			<div class="row text-center"> 
-				<div class="col-md-12">
-					<button class="btn btn-sm btn-success" id="save_button"><i class="fa fa-floppy-o"></i>&nbsp;&nbsp;Save</button>
-				</div>	
-			</div> 
-
-	      </div>      
-	    </div>
-	  </div>
-	</div>    
-
+    </div>
+  </div>
+</div>
 </form>      
 <script src="<?= BASE_URL ?>js/ajaxupload.3.5.js"></script>
 <script>
@@ -65,22 +67,15 @@ function upload_attr_attch()
       },
       onComplete: function(file, response)
       {
-        if(response==="error"){          
-          error_msg_alert("File is not uploaded.");           
+        var msg = response.split('--');
+        if(msg[0]==="error"){          
+          error_msg_alert(msg[1]);           
           $(btnUpload).find('span').text('Upload Images');
         }else
         { 
-          if(response=="error1")
-          {
-            $(btnUpload).find('span').text('Upload Images');
-            error_msg_alert('Maximum size exceeds');
-            return false;
-          }else
-          {
-            $(btnUpload).find('span').text('Uploaded');
-            $("#upload_url").val(response);
-            upload_pic();
-          }
+          $(btnUpload).find('span').text('Uploaded');
+          $("#upload_url").val(response);
+          upload_pic();
         }
       }
     });

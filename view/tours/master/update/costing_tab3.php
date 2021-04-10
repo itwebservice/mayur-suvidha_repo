@@ -1,7 +1,19 @@
 <form id="frm_tour_update"> 
-      <h3 class="editor_title">Costing Details</h3>            
-
-      <div class="panel panel-default panel-body app_panel_style">
+  <div class="app_panel">
+    <!--=======Header panel======-->
+    <div class="app_panel_head mg_bt_20">
+      <div class="container">
+          <h2 class="pull-left"></h2>
+          <div class="pull-right header_btn">
+            <button>
+              <a>
+                <i class="fa fa-arrow-right"></i>
+              </a>
+            </button>
+          </div>
+      </div>
+    </div> 
+    <div class="container">
         <div class="row text-center">   
 
           <div class="col-md-3 col-sm-6 mg_bt_10_xs"> 
@@ -27,22 +39,11 @@
               <input type="text" id="txt_infant_cost" name="txt_infant_cost" onchange="validate_balance(this.id)" class="form-control"  placeholder="Infant Cost"  value="<?php echo $tour_info['infant_cost']; ?>" title="Infant Cost" maxlength="10" />
 
           </div>  
-
-              
-
-      </div>      
-
-  
-
-      <div class="row mg_tp_10 text-center"> 
-
-      <div class="col-md-3 col-sm-6 mg_bt_10_xs"> 
-
-        <input type="text" id="with_bed_cost" onchange="validate_balance(this.id)" value="<?php echo $tour_info['with_bed_cost']; ?>" name="with_bed_cost" placeholder="Extra bed cost" title="Extra bed cost">
-
       </div>
-
-     </div>
+      <div class="row mg_tp_10 text-center"> 
+        <div class="col-md-3 col-sm-6 mg_bt_10_xs"> 
+          <input type="text" id="with_bed_cost" onchange="validate_balance(this.id)" value="<?php echo $tour_info['with_bed_cost']; ?>" name="with_bed_cost" placeholder="Extra bed cost" title="Extra bed cost">
+        </div>
       </div>
 
 
@@ -62,13 +63,21 @@
         </div>
 
         <div class="row mg_bt_10 mg_tp_20 text-center">
-          <button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab2()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous</button>
+          <button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab3()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous</button>
       &nbsp;&nbsp;
           <button class="btn btn-sm btn-success ico_left" id="btn_update" >Update<i class="fa fa-floppy-o"></i>&nbsp;&nbsp;</button>
         </div>
+      </div>
+    </div>
 </form>
 <script>
-function switch_to_tab2(){ $('a[href="#tab2"]').tab('show'); }
+function switch_to_tab3(){ 
+  $('#tab4_head').removeClass('active');
+	$('#tab3_head').addClass('active');
+	$('.bk_tab').removeClass('active');
+	$('#tab3').addClass('active');
+	$('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
+}
 
 $('#frm_tour_update').validate({
 
@@ -238,7 +247,7 @@ $('#frm_tour_update').validate({
                  var overnight_stay = row.cells[3].childNodes[0].value;
                  var meal_plan = row.cells[4].childNodes[0].value;
 
-                 var entry_id = row.cells[5].childNodes[0].value;
+                 var entry_id = row.cells[6].childNodes[0].value;
 
                  if(day_program=="") {error_msg_alert("Day-wise program important"); return false;} 
 
@@ -496,38 +505,35 @@ var rowCount = table.rows.length;
 
     $.post( 
 
-             base_url+"controller/group_tour/tours/tour_master_update.php",
+      base_url+"controller/group_tour/tours/tour_master_update.php",
 
-                 {  tour_id : tour_id,tour_type : tour_type, tour_name : tour_name, adult_cost : adult_cost, child_with_cost : child_with_cost, child_without_cost : child_without_cost, infant_cost : infant_cost, with_bed_cost : with_bed_cost, 'from_date[]' : from_date, 'to_date[]' : to_date, 'capacity[]' : capacity,tour_group_id : tour_group_id,visa_country_name : visa_country_name,company_name : company_name ,active_flag : active_flag,day_program_arr : day_program_arr, special_attaraction_arr : special_attaraction_arr,overnight_stay_arr : overnight_stay_arr,meal_plan_arr : meal_plan_arr, entry_id_arr : entry_id_arr,train_from_location_arr : train_from_location_arr, train_to_location_arr : train_to_location_arr, train_class_arr : train_class_arr,train_id_arr : train_id_arr, from_city_id_arr : from_city_id_arr, to_city_id_arr : to_city_id_arr, plane_from_location_arr : plane_from_location_arr, plane_to_location_arr : plane_to_location_arr,airline_name_arr : airline_name_arr , plane_class_arr : plane_class_arr,plane_id_arr : plane_id_arr, route_arr : route_arr, cabin_arr : cabin_arr,city_name_arr,hotel_name_arr,hotel_type_arr,total_days_arr,hotel_entry_id_arr, c_entry_id_arr : c_entry_id_arr, inclusions : inclusions, exclusions : exclusions, daywise_url:daywise_url  },
+      {  tour_id : tour_id,tour_type : tour_type, tour_name : tour_name, adult_cost : adult_cost, child_with_cost : child_with_cost, child_without_cost : child_without_cost, infant_cost : infant_cost, with_bed_cost : with_bed_cost, 'from_date[]' : from_date, 'to_date[]' : to_date, 'capacity[]' : capacity,tour_group_id : tour_group_id,visa_country_name : visa_country_name,company_name : company_name ,active_flag : active_flag,day_program_arr : day_program_arr, special_attaraction_arr : special_attaraction_arr,overnight_stay_arr : overnight_stay_arr,meal_plan_arr : meal_plan_arr, entry_id_arr : entry_id_arr,train_from_location_arr : train_from_location_arr, train_to_location_arr : train_to_location_arr, train_class_arr : train_class_arr,train_id_arr : train_id_arr, from_city_id_arr : from_city_id_arr, to_city_id_arr : to_city_id_arr, plane_from_location_arr : plane_from_location_arr, plane_to_location_arr : plane_to_location_arr,airline_name_arr : airline_name_arr , plane_class_arr : plane_class_arr,plane_id_arr : plane_id_arr, route_arr : route_arr, cabin_arr : cabin_arr,city_name_arr,hotel_name_arr,hotel_type_arr,total_days_arr,hotel_entry_id_arr, c_entry_id_arr : c_entry_id_arr, inclusions : inclusions, exclusions : exclusions, daywise_url:daywise_url  },
 
-                 function(data) {
+    function(data) {
 
-                  var msg = data.split('--');
-                  if(msg[0]=="error"){
-                      error_msg_alert(msg[1]);
-                      $('#btn_update').button('reset');
-                      return false;
-                  }
+      var msg = data.split('--');
+      if(msg[0]=="error"){
+          error_msg_alert(msg[1]);
+          $('#btn_update').button('reset');
+          return false;
+      }
 
-                  else
+      else{
+        $('#btn_update').button('reset');
+        $('#vi_confirm_box').vi_confirm_box({
+          false_btn: false,
+          message: data,
+          true_btn_text:'Ok',
+          callback: function(data1){
+            if(data1=="yes"){
+              update_b2c_cache();
+              window.location.href =  '../index.php';
+            }
+            }
+        });
+      }  
 
-                  {                                      
-
-                    success_msg_alert(data);
-
-                    $('#btn_update').button('reset');
-
-                    $('#update_modal1').modal('hide');
-
-                    $('#update_modal1').on('hidden.bs.modal', function(){
-
-                      list_reflect();
-
-                    });
-
-                  }  
-
-                 });
+    });
 
 }  
 

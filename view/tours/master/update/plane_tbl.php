@@ -1,6 +1,7 @@
 <div class="row mg_bt_10">
     <div class="col-md-12 text-right text_center_xs">
-        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_group_tour_quotation_dynamic_plane_update');event_airport('tbl_group_tour_quotation_dynamic_plane_update');"><i class="fa fa-plus"></i></button>
+		<button type="button" class="btn btn-info btn-sm ico_left" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+		<button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('tbl_group_tour_quotation_dynamic_plane_update');event_airport('tbl_group_tour_quotation_dynamic_plane_update');"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
     </div>
 </div>
 
@@ -87,7 +88,8 @@
         </table>
         </div>
     </div>
-</div> 
+</div>
+<div id="airport_save_modal_direct"></div> 
 <script>
 	event_airport('tbl_group_tour_quotation_dynamic_plane_update');
 </script>

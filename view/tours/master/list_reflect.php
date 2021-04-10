@@ -35,7 +35,11 @@ include "../../../model/model.php";
 					<button class="btn btn-info btn-sm" onclick="display_modal(<?= $row_tour['tour_id'] ?>)" title="View Tour"><i class="fa fa-eye"></i></button>
 				</td>				
 				<td>
-					<button class="btn btn-info btn-sm" onclick="update_modal(<?= $row_tour['tour_id'] ?>)" title="Edit Tour"><i class="fa fa-pencil-square-o"></i></button>
+				<?php echo '
+					<form style="display:inline-block" action="update/update_group_tour.php" class="no-marg" method="POST">
+						<input type="hidden" id="tour_id" style="display:inline-block" name="tour_id" value="'.$row_tour['tour_id'].'">
+						<button class="btn btn-info btn-sm form-control" id="update_btn'.$row_tour['tour_id'].'" title="Update Details"><i class="fa fa-pencil-square-o"></i></button>
+					</form>';?>
 				</td>
 			</tr>
 			<?php

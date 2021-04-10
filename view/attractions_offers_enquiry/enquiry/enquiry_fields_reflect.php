@@ -653,33 +653,13 @@ if($enquiry_type=="Hotel"){
 	if(isset($_POST['enquiry_id'])){
 
 		foreach($enquiry_content_arr1 as $enquiry_content_arr2){
-
-			if($enquiry_content_arr2['name']=="city_id"){ $sq_c['city_id'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="check_in_date"){ $sq_c['check_in_date'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="check_out_date"){ $sq_c['check_out_date'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="no_of_nights"){ $sq_c['no_of_nights'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="no_of_rooms"){ $sq_c['no_of_rooms'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="hotel_type"){ $sq_c['hotel_type'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="room_type"){ $sq_c['room_type'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="accomodation_type"){ $sq_c['accomodation_type'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="meal_plan"){ $sq_c['meal_plan'] = $enquiry_content_arr2['value']; }
-
+			
+			if($enquiry_content_arr2['name']=="hotel_requirements"){ $sq_c['hotel_requirements'] = $enquiry_content_arr2['value']; }
 			if($enquiry_content_arr2['name']=="total_adult"){ $sq_c['total_adult'] = $enquiry_content_arr2['value']; }
-
-			if($enquiry_content_arr2['name']=="total_children"){ $sq_c['total_children'] = $enquiry_content_arr2['value']; }
-
+			if($enquiry_content_arr2['name']=="total_cwb"){ $sq_c['total_cwb'] = $enquiry_content_arr2['value']; }
+			if($enquiry_content_arr2['name']=="total_cwob"){ $sq_c['total_cwob'] = $enquiry_content_arr2['value']; }
 			if($enquiry_content_arr2['name']=="total_infant"){ $sq_c['total_infant'] = $enquiry_content_arr2['value']; }
-
 			if($enquiry_content_arr2['name']=="total_members"){ $sq_c['total_members'] = $enquiry_content_arr2['value']; }
-
 			if($enquiry_content_arr2['name']=="budget"){ $sq_c['budget'] = $enquiry_content_arr2['value']; }
 
 		}
@@ -688,265 +668,56 @@ if($enquiry_type=="Hotel"){
 
 	else{
 
-		$sq_c['city_id'] = $sq_c['budget'] = $sq_c['check_in_date'] =  $sq_c['check_out_date'] =  $sq_c['no_of_nights'] =  $sq_c['no_of_rooms'] =  $sq_c['hotel_type'] =  $sq_c['room_type'] =  $sq_c['accomodation_type'] =  $sq_c['meal_plan'] = $sq_c['total_adult'] = $sq_c['total_children'] = $sq_c['total_infant'] = $sq_c['total_members'] =  "";		
+		$sq_c['hotel_requirements'] = $sq_c['total_adult'] = $sq_c['total_cwb'] = $sq_c['total_cwob'] = $sq_c['total_infant'] = $sq_c['total_members'] =  "";		
 
 	}
-
-
-
 ?>
-
 <div class="row mg_bt_10">
-
-	<div class="col-md-4">
-
-		<select name="city_id" id="city_id" title="City Name" style="width:100%">
-
-			<?php 
-
-			if($sq_c['city_id']!=""){
-
-				$sq_city = mysql_fetch_assoc(mysql_query("select * from city_master where city_id='$sq_c[city_id]'"));
-
-				?>
-
-				<option value="<?= $sq_city['city_id'] ?>" selected="selected"><?= $sq_city['city_name'] ?></option>
-
-				<?php
-
-			}
-
-			?>
-
-		</select>
-
+	<div class="col-md-12 col-sm-6 mg_bt_10_sm_xs">
+		<h3 class="editor_title">Hotel Requirements</h3>
+		<textarea name="hotel_requirements" id="hotel_requirements" class="feature_editor form_control" cols="30" rows="10"><?= $sq_c['hotel_requirements']?></textarea>
 	</div>
-	<div class="col-md-4">
-
-		<input type="text" id="check_in_date" name="check_in_date" placeholder="*Check-In Date" onchange="get_to_datetime(this.id,'check_out_date')" title="Check-In Date" value="<?= ($sq_c['check_in_date']!="") ? $sq_c['check_in_date'] : date('d-m-Y H:i') ?>" class="form-control">
-
-	</div>
-
-	<div class="col-md-4">
-
-		<input type="text" id="check_out_date" name="check_out_date" placeholder="*Check-Out Date" title="Check-Out Date" value="<?= ($sq_c['check_out_date']!="") ? $sq_c['check_out_date'] : date('d-m-Y H:i') ?>" class="form-control">
-
-	</div>
-
 </div>
-
 <div class="row mg_bt_10">
-
-	<div class="col-md-4">
-
-		<input type="text" id="no_of_nights" name="no_of_nights" placeholder="*No Of Nights" title="No Of Nights" value="<?= $sq_c['no_of_nights'] ?>" class="form-control" onchange="validate_balance(this.id)">
-
-	</div>
-
-	<div class="col-md-4">
-
-		<input type="text" id="no_of_rooms" name="no_of_rooms" placeholder="*Total Rooms" title="Total Rooms" value="<?= $sq_c['no_of_rooms'] ?>" onchange="validate_balance(this.id)">
-
-	</div>
-
-	<div class="col-md-4">
-
-		<select name="hotel_type" id="hotel_type" title="Hotel Type" class="form-control">
-
-			<?php 
-
-			if($sq_c['hotel_type']!=""){
-
-				?>
-
-				<option value="<?= $sq_c['hotel_type'] ?>"><?= $sq_c['hotel_type'] ?></option>
-
-				<?php
-
-			}
-
-			?>
-
-			<option value="">Hotel Type</option>
-
-			<option value="1-Star">1-Star</option>
-
-			<option value="2-Star">2-Star</option>
-
-			<option value="3-Star">3-Star</option>
-
-			<option value="4-Star">4-Star</option>
-
-			<option value="5-Star">5-Star</option>
-			<option value="Economy">Economy</option>
-
-			<option value="Resort">Resort</option>
-
-			<option value="Other">Other</option>
-
-		</select>
-
-	</div>
-
-</div>
-
-<div class="row mg_bt_10">
-
-	<div class="col-md-4">
-
-		<select name="room_type" id="room_type" title="Room Type" class="form-control">
-
-			<?php 
-
-			if($sq_c['room_type']!=""){
-
-				?>
-
-				<option value="<?= $sq_c['room_type'] ?>"><?= $sq_c['room_type'] ?></option>
-
-				<?php
-
-			}
-
-			?>
-			<option value="">Room Type</option>
-			<option value="AC">AC</option>
-
-			<option value="Non AC">Non AC</option>
-
-		</select>
-
-	</div>
-
-	<div class="col-md-4">
-
-		<select name="accomodation_type" id="accommodation_type" title="Accommodation Type" class="form-control">
-
-			<?php 
-
-			if($sq_c['accomodation_type']!=""){
-
-				?>
-
-				<option value="<?= $sq_c['accomodation_type'] ?>"><?= $sq_c['accomodation_type'] ?></option>
-
-				<?php
-
-			}
-
-			?>			
-
-			<option value="">Accommodation Type</option>
-
-			<option value="Twin Sharing">Twin Sharing</option>
-
-			<option value="Single Adult">Single Adult</option>
-
-			<option value="Triple Sharing">Triple Sharing</option>
-
-			<option value="Quadruple Sharing">Quadruple Sharing</option>
-
-		</select>
-
-	</div>
-
-	<div class="col-md-4">
-
-		<select name="meal_plan" id="meal_plan" title="Meal Plan" class="form-control">
-
-			<?php 
-
-			if($sq_c['meal_plan']!=""){
-
-				?>
-
-				<option value="<?= $sq_c['meal_plan'] ?>"><?= $sq_c['meal_plan'] ?></option>
-
-				<?php
-
-			}
-
-			?>
-			<option value="">Meal Plan</option>
-			<option value="AP">AP</option>
-
-			<option value="CP">CP</option>
-
-			<option value="EP">EP</option>
-
-			<option value="MAP">MAP</option>
-
-		</select>
-
-	</div>
-
-</div>
-
-<div class="row mg_bt_10">
-
 	<div class="col-md-4 col-sm-6 mg_bt_10_sm_xs">
-
         <input type="text" id="total_adult" name="total_adult" onchange="validate_balance(this.id); total_members_calculate()" placeholder="*Total Adults" title="Total Adults" value="<?= $sq_c['total_adult'] ?>" class="form-control">            
-
     </div>
-
 	<div class="col-md-4 col-sm-6 mg_bt_10_sm_xs">
-
-        <input type="text" id="total_children" name="total_children" onchange="validate_balance(this.id); total_members_calculate()" placeholder="*Total Children" title="Total Children" value="<?= $sq_c['total_children'] ?>" class="form-control">            
-
+        <input type="text" id="total_cwb" name="total_cwb" onchange="validate_balance(this.id); total_members_calculate()" placeholder="*Total Child With Bed" title="Total Child With Bed" value="<?= $sq_c['total_cwb'] ?>" class="form-control">            
     </div>  
-
-    <div class="col-md-4 col-sm-6 mg_bt_10_sm_xs">
-
-        <input type="text" id="total_infant" name="total_infant" onchange="validate_balance(this.id); total_members_calculate()" placeholder="*Total Infant" title="Total Infant" value="<?= $sq_c['total_infant'] ?>" class="form-control">            
-
-    </div>
-
+	<div class="col-md-4 col-sm-6 mg_bt_10_sm_xs">
+        <input type="text" id="total_cwob" name="total_cwob" onchange="validate_balance(this.id); total_members_calculate()" placeholder="*Total Child Without Bed" title="Total Child Without Bed" value="<?= $sq_c['total_cwob'] ?>" class="form-control">            
+    </div> 
 </div>
-
 <div class="row mg_bt_10">
-
+	<div class="col-md-4 col-sm-6 mg_bt_10_sm_xs">
+        <input type="text" id="total_infant" name="total_infant" onchange="validate_balance(this.id); total_members_calculate()" placeholder="*Total Infant" title="Total Infant" value="<?= $sq_c['total_infant'] ?>" class="form-control">            
+    </div>
 	<div class="col-md-4">
-
 		<input type="text" id="total_members" name="total_members" placeholder="Total Passenger" title="Total Passenger" value="<?= $sq_c['total_members'] ?>" class="form-control" readonly>
-
 	</div>
 	<div class="col-md-4 col-sm-6 mg_bt_10">
-
 	    <input type="text" id="budget" name="budget" onchange="validate_balance(this.id)" placeholder="*Budget" title="Budget" value="<?= $sq_c['budget'] ?>" class="form-control">
-
 	</div>
-
 </div>
-
 <script>
-
 $('#check_in_date, #check_out_date').datetimepicker({ timepicker:true, format:'d-m-Y H:i:s' });
-
 city_lzloading('#city_id');
 
-function total_members_calculate()
 
-{
+function total_members_calculate(){
 
 	var total_adult = $('#total_adult').val();	
-
-	var total_children = $('#total_children').val();
-
+	var total_cwb = $('#total_cwb').val();
+	var total_cwob = $('#total_cwob').val();
 	var total_infant = $('#total_infant').val();
 
-
-
 	if(total_adult==""){ total_adult = 0; }
-
-	if(total_children==""){ total_children = 0; }
-
+	if(total_cwb==""){ total_cwb = 0; }
+	if(total_cwob==""){ total_cwob = 0; }
 	if(total_infant==""){ total_infant = 0; }
 
-
-
-	var total_members = parseFloat(total_adult) + parseFloat(total_children) + parseFloat(total_infant);
-
+	var total_members = parseFloat(total_adult) + parseFloat(total_cwb) + parseFloat(total_cwob) + parseFloat(total_infant);
 	$('#total_members').val(total_members);
 
 }

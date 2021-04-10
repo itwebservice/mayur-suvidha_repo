@@ -1,4 +1,6 @@
+<?php include_once "../../../model/model.php"; ?>
 <form id="frm_master_save">
+<input type="hidden" name="table_id_show" id="table_id_show" value="<?= $_POST['table_id'] ?>">
 <div class="modal fade" id="master_save_modal" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -53,13 +55,21 @@
 <script>
 $('#vehicle_type').select2();
 upload_vehicle_image();
+if($('#table_id_show').val() != ''){
+  $('#master_save_modal').modal('show');
+  $(function () {
+    $('input[type="text"], input[type="number"], select, textarea').addClass('form-control');
+    $('.no_form_control').removeClass('form-control');
+});
+}
 function upload_vehicle_image(){
 
     var btnUpload=$('#image_upload_btn');
+    var base_url = $('#base_url').val();
     $(btnUpload).find('span').text('Vehicle Image');
     new AjaxUpload(btnUpload, {
 
-      action: 'master/upload_image.php',
+      action: base_url+'/view/b2b_transfer/master/upload_image.php',
       name: 'uploadfile',
       onSubmit: function(file, ext){
         if (! (ext && /^(jpg|png|jpeg)$/.test(ext))){ 
@@ -86,3 +96,4 @@ function upload_vehicle_image(){
     });
 }
 </script>
+<script src="<?= BASE_URL ?>/view/b2b_transfer/js/master.js"></script>

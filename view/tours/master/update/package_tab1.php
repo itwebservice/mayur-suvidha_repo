@@ -1,7 +1,22 @@
 <form id="frm_tour_master_update" name="frm_tour_master_save" method="POST">
+<div class="app_panel">
+<!--=======Header panel======-->
+    <div class="app_panel_head mg_bt_20">
+      <div class="container">
+          <h2 class="pull-left"></h2>
+          <div class="pull-right header_btn">
+            <button>
+                <a>
+                    <i class="fa fa-arrow-right"></i>
+                </a>
+            </button>
+          </div>
+      </div>
+    </div> 
+    <div class="container">
       <input type="hidden" id="txt_tour_id" name="txt_tour_id" value="<?php echo $tour_id; ?>">
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-md-offset-2 mg_bt_10">
+            <div class="col-md-3 col-sm-6 mg_bt_10">
                 <select id="cmb_tour_type" name="cmb_tour_type" class="form-control" title="Tour Type" disabled>
                     <option value="<?php echo $tour_info['tour_type'] ?>" selected><?php echo $tour_info['tour_type'] ?></option>
                     <option value="Domestic">Domestic</option>
@@ -22,6 +37,13 @@
                         <option value="<?php echo $row_dest['dest_id']; ?>"><?php echo $row_dest['dest_name']; ?></option>
                     <?php } ?>
                 </select>
+            </div>
+            <div class="col-md-3 col-sm-6"> 
+              <select name="active_flag1" id="active_flag1" title="Status">
+              <option  value="<?php echo $tour_info['active_flag']; ?>"><?php echo $tour_info['active_flag']; ?></option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
             </div>
         </div>
 
@@ -73,42 +95,39 @@
               <table style="width:100%;margin: 0 !important;" id="dynamic_table_list1" name="dynamic_table_list">
                 <?php
                 $count = 1;
-                $query = "select * from group_tour_program where tour_id = '$tour_id'";
-                $sq_pckg_a = mysql_query($query);
-
-                  while($sq_pckg1 = mysql_fetch_assoc($sq_pckg_a))
-                  { ?>
+                $sq_pckg_a = mysql_query("select * from group_tour_program where tour_id = '$tour_id'");
+                while($sq_pckg1 = mysql_fetch_assoc($sq_pckg_a)){
+                  ?>
                   <tr>
                     <td class='col-md-1 pad_8'><input type="text" id="day" name="day" class="form-control mg_bt_10" placeholder="Day <?php echo $count; ?>" title="Day" value="" disabled> 
-                    <td class='col-md-3 pad_8' style='width:100px'><input type="text" id="special_attaraction<?php echo $count; ?>" name="special_attaraction" class="form-control mg_bt_10" placeholder="Special Attraction" title="Special Attraction" onchange="validate_spaces(this.id);validate_spattration(this.id);"  value="<?php echo $sq_pckg1['attraction']; ?>"></td>
-                    <td class='col-md-6 pad_8' style="max-width: 594px;overflow: hidden;"><textarea id="day_program<?php echo $count; ?>" name="day_program" class="form-control mg_bt_10" placeholder="Day<?php echo $count++;?> Program" title="Day-wise Program" rows="3"  onchange="validate_spaces(this.id);validate_dayprogram(this.id);" value="<?php echo $sq_pckg1['day_wise_program']; ?>"><?php echo $sq_pckg1['day_wise_program']; ?></textarea></td>
-                    <td class='col-md-2 pad_8' style='width:100px'><input type="text" id="overnight_stay<?php echo $count; ?>" name="overnight_stay" class="form-control mg_bt_10" placeholder="Overnight Stay"  onchange="validate_spaces(this.id);validate_onstay(this.id);" title="Overnight Stay"  value="<?php echo $sq_pckg1['stay']; ?>"></td>
+                    <td class='col-md-3 pad_8' style='width:100px'><input type="text" id="special_attaraction<?php echo $count; ?>-u" name="special_attaraction" class="form-control mg_bt_10" placeholder="Special Attraction" title="Special Attraction" onchange="validate_spaces(this.id);validate_spattration(this.id);"  value="<?php echo $sq_pckg1['attraction']; ?>"></td>
+                    <td class='col-md-6 pad_8' style="max-width: 594px;overflow: hidden;"><textarea id="day_program<?php echo $count; ?>-u" name="day_program" class="form-control mg_bt_10" placeholder="Day<?php echo $count+1;?> Program" title="Day-wise Program" rows="3"  onchange="validate_spaces(this.id);validate_dayprogram(this.id);" value="<?php echo $sq_pckg1['day_wise_program']; ?>"><?php echo $sq_pckg1['day_wise_program']; ?></textarea></td>
+                    <td class='col-md-2 pad_8' style='width:100px'><input type="text" id="overnight_stay<?php echo $count; ?>-u" name="overnight_stay" class="form-control mg_bt_10" placeholder="Overnight Stay"  onchange="validate_spaces(this.id);validate_onstay(this.id);" title="Overnight Stay"  value="<?php echo $sq_pckg1['stay']; ?>"></td>
                     <td class='col-md-1 pad_8' style='width:100px'><select id="meal_plan<?php echo $count; ?>" title="Meal Plan" name="meal_plan" class="form-control">
                       <?php if($sq_pckg1['meal_plan']!=''){ ?>
                                   <option value="<?= $sq_pckg1['meal_plan'] ?>"><?= $sq_pckg1['meal_plan'] ?></option>
                                   <?php }?>
                                   <?php get_mealplan_dropdown(); ?>
-                                     </select></td>
+                          </select></td>
+                    <td class='col-md-1 pad_8'><button type="button" class="btn btn-excel" title="Add Itinerary" onClick="add_itinerary('dest_name_s','special_attaraction<?php echo $count; ?>-u','day_program<?php echo $count; ?>-u','overnight_stay<?php echo $count; ?>-u')"><i class="fa fa-plus"></i></button>
+                    </td>
                     <td class="hidden"><input type="text" value="<?php echo $sq_pckg1['entry_id']; ?>"></td>
                   </tr>
-                  <?php  }  ?>
+                  <?php
+                  $count++;
+                }  ?>
               </table>
             </div>    
         </div>
         </div>
       
-     <div class="row">
-          <div class="col-md-3 col-sm-6"> 
-            <select name="active_flag1" id="active_flag1" title="Status">
-            <option  value="<?php echo $tour_info['active_flag']; ?>"><?php echo $tour_info['active_flag']; ?></option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>    
+     <div class="row">    
       </div>                                     
       <div class="row mg_bt_10 mg_tp_20 text-center">
               <button class="btn btn-sm btn-info ico_right" id="btn_update">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
-      </div>        
+      </div>
+    </div>
+</div>
 </form>
 
 <script>
@@ -141,7 +160,11 @@ $(function(){
             if(day_program=="") {error_msg_alert("Day-wise program important"); return false;} 
         }
         
-       $('a[href="#tab2"]').tab('show');
+        $('#tab1_head').addClass('done');
+        $('#tab2_head').addClass('active');
+        $('.bk_tab').removeClass('active');
+        $('#tab2').addClass('active');
+        $('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
 
       return false;
 
@@ -239,4 +262,3 @@ function tour_date_generate()
 }
 tour_date_generate();
 </script>
-<script src="<?php echo BASE_URL ?>js/app/footer_scripts.js"></script>

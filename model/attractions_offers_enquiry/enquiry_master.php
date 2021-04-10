@@ -43,7 +43,7 @@ function enquiry_master_save(){
 
     $name = addslashes($name);
     $enquiry_specification = addslashes($enquiry_specification);
-    $sq_enquiry = mysql_query("insert into enquiry_master (enquiry_id, login_id,branch_admin_id,financial_year_id, enquiry_type,enquiry, name, mobile_no, landline_no, country_code,email_id,location, assigned_emp_id, enquiry_specification, enquiry_date, followup_date, reference_id, ref_detail,enquiry_content ) values ('$enquiry_id', '$login_id', '$branch_admin_id','$financial_year_id', '$enquiry_type','$enquiry', '$name', '$mobile_no', '$landline_no', '$country_code','$email_id','$location', '$assigned_emp_id', '$enquiry_specification', '$enquiry_date', '$followup_date', '$reference_id', '$ref_detail','$enquiry_content')");
+    $sq_enquiry = mysql_query("insert into enquiry_master (enquiry_id, login_id,branch_admin_id,financial_year_id, enquiry_type,enquiry, name, mobile_no, landline_no, country_code,email_id,location, assigned_emp_id, enquiry_specification, enquiry_date, followup_date, reference_id, enquiry_content, ref_detail ) values ('$enquiry_id', '$login_id', '$branch_admin_id','$financial_year_id', '$enquiry_type','$enquiry', '$name', '$mobile_no', '$landline_no', '$country_code','$email_id','$location', '$assigned_emp_id', '$enquiry_specification', '$enquiry_date', '$followup_date', '$reference_id', '$enquiry_content', '$ref_detail')");
 
     $sq_max = mysql_fetch_assoc(mysql_query("select max(entry_id) as max from enquiry_master_entries"));
     $entry_id = $sq_max['max'] + 1;
@@ -162,7 +162,7 @@ function send_emp_enquiry_mail($enquiry_id, $assigned_emp_id,$name)
        <tr>
         <table width="85%" cellspacing="0" cellpadding="5" style="color: #888888;border: 1px solid #888888;margin: 0px auto;margin-top:20px; min-width: 100%;" role="presentation">
           <tr><td style="text-align:left;border: 1px solid #888888;">Enquiry ID</td>   <td style="text-align:left;border: 1px solid #888888;">'.$enquiry_id.'</td></tr>
-          <tr><td style="text-align:left;border: 1px solid #888888;">Enquiry Date</td>   <td style="text-align:left;border: 1px solid #888888;">'.$sq_enquiry_details[enquiry_date].'</td></tr>
+          <tr><td style="text-align:left;border: 1px solid #888888;">Enquiry Date</td>   <td style="text-align:left;border: 1px solid #888888;">'.get_date_user($sq_enquiry_details[enquiry_date]).'</td></tr>
           <tr><td style="text-align:left;border: 1px solid #888888;">Customer Name</td>   <td style="text-align:left;border: 1px solid #888888;" >'.$Cust_name.'</td></tr>
           <tr><td style="text-align:left;border: 1px solid #888888;">Mobile No</td>   <td style="text-align:left;border: 1px solid #888888;">'.$sq_enquiry_details['mobile_no'].'</td></tr>
           <tr><td style="text-align:left;border: 1px solid #888888;">Email ID</td>   <td style="text-align:left;border: 1px solid #888888;">'.$sq_enquiry_details['email_id'].'</td></tr>';
@@ -229,7 +229,7 @@ function enquiry_master_update()
   $name = addslashes($name);
   $enquiry_specification = addslashes($enquiry_specification);
 
-  $sq_enquiry = mysql_query("update enquiry_master set name='$name', country_code = '$country_code', mobile_no='$mobile_no',landline_no = '$landline_no',email_id='$email_id',location='$location', enquiry = '$enquiry', enquiry_date='$enquiry_date', followup_date='$followup_date', reference_id='$reference_id', ref_detail = '$ref_detail',enquiry_content='$enquiry_content', enquiry_specification='$enquiry_specification', assigned_emp_id ='$assigned_emp_id' where enquiry_id='$enquiry_id'");
+  $sq_enquiry = mysql_query("update enquiry_master set name='$name', country_code = '$country_code', mobile_no='$mobile_no',landline_no = '$landline_no',email_id='$email_id',location='$location', enquiry = '$enquiry', enquiry_date='$enquiry_date', followup_date='$followup_date', reference_id='$reference_id', enquiry_content='$enquiry_content', enquiry_specification='$enquiry_specification', assigned_emp_id ='$assigned_emp_id', ref_detail='$ref_detail' where enquiry_id='$enquiry_id'");
 
   if(!$sq_enquiry){
     echo "error--Enquiry Information Not Updated.";

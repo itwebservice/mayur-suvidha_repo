@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-xs-12 text-right mg_bt_20_sm_xs">
+		<button type="button" class="btn btn-info btn-sm ico_left" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
         <button type="button" class="btn btn-excel btn-sm" onclick="addRow('tbl_package_tour_quotation_dynamic_plane');event_airport('tbl_package_tour_quotation_dynamic_plane');"><i class="fa fa-plus"></i></button>
     </div>
 </div>
@@ -99,6 +100,7 @@
         </div>
     </div>
 </div>
+<div id="airport_save_modal_direct"></div>
 <script>
 	event_airport('tbl_package_tour_quotation_dynamic_plane');
 </script>

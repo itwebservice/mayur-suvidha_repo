@@ -356,10 +356,28 @@ function hotel_save_modal() {
 	var target = '_blank';
 	window.open(base_url + 'view/hotels/master/index.php', target);
 }
-function hotel_save_modal_direct(table_id){
+function hotel_save_modal_direct(table_id = ""){
 	var base_url = $('#base_url').val();
 	$.post(base_url+'view/hotels/master/hotel/save_modal.php', {table_id : table_id}, function(data){
 		$('#hotel_save_modal_direct').html(data);
+	});
+}
+function transport_save_direct(table_id){
+	var base_url = $('#base_url').val();
+	$.post(base_url+'view/b2b_transfer/master/save_modal.php', {table_id : table_id}, function(data){
+		$('#transfer_save_modal_direct').html(data);
+	});
+}
+function airport_direct_save(){
+	var base_url = $('#base_url').val();
+	$.post(base_url+'view/other_masters/airports/save_modal.php', {}, function(data){
+		$('#airport_save_modal_direct').html(data);
+	});
+}
+function hotel_category_direct_save(table_id){
+	var base_url = $('#base_url').val();
+	$.post(base_url+'view/other_masters/room_category/save_modal.php', {table_id : table_id}, function(data){
+		$('#category_save_modal_direct').html(data);
 	});
 }
 function hotel_dropdown_reload(hotel_id = '') {

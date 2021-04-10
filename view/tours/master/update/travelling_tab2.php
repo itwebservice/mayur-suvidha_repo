@@ -1,90 +1,108 @@
 <form id="frm_tab2">
-
-	<div class="row">
-		<div class="col-md-12 app_accordion">
-  			<div class="panel-group main_block" id="accordion" role="tablist" aria-multiselectable="true">
-
-				<!-- Train Information -->
-				<div class="accordion_content main_block mg_bt_10">
-					<div class="panel panel-default main_block">
-		  				<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
-					        <div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1" id="collapsed1">                  
-					        	<div class="col-md-12"><span>Train Information</span></div>
-					        </div>
-					    </div>
-				        <div id="collapse1" class="panel-collapse collapse in main_block" role="tabpanel" aria-labelledby="heading1">
-						    <div class="panel-body">
-						    	<?php include_once('train_tbl.php'); ?>	
-						    </div>
-						</div>
-					</div>
-				</div>
-				<!-- Hotel Information -->
-				<div class="accordion_content main_block mg_bt_10">
-					<div class="panel panel-default main_block">
-		  				<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
-					        <div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2" id="collapsed2">                  
-					        	<div class="col-md-12"><span>Hotel Information</span></div>
-					        </div>
-					    </div>
-				        <div id="collapse2" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading2">
-						    <div class="panel-body">
-						    	<?php include_once('hotel_tbl.php'); ?>	
-						    </div>
-						</div>
-					</div>
-				</div>
-				<!-- Flight Information -->
-				<div class="accordion_content main_block mg_bt_10">
-					<div class="panel panel-default main_block">
-		  				<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
-					        <div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3" id="collapsed3">                  
-					        	<div class="col-md-12"><span>Flight Information</span></div>
-					        </div>
-					    </div>
-				        <div id="collapse3" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading3">
-						    <div class="panel-body">
-						    	<?php include_once('plane_tbl.php'); ?>	
-						    </div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Cruise Information -->
-				<div class="accordion_content main_block mg_bt_10">
-					<div class="panel panel-default main_block">
-		  				<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
-					        <div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse4" id="collapsed4">                  
-					        	<div class="col-md-12"><span>Cruise Information</span></div>
-					        </div>
-					    </div>
-				        <div id="collapse4" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading4">
-						    <div class="panel-body">
-						    	<?php include_once('cruise_tbl.php'); ?>	
-						    </div>
-						</div>
-					</div>
-				</div>
-
+<div class="app_panel">
+<!--=======Header panel======-->
+	<div class="app_panel_head mg_bt_20">
+		<div class="container">
+			<h2 class="pull-left"></h2>
+			<div class="pull-right header_btn">
+			<button>
+				<a>
+					<i class="fa fa-arrow-right"></i>
+				</a>
+			</button>
 			</div>
 		</div>
-	</div>	
+	</div> 
+    <div class="container">
+		<div class="row">
+			<div class="col-md-12 app_accordion">
+				<div class="panel-group main_block" id="accordion" role="tablist" aria-multiselectable="true">
 
+					<!-- Train Information -->
+					<div class="accordion_content main_block mg_bt_10">
+						<div class="panel panel-default main_block">
+							<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
+								<div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1" id="collapsed1">                  
+									<div class="col-md-12"><span>Train Information</span></div>
+								</div>
+							</div>
+							<div id="collapse1" class="panel-collapse collapse in main_block" role="tabpanel" aria-labelledby="heading1">
+								<div class="panel-body">
+									<?php include_once('train_tbl.php'); ?>	
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Hotel Information -->
+					<div class="accordion_content main_block mg_bt_10">
+						<div class="panel panel-default main_block">
+							<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
+								<div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2" id="collapsed2">                  
+									<div class="col-md-12"><span>Hotel Information</span></div>
+								</div>
+							</div>
+							<div id="collapse2" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading2">
+								<div class="panel-body">
+									<?php include_once('hotel_tbl.php'); ?>	
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Flight Information -->
+					<div class="accordion_content main_block mg_bt_10">
+						<div class="panel panel-default main_block">
+							<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
+								<div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3" id="collapsed3">                  
+									<div class="col-md-12"><span>Flight Information</span></div>
+								</div>
+							</div>
+							<div id="collapse3" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading3">
+								<div class="panel-body">
+									<?php include_once('plane_tbl.php'); ?>	
+								</div>
+							</div>
+						</div>
+					</div>
 
+					<!-- Cruise Information -->
+					<div class="accordion_content main_block mg_bt_10">
+						<div class="panel panel-default main_block">
+							<div class="panel-heading main_block" role="tab" id="heading_<?= $count ?>">
+								<div class="Normal main_block" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse4" id="collapsed4">                  
+									<div class="col-md-12"><span>Cruise Information</span></div>
+								</div>
+							</div>
+							<div id="collapse4" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading4">
+								<div class="panel-body">
+									<?php include_once('cruise_tbl.php'); ?>	
+								</div>
+							</div>
+						</div>
+					</div>
 
-	<div class="row text-center mg_tp_20">
-		<div class="col-md-12">
-			<button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab1()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous</button>
-			&nbsp;&nbsp;
-			<button class="btn btn-sm btn-info ico_right" id="btn_quotation_update">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
+				</div>
+			</div>
+		</div>	
+		<div class="row text-center mg_tp_20">
+			<div class="col-md-12">
+				<button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab1()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous</button>
+				&nbsp;&nbsp;
+				<button class="btn btn-sm btn-info ico_right" id="btn_quotation_update">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
+			</div>
 		</div>
 	</div>
+</div>
 </form>
 <script> 
-function switch_to_tab1(){ $('a[href="#tab1"]').tab('show'); }
+function switch_to_tab1(){
+	$('#tab2_head').removeClass('active');
+	$('#tab1_head').addClass('active');
+	$('.bk_tab').removeClass('active');
+	$('#tab1').addClass('active');
+	$('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
+}
 </script>
-<script> 
-
+<script>
 // App_accordion
 jQuery(document).ready(function() {			
 			jQuery(".panel-heading").click(function(){ 
@@ -265,7 +283,11 @@ $('#frm_tab2').validate({
 		$('.accordion_content').removeClass("indicator");
 		$('.collapse').removeClass("in");
 		$('#collapse1').addClass("in");
-    	$('a[href="#tab3"]').tab('show');
+    	$('#tab2_head').addClass('done');
+        $('#tab3_head').addClass('active');
+        $('.bk_tab').removeClass('active');
+        $('#tab3').addClass('active');
+        $('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
 }  
 
 });

@@ -1,93 +1,83 @@
 <form id="frm_tab_2">
+<div class="app_panel">
 <!--=======Header panel======-->
-<div class="app_panel_head mg_bt_20">
-      <div class="container">
-          <h2 class="pull-left"></h2>
-          <div class="pull-right header_btn">
-            <button>
-                <a>
-                    <i class="fa fa-arrow-right"></i>
-                </a>
-            </button>
-          </div>
-      </div>
+    <div class="app_panel_head mg_bt_20">
+		<div class="container">
+			<h2 class="pull-left"></h2>
+			<div class="pull-right header_btn">
+				<button>
+					<a>
+						<i class="fa fa-arrow-right"></i>
+					</a>
+				</button>
+			</div>
+		</div>
     </div> 
 <!--=======Header panel end======-->
-   <div class="container">
+  <div class="container">
 
-      <div class="app_panel_content no-pad"> 
+      <div class="row">
+        <div class="col-md-3 col-sm-6 mg_bt_20">
+          <select name="day_name" id="day_name"></select>
+        </div>
+        <div class="col-md-3 col-sm-6 mg_bt_20">
+          
+          <select id="dest_name2" name="dest_name" title="Select Destination" onchange="image_list_reflect(this.value)" class="form-control" style="width:100%"> 
 
-        <div class="panel panel-default panel-body mg_bt_10 mg_tp_20">
+              <option value="">Select Destination</option>
 
-             <div class="row">
-             <div class="col-md-3 col-sm-6 mg_bt_20">
-                <select name="day_name" id="day_name"></select>
-             </div>
-             <div class="col-md-3 col-sm-6 mg_bt_20">
-                
-                <select id="dest_name2" name="dest_name" title="Select Destination" onchange="image_list_reflect(this.value)" class="form-control" style="width:100%"> 
+              <?php 
 
-                    <option value="">Select Destination</option>
+              $sq_query = mysql_query("select * from destination_master where status != 'Inactive'"); 
 
-                     <?php 
+                  while($row_dest = mysql_fetch_assoc($sq_query)){ ?>
 
-                     $sq_query = mysql_query("select * from destination_master where status != 'Inactive'"); 
+                    <option value="<?php echo $row_dest['dest_id']; ?>"><?php echo $row_dest['dest_name']; ?></option>
 
-                        while($row_dest = mysql_fetch_assoc($sq_query)){ ?>
+                <?php } ?>
 
-                          <option value="<?php echo $row_dest['dest_id']; ?>"><?php echo $row_dest['dest_name']; ?></option>
-
-                      <?php } ?>
-
-                </select>
-
-             </div>
-             <div class="col-md-2">
-                        <input type="button" class="btn btn-sm btnType" id="btn_image_save" onclick="daywise_image_prepare()" autocomplete="off" data-original-title="save" title="save" value="Save">
-                  </div>
-
-             </div>
-
-             <div id="image_div"></div>         
+          </select>
 
         </div>
+        <div class="col-md-2">
+              <input type="button" class="btn btn-sm btnType" id="btn_image_save" onclick="daywise_image_prepare()" autocomplete="off" data-original-title="save" title="save" value="Save">
+        </div>
+      </div>
 
-    </div>
+      <div id="image_div"></div>         
 
-   </div>
-
-   <div class="row text-center mg_tp_20">
-		<div class="col-md-12">
-			<button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab2()" ><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous</button>
-			&nbsp;&nbsp;
-			<button class="btn btn-sm btn-info ico_right" id="btn_quotation_save">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
-		</div>
-	</div>
-          <input type="hidden" id="daywise_url" name="daywise_url"/>
+      <div class="row text-center mg_tp_20">
+        <div class="col-md-12">
+          <button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab2()" ><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous</button>
+          &nbsp;&nbsp;
+          <button class="btn btn-sm btn-info ico_right" id="btn_quotation_save">Next&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <input type="hidden" id="daywise_url" name="daywise_url"/>
+  </div>
+</div>          
 </form>
 <script>
 
 function daywise_image_prepare(){
 
-$('#btn_image_save').button('loading');
-var day = $('#day_name').val();
-var daywise_url = $('#daywise_url').val();
-//var pckg_img_arr = new Array();
+  $('#btn_image_save').button('loading');
+  var day = $('#day_name').val();
+  var daywise_url = $('#daywise_url').val();
 
-
-var radioValue = $("input[name=image_check]:checked").val();
-if(typeof radioValue === 'undefined'){
-    error_msg_alert("Select one daywise image!");
-    $('#btn_image_save').button('reset');
-    return false;
-}
-else{
-    daywise_url += day+'='+radioValue+',';
-    $('#btn_image_save').button('reset');
-    msg_alert("Image Saved");
-}
-$('#daywise_url').val(daywise_url);
-return false;
+  var radioValue = $("input[name=image_check]:checked").val();
+  if(typeof radioValue === 'undefined'){
+      error_msg_alert("Select one daywise image!");
+      $('#btn_image_save').button('reset');
+      return false;
+  }
+  else{
+      daywise_url += day+'='+radioValue+',';
+      $('#btn_image_save').button('reset');
+      msg_alert("Image Saved");
+  }
+  $('#daywise_url').val(daywise_url);
+  return false;
 }
     $('#btn_quotation_save').click(function(){
         var dateParts = $('#txt_from_date1').val().split("-");
@@ -127,22 +117,22 @@ $(function(){
 
         var daywise_url = $('#daywise_url').val();
 
-        $('#tab_daywise_head').addClass('done');
-        $('#tab3_head').addClass('active');
-        $('.bk_tab').removeClass('active');
-        $('#tab3').addClass('active');
-        $('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);  
-
+      $('#tab3_head').addClass('done');
+      $('#tab4_head').addClass('active');
+      $('.bk_tab').removeClass('active');
+      $('#tab4').addClass('active');
+      $('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
       return false;
 
     }
   });
 });
-function switch_to_tab2(){ 
-	$('#tab_daywise_head').removeClass('active');
+function switch_to_tab2(){
+
+  $('#tab3_head').removeClass('active');
 	$('#tab2_head').addClass('active');
 	$('.bk_tab').removeClass('active');
 	$('#tab2').addClass('active');
-	$('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200); 
-} 
+	$('html, body').animate({scrollTop: $('.bk_tab_head').offset().top}, 200);
+}
 </script>

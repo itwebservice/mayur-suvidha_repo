@@ -216,17 +216,24 @@ while($row = mysql_fetch_assoc($sq_enquiries)){
 		get_datetime_user($followup_date1)
 		)
 	);
-	if($row['enquiry_type'] == "Package Booking" || $row['enquiry_type'] == "Group Booking" || $row['enquiry_type'] == "Car Rental" || $row['enquiry_type'] == "Flight Ticket"){
+	if($row['enquiry_type'] == "Package Booking" || $row['enquiry_type'] == "Group Booking" || $row['enquiry_type'] == "Car Rental" || $row['enquiry_type'] == "Flight Ticket" || $row['enquiry_type'] == "Hotel"){
 		switch($row['enquiry_type']){
 			case "Package Booking" : $link = "home/save";break;
 			case "Group Booking" : $link = "group_tour";break;
 			case "Car Rental" : $link = "car_flight/car_rental";break;
 			case "Flight Ticket" : $link = "car_flight/flight";break;
+			case "Hotel" : $link = BASE_URL.'view/hotel_quotation/save/index.php';break;
 		}
 		$form_add = '<form style="display:inline-block" action="'. BASE_URL.'view/package_booking/quotation/'.$link.'/index.php" target="_blank" id="frm_booking_1" method="GET">
 			<input type="hidden" id="enquiry_id" name="enquiry_id" value="'.$row['enquiry_id'].'">
 			<button style="display:inline-block" data-toggle="tooltip" class="btn btn-info btn-sm" title="Create Quick Quotation"><i class="fa fa-plus"></i></button>
 		</form>';
+		if($row['enquiry_type'] == "Hotel"){
+			$form_add = '<form style="display:inline-block" action="'.$link.'" target="_blank" id="frm_booking_1" method="GET">
+			<input type="hidden" id="enquiry_id" name="enquiry_id" value="'.$row['enquiry_id'].'">
+			<button style="display:inline-block" data-toggle="tooltip" class="btn btn-info btn-sm" title="Create Quick Quotation"><i class="fa fa-plus"></i></button>
+		</form>';
+		}
 		if($row['enquiry_type'] == "Package Booking"){
 			$form_add .= '<form style="display:inline-block" action="'. BASE_URL.'view/vendor/quotation_request/index.php" target="_blank" id="frm_booking_13" method="GET">
 			<input type="hidden" id="enquiry_id" name="enquiry_id" value="'.$row['enquiry_id'].'">

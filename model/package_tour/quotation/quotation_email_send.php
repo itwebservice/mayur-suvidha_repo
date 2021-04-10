@@ -98,12 +98,14 @@ class quotation_email_send
 	}
 	public function quotation_whatsapp(){
 		$quotation_id_arr = $_POST['quotation_id_arr'];
-		$currency = "Rs.";
 		global $app_name, $app_cancel_pdf,$model,$quot_note,$app_contact_no;
 		
 		$all_message = "";
 		for($i=0;$i<sizeof($quotation_id_arr);$i++){
 			$sq_quotation = mysql_fetch_assoc(mysql_query("select * from package_tour_quotation_master where quotation_id='$quotation_id_arr[$i]'"));
+			$currency=$sq_quotation['currency_code'];
+			$currency_r=mysql_fetch_assoc(mysql_query("select currency_rate from roe_master where currency_id='$currency'"));
+			$currency_rate=$currency_r['currency_rate'];
 			$sq_cost =  mysql_fetch_assoc(mysql_query("select * from package_tour_quotation_costing_entries where quotation_id = '$quotation_id_arr[$i]'"));
 			$sq_login = mysql_fetch_assoc(mysql_query("select * from roles where id='$sq_quotation[login_id]'"));
 			$sq_emp_info = mysql_fetch_assoc(mysql_query("select * from emp_master where emp_id='$sq_login[emp_id]'"));
@@ -118,7 +120,7 @@ class quotation_email_send
 			$sq_tours_package = mysql_fetch_assoc(mysql_query("select * from custom_package_master where package_id = '$sq_quotation[package_id]'"));		
 
 			$quotation_no = base64_encode($quotation_id_arr[$i]);
-			$whatsapp_msg = 'Hello%20Dear%20'.rawurlencode($sq_quotation['customer_name']).',%0aHope%20you%20are%20doing%20great.%20This%20is%20Package%20tour%20quotation%20details%20as%20per%20your%20request.%20We%20look%20forward%20to%20having%20you%20onboard%20with%20us.%0a*Interested%20Tour*%20:%20'.rawurlencode($sq_tours_package['package_name']).'%0a*Duration*%20:%20'.rawurlencode($sq_tours_package['total_days']).'D/'.rawurlencode($sq_tours_package['total_nights']).'N%0a*Cost*%20:%20'.$currency.rawurlencode($quotation_cost).'%0a*Link*%20:%20'.BASE_URL.'/model/package_tour/quotation/single_quotation.php?quotation='.$quotation_no.'%0aPlease%20contact%20for%20more%20details%20:%20'.$contact.'%0aThank%20you.%0a';
+			$whatsapp_msg = 'Hello%20Dear%20'.rawurlencode($sq_quotation['customer_name']).',%0aHope%20you%20are%20doing%20great.%20This%20is%20Package%20tour%20quotation%20details%20as%20per%20your%20request.%20We%20look%20forward%20to%20having%20you%20onboard%20with%20us.%0a*Interested%20Tour*%20:%20'.rawurlencode($sq_tours_package['package_name']).'%0a*Duration*%20:%20'.rawurlencode($sq_tours_package['total_days']).'D/'.rawurlencode($sq_tours_package['total_nights']).'N%0a*Cost*%20:%20'.$currency.rawurlencode($quotation_cost*$currency_rate).'%0a*Link*%20:%20'.BASE_URL.'/model/package_tour/quotation/single_quotation.php?quotation='.$quotation_no.'%0aPlease%20contact%20for%20more%20details%20:%20'.$contact.'%0aThank%20you.%0a';
 			$all_message .=$whatsapp_msg;
 		}
 		$link = 'https://web.whatsapp.com/send?phone='.$sq_quotation['mobile_no'].'&text='.$all_message;

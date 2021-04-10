@@ -3,7 +3,7 @@
 include "../../../model/model.php";
 
 ?>
-
+<input type="hidden" id="table_id_show" name="table_id_show" value="<?= $_POST['table_id'] ?>">
 <form id="frm_save">
 
 <div class="modal fade" id="save_modal" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
@@ -104,14 +104,24 @@ $('#frm_save').validate({
 
               var msg = result.split('--');
 
-              msg_alert(result);
+              if(msg[0] == "error"){
+                error_msg_alert(msg[1]);
+              }else{
+                if($('#table_id_show').val() != ''){
+                    var roomCat = msg[0].split(':')[0];
 
-              if(msg[0]!="error"){
+                    var table=document.getElementById($('#table_id_show').val());
+                    var rowlength = table.rows.length;
 
-                $('#save_modal').modal('hide');
+                    for(var i =0; i<rowlength;i++){
+                      var newOption = new Option(roomCat, roomCat, false, false);
+                      $('#'+table.rows[i].cells[4].childNodes[0].id).append(newOption);
+                    }
+                  }
+                  msg_alert(msg[1]);
+                   $('#save_modal').modal('hide');
 
-                list_reflect();
-
+                  list_reflect();
               }
 
           }

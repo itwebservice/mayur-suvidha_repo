@@ -525,6 +525,15 @@
 	</menu_desc>
 
 	<menu_desc>
+		<name>Hotel Quotation</name>
+		<link>hotel_quotation/index.php</link>
+		<rank>8</rank>
+		<priority>2</priority>
+		<description>This is hotel quotation.</description>
+		<menu_icon>fa fa-file-text-o</menu_icon>
+	</menu_desc>
+
+	<menu_desc>
 		<name>Car Rental Quotation</name>
 		<link>package_booking/quotation/car_flight/car_rental/index.php</link>
 		<rank>8</rank>

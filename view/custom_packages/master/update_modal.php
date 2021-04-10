@@ -156,6 +156,7 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
                   <small>Note -  Pls ensure you added city wise hotel & tariff using Supplier Master</small>
                   <div class="bg_white main_block panel-default-inner">
                     <div class="col-xs-12 text-right mg_tp_10">
+                     <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="hotel_save_modal_direct('tbl_package_hotel_master')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
                       <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="addRow('tbl_package_hotel_master');city_lzloading('select[name^=city_name1]')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
                     </div>
                     <table id="tbl_package_hotel_master" name="tbl_package_hotel_master" class="table border_0 table-hover" style="padding: 0 !important;">
@@ -165,12 +166,12 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
                         <tr>
                             <td><input id="chk_dest" type="checkbox" checked></td>
                             <td><input maxlength="15" value="1" type="text" name="no" placeholder="Sr. No." class="form-control" disabled /></td>
-                            <td><select id="city_name" name="city_name1" onchange="hotel_name_list_load(this.id);" class="city_master_dropdown app_select2" style="width:100%" title="Select City Name">
+                            <td><select id="city_name" name="city_name1" class="city_master_dropdown app_select2" style="width:100%" title="Select City Name">
                                 </select></td>
                             <td><select id="hotel_name" name="hotel_name1" onchange="hotel_type_load(this.id);" style="width:100%" title="Select Hotel Name">
                                   <option value="">*Hotel Name</option>
                                 </select></td>
-                            <td><input type="text" id="hotel_type_master" name="hotel_type_master1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
+                            <td><input type="text" id="hotel_type" name="hotel_type1" placeholder="*Hotel Type" title="Hotel Type" readonly></td>
                             <td><input type="text" id="hotel_tota_days1" onchange="validate_balance(this.id)" name="hotel_tota_days1" placeholder="*Total Night" title="Total Night"></td>
                         </tr>
                         <script type="text/javascript">
@@ -187,13 +188,13 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
                           <tr>
                             <td><input id="chk_dest<?php echo $count_hotel; ?>" type="checkbox" checked></td>
                             <td><input maxlength="15" value="<?php echo $count_hotel; ?>" type="text" name="no" placeholder="Sr. No." class="form-control" disabled /></td>
-                            <td><select id="city_name<?php echo $count_hotel; ?>-u" name="city_name1" onchange="hotel_name_list_load(this.id);" class="city_master_dropdown app_select2" style="width:100%" title="Select City Name">
+                            <td><select id="city_name<?php echo $count_hotel; ?>-u" name="city_name1" class="city_master_dropdown app_select2" style="width:100%" title="Select City Name">
                                 <option value="<?php echo $sq_city['city_id']; ?>"><?php echo $sq_city['city_name']; ?></option>
                                 </select></td>
                             <td><select id="hotel_name<?php echo $count_hotel; ?>-u" name="hotel_name1" onchange="hotel_type_load(this.id);" style="width:100%" title="Select Hotel Name">
                                   <option value="<?php echo $sq_pckgh['hotel_id']; ?>"><?php echo $sq_pckgh['hotel_name']; ?></option>
                               </select></td>
-                            <td><input type="text" id="hotel_type_master<?php echo $count_hotel; ?>-u" name="hotel_type_master1" value="<?php echo $row_hotel['hotel_type']; ?>" placeholder="Hotel Type" title="Hotel Type" readonly></td>
+                            <td><input type="text" id="hotel_type<?php echo $count_hotel; ?>-u" name="hotel_type1" value="<?php echo $row_hotel['hotel_type']; ?>" placeholder="Hotel Type" title="Hotel Type" readonly></td>
                             <td><input type="text" id="hotel_tota_days1" value="<?php echo $row_hotel['total_days']; ?>" name="hotel_tota_days1" placeholder="Total Night" onchange="validate_balance(this.id);" title="Total Night"></td>
                             <td class="hidden"><input type="text" value="<?php echo $row_hotel['entry_id']; ?>"></td>
                         </tr> 
@@ -209,6 +210,9 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
                 <legend>Transport Information</legend>
                 <div class="bg_white main_block panel-default-inner">
                   <div class="col-xs-12 text-right mg_tp_10">
+                    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+                    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+                    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="transport_save_direct('tbl_package_tour_transport')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Transport</button>
                     <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="addRow('tbl_package_tour_transport');destinationLoading('select[name^=pickup_from]', 'Pickup Location');
                   destinationLoading('select[name^=drop_to]', 'Drop-off Location');"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
                   </div>
@@ -219,7 +223,7 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
                       <tr>
                           <td><input class="css-checkbox labelauty" id="chk_transport1" type="checkbox" checked="" autocomplete="off" data-original-title="" title="" aria-hidden="true" style="display: none;"><label for="chk_transport1"><span class="labelauty-unchecked-image"></span><span class="labelauty-checked-image"></span></label><label class="css-label" for="chk_transport1"> </label></td>
                           <td class="col-md-1"><input maxlength="15" value="1" type="text" name="username" placeholder="Sr No." class="form-control" disabled="" autocomplete="off" data-original-title="" title="" ></td>
-                          <td class="col-md-3"><select name="vehicle_name1" id="vehicle_name1" style="width:100%" class="form-control app_select2">
+                          <td class="col-md-3"><select name="vehicle_name1" id="vehicle_name1" style="width:100%" class="vehicle_name form-control app_select2">
                             <option value="">Select Vehicle</option>
                             <?php
                             $sq_query = mysql_query("select * from b2b_transfer_master where status != 'Inactive'"); 
@@ -243,7 +247,7 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
                         <tr>
                             <td><input id="chk_transport1<?php echo $count_hotel; ?>" type="checkbox" checked></td>
                             <td><input maxlength="15" value="<?php echo $count_hotel; ?>" type="text" name="no" placeholder="Sr. No." class="form-control" disabled /></td>           
-                            <td class="col-md-3"><select name="vehicle_name1-u" id="vehicle_name1<?php echo $count_hotel; ?>-u" style="width:250px" class="form-control app_select2">
+                            <td class="col-md-3"><select name="vehicle_name1-u" id="vehicle_name1<?php echo $count_hotel; ?>-u" style="width:250px" class="vehicle_name form-control app_select2">
                               <option value="<?php echo $sq_transport['entry_id']; ?>"><?php echo $sq_transport['vehicle_name']; ?></option>
                               <option value="">Select Vehicle</option>
                               <?php
@@ -328,6 +332,9 @@ $readable = ($sq_pckg['clone']=='yes' && $sq_pckg['update_flag']=='0')?'':'reado
       </form>
     </div>
 </div>
+<div id="hotel_save_modal_direct"></div> 
+<div id="transfer_save_modal_direct"></div>
+<div id="airport_save_modal_direct"></div>
 <script src="<?= BASE_URL ?>js/app/field_validation.js"></script>
 <script src="<?php echo BASE_URL ?>js/app/footer_scripts.js"></script>
 
@@ -363,6 +370,9 @@ $(document).ready(function(){
     controls:"bold,italic,|,undo,redo,image",
     initialContent: '',
   });
+  $('.city_master_dropdown').on('change', function(){
+    	hotel_name_list_load($(this).attr('id'));
+});
 });
 $(document).ready(function(){
   $('#exclusions1').wysiwyg({
@@ -387,8 +397,8 @@ $(function(){
         total_nights : { required: true, number:true },          
     },
 
-    submitHandler:function(form){
-
+    submitHandler:function(form,e){
+        e.preventDefault();
         var base_url = $('#base_url').val();
         var currency_id = $('#currency_code1').val();
         var taxation_type = $('#taxation_type1').val();
@@ -608,7 +618,7 @@ function hotel_type_load(id)
   var count = id.substring(10);
 
   $.get( "package/hotel/hotel_type_load.php" , { hotel_id : hotel_id } , function ( data ) {
-        $ ("#hotel_type_master"+count).val( data ) ;                            
+        $ ("#hotel_type"+count).val( data ) ;                            
   } ) ;   
 }
 

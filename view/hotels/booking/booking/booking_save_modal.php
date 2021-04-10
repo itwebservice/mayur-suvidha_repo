@@ -20,7 +20,27 @@ $branch_status = $sq['branch_status'];
           <input type="hidden" id="hotel_taxes" name="hotel_taxes">
           <input type="hidden" id="hotel_markup_taxes" name="hotel_markup_taxes">
           <input type="hidden" id="hotel_tds" name="hotel_tds">
-
+          <legend>Quotation Details</legend>
+          <div class="row">
+            <div class="col-md-4">
+            
+            <select name="quotation_id" id="quotation_id" style="width:100%" onchange="get_quotation_details(this)" class="form-control">
+                  <option value="">Select Quotation</option>
+                  <?php
+                  $query = "SELECT * FROM `hotel_quotation_master` ORDER BY quotation_id DESC";
+                  
+                  $sq_enq = mysql_query($query);   
+                  while($row_enq = mysql_fetch_assoc($sq_enq)){
+                    $cust_name = json_decode($row_enq['enquiry_details']);
+                    ?>
+                <option value="<?= $row_enq['quotation_id'] ?>"><?= 'QTP/'.$row_enq['quotation_id'].' : '.$cust_name->customer_name ?></option>
+                    <?php
+                  }
+                  ?>
+              </select>
+              </div>
+          </div>
+        </div>
           <div class="panel panel-default panel-body app_panel_style feildset-panel">
             <legend>Customer Details</legend>
 

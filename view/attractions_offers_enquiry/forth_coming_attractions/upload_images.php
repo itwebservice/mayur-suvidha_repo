@@ -25,15 +25,17 @@ $current_dir = check_dir($current_dir , $day);
 $current_dir = check_dir($current_dir , $timestamp);
 
 $file = $current_dir.basename($_FILES['uploadfile']['name']);
-if ($_FILES['uploadfile']['size'] > 1*1048576)
+if ($_FILES['uploadfile']['size'] > 1*300000)
 {
-	echo "error1";
+	echo "error--Maximum size exceeds";
 	exit;
 }
- 
-if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $file)) { 
-  echo $file; 
-} else {
-	echo "error";
+else{
+
+	if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $file)) { 
+		echo $file; 
+	} else {
+		echo "error--Image not uploaded";
+	}
 }
 ?>

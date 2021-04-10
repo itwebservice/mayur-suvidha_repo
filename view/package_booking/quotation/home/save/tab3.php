@@ -88,8 +88,11 @@
 					        <div class="panel-body">
 								<div class="row">
 								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
-								        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_tour_quotation_dynamic_plane')"><i class="fa fa-plus"></i></button>
-										<button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_package_tour_quotation_dynamic_plane')"><i class="fa fa-trash"></i></button>
+										<button type="button" class="btn btn-info btn-sm ico_left" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+
+										<button type="button" class="btn btn-info btn-sm ico_left" onclick="addRow('tbl_package_tour_quotation_dynamic_plane')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+										
+										<button type="button" class="btn btn-danger btn-sm ico_left" onclick="deleteRow('tbl_package_tour_quotation_dynamic_plane')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
 								    </div>
 								</div>
 								<div class="row">
@@ -180,8 +183,16 @@
 					        	<div class="col-md-12"><span>Hotel Information</span></div>
 					        </div>
 					    </div>
+						
 					    <div id="collapse4" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading4">
 					        <div class="panel-body">
+							<div class="row">
+								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
+										
+										<button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_save_modal_direct('tbl_package_tour_quotation_dynamic_hotel')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+										<button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_category_direct_save('tbl_package_tour_quotation_dynamic_hotel')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Room Category</button>
+								    </div>
+								</div>
 								<div class="row">
 								    <div class="col-xs-12">
 								        <div class="table-responsive">
@@ -227,6 +238,13 @@
 					    <div id="collapse5" class="panel-collapse collapse main_block" role="tabpanel" aria-labelledby="heading5">
 					        <div class="panel-body">
 								<div class="row">
+								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="transport_save_direct('tbl_package_tour_quotation_dynamic_transport')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Transport</button>
+									</div>
+								</div>
+								<div class="row">
 
 								    <div class="col-xs-12">
 								        <div class="table-responsive">
@@ -234,7 +252,7 @@
 								            <tr>
 								                <td><input class="css-checkbox" id="chk_transport-" type="checkbox" onchange="get_transport_cost();" checked readonly><label class="css-label" for="chk_transport1" > </label></td>
 								                <td><input maxlength="15" value="1" type="text" name="username" placeholder="Sr. No." class="form-control" disabled /></td>
-								                <td><select id="transport_vehicle-"  name="transport_vehicle-" title="Select Transport" onchange="get_transport_cost();" class="form-control app_select2" style="width:200px"> 
+								                <td><select id="transport_vehicle-"  name="transport_vehicle-" title="Select Transport" onchange="get_transport_cost();" class="vehicle_name form-control app_select2" style="width:200px"> 
 										                <option value="">Transport Vehicle</option>
 														<?php
 														$sq_query = mysql_query("select * from b2b_transfer_master where status != 'Inactive' order by vehicle_name asc"); 
@@ -276,6 +294,9 @@
 					        <div class="panel-body">
 								<div class="row">
 								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="transport_save_direct('tbl_package_tour_transport')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Transport</button>
 								        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_tour_quotation_dynamic_excursion');city_lzloading('.exc_city')"><i class="fa fa-plus"></i></button>
 										<button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_package_tour_quotation_dynamic_excursion')"><i class="fa fa-trash"></i></button>
 								    </div>
@@ -328,7 +349,10 @@
 <input type="hidden" id="hotel_pp_costing" name="hotel_pp_costing"/>
 </form>
 <?= end_panel() ?>
-
+<div id="airport_save_modal_direct"></div>
+<div id="hotel_save_modal_direct"></div> 
+<div id="category_save_modal_direct"></div>
+<div id="transfer_save_modal_direct"></div>
 <script>
 
 $('#airline_name1,#room_cat1,#pickup_from-,#drop_to-,#transport_vehicle-').select2();
@@ -346,6 +370,9 @@ jQuery(document).ready(function() {
 		jQuery(this).next(".panel-collapse").addClass('thePanel');
 		jQuery('#accordion .panel-collapse').not('.thePanel').slideUp("slow"); 
 		jQuery(".thePanel").slideToggle("slow").removeClass('thePanel'); 
+	});
+	$('.city_master_dropdown').on('change', function(){
+    	hotel_name_list_load($(this).attr('id'));
 	});
 });
 

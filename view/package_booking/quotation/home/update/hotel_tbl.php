@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-xs-12 text-right mg_bt_20_sm_xs">
-        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_tour_quotation_dynamic_hotel_update');city_lzloading('.city_name1');"><i class="fa fa-plus"></i></button>
+        <button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_save_modal_direct('tbl_package_tour_quotation_dynamic_hotel_update')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
+        <button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_category_direct_save('tbl_package_tour_quotation_dynamic_hotel_update')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Room Category</button>
+        <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('tbl_package_tour_quotation_dynamic_hotel_update');city_lzloading('.city_name1');"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
     </div>
 </div>
 <div class="row">
@@ -16,7 +18,7 @@
                 <tr>
                     <td><input class="css-checkbox" id="chk_hotel1" type="checkbox" checked readonly><label class="css-label" for="chk_hotel1" > <label></td>
                     <td><input maxlength="15" value="1" type="text" name="username" placeholder="Sr. No." class="form-control" disabled /></td>
-                    <td><select id="city_name1" name="city_name1" onchange="hotel_name_list_load(this.id);" class="city_name1 city_master_dropdown" style="width:100%" title="Select City Name">
+                    <td><select id="city_name1" name="city_name1"  class="city_name1 city_master_dropdown" style="width:100%" title="Select City Name">
                           </select></td>
                     <td><select id="hotel_name-1" name="hotel_name-1" onchange="hotel_type_load(this.id);get_hotel_cost();" style="width:160px" title="Select Hotel Name">
                         <option value="">Hotel Name</option>
@@ -50,7 +52,7 @@
                     <tr>
                         <td><input class="css-checkbox" id="chk_hotel<?= $count ?>_1" type="checkbox" checked><label class="css-label" for="chk_hotel1"> <label></td>
                         <td><input maxlength="15" value="<?= $count ?>" type="text" name="username" placeholder="Sr. No." class="form-control" disabled /></td>
-                        <td><select id="city_name1<?= $count ?>" name="city_name1<?= $count ?>" class="city_name1" onchange="hotel_name_list_load(this.id);" class="city_master_dropdown" style="width:100%" title="Select City Name">
+                        <td><select id="city_name1<?= $count ?>" name="city_name1<?= $count ?>" class="city_name1"  class="city_master_dropdown" style="width:100%" title="Select City Name">
 
                                 <option value="<?php echo $sq_city['city_id']; ?>"><?php echo $sq_city['city_name']; ?></option>
                                 </select></td>
@@ -84,9 +86,16 @@
         </div>
     </div>
 </div>
+<div id="airport_save_modal_direct"></div>
+<div id="hotel_save_modal_direct"></div> 
+<div id="category_save_modal_direct"></div>
 <script>
+
 $('#check_in-1, #check_out-1').datetimepicker({ format:'d-m-Y',timepicker:false });
 $(document).ready(function(){
     city_lzloading('.city_name1');
+    $('.city_master_dropdown').on('change', function(){
+    	hotel_name_list_load($(this).attr('id'));
+	});
 });
 </script>

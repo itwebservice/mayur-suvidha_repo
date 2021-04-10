@@ -23,7 +23,7 @@ class attraction_images
 			  }
 		  }else
 		  {
-		  	echo "error--Sorry,You can Upload upto 3 images.".$data[0]."/".$data[1];
+		  	echo "error--Sorry,You can Upload upto 3 images.";
 		  }
 
 	}
