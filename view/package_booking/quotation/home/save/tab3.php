@@ -294,9 +294,6 @@
 					        <div class="panel-body">
 								<div class="row">
 								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
-										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
-										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="airport_direct_save()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
-										<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="transport_save_direct('tbl_package_tour_transport')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Transport</button>
 								        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_tour_quotation_dynamic_excursion');city_lzloading('.exc_city')"><i class="fa fa-plus"></i></button>
 										<button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_package_tour_quotation_dynamic_excursion')"><i class="fa fa-trash"></i></button>
 								    </div>

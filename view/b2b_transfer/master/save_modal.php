@@ -1,6 +1,6 @@
 <?php include_once "../../../model/model.php"; ?>
 <form id="frm_master_save">
-<input type="hidden" name="table_id_show" id="table_id_show" value="<?= $_POST['table_id'] ?>">
+<input type="hidden" name="table_id_show_b2b" id="table_id_show_b2b" value="<?= $_POST['table_id'] ?>">
 <div class="modal fade" id="master_save_modal" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -55,7 +55,7 @@
 <script>
 $('#vehicle_type').select2();
 upload_vehicle_image();
-if($('#table_id_show').val() != ''){
+if($('#table_id_show_b2b').val() != ''){
   $('#master_save_modal').modal('show');
   $(function () {
     $('input[type="text"], input[type="number"], select, textarea').addClass('form-control');

@@ -3,10 +3,10 @@
 include "../../../model/model.php";
 
 ?>
-<input type="hidden" id="table_id_show" name="table_id_show" value="<?= $_POST['table_id'] ?>">
-<form id="frm_save">
+<input type="hidden" id="table_id_show_room" name="table_id_show_room" value="<?= $_POST['table_id'] ?>">
+<form id="frm_save_room_category">
 
-<div class="modal fade" id="save_modal" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="save_modal_room_category" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
 
   <div class="modal-dialog" role="document">
 
@@ -66,9 +66,9 @@ include "../../../model/model.php";
 
 <script>
 
-$('#save_modal').modal('show');
+$('#save_modal_room_category').modal('show');
 
-$('#frm_save').validate({
+$('#frm_save_room_category').validate({
 
     rules:{
 
@@ -107,10 +107,10 @@ $('#frm_save').validate({
               if(msg[0] == "error"){
                 error_msg_alert(msg[1]);
               }else{
-                if($('#table_id_show').val() != ''){
+                if($('#table_id_show_room').val() != ''){
                     var roomCat = msg[0].split(':')[0];
 
-                    var table=document.getElementById($('#table_id_show').val());
+                    var table=document.getElementById($('#table_id_show_room').val());
                     var rowlength = table.rows.length;
 
                     for(var i =0; i<rowlength;i++){
@@ -119,7 +119,7 @@ $('#frm_save').validate({
                     }
                   }
                   msg_alert(msg[1]);
-                   $('#save_modal').modal('hide');
+                   $('#save_modal_room_category').modal('hide');
 
                   list_reflect();
               }
