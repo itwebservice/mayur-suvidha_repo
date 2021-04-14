@@ -17,6 +17,7 @@ $followup_status = $_POST['followup_status']; ?>
 	</script>
 <?php } 
 elseif($followup_status=='Converted'){  ?>
+<option value="Advance Received">Confirmation Received</option>
 	<option value="Advance Received">Advance Received</option>
 	<option value="Cancel & Refund">Cancel & Refund</option>
 	<script>

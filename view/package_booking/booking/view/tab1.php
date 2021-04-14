@@ -18,7 +18,7 @@
 					</span>
 					<span class="main_block">
 						<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>
-						<?php echo "<label>Tour Days <em>:</em></label>" .$sq_package_info['total_tour_days']; ?>
+						<?php echo "<label>Tour Nights <em>:</em></label>" .$sq_package_info['total_tour_days']; ?>
 					</span>
 					<span class="main_block">
 						<i class="fa fa-angle-double-right cost_arrow" aria-hidden="true"></i>

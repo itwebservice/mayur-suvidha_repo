@@ -21,6 +21,7 @@ $branch_status = $sq['branch_status'];
               <option value="">*Select Type</option>
               <option value="Package Quotation">Package Quotation</option>
               <option value="Group Quotation">Group Quotation</option>
+              <option value="Hotel Quotation">Hotel Quotation</option>
               <option value="Car Rental Quotation">Car Rental Quotation</option>
               <option value="Flight Quotation">Flight Quotation</option>
               <option value="Group Sale">Group Sale</option>
