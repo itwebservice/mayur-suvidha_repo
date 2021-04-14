@@ -135,7 +135,6 @@ $(function () {
 							var vehicle_name = msg[0].split(':')[1];
 							var table=document.getElementById($('#table_id_show').val());
 							var rowlength = table.rows.length;
-							console.log(vehicle_id, vehicle_name)
 							var newOption = new Option(vehicle_name, vehicle_id, true, true);
 							$('#'+table.rows[rowlength-1].cells[2].childNodes[0].id).append(newOption).trigger('change.select2');
 							

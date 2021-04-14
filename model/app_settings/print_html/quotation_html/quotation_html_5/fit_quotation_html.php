@@ -17,6 +17,10 @@ $sq_transport = mysql_fetch_assoc(mysql_query("select * from package_tour_quotat
 $sq_costing = mysql_fetch_assoc(mysql_query("select * from package_tour_quotation_costing_entries where quotation_id='$quotation_id'"));
 $sq_package_program = mysql_query("select * from  package_quotation_program where quotation_id='$quotation_id'");
 
+$currency=$sq_quotation['currency_code'];
+$currency_r=mysql_fetch_assoc(mysql_query("select currency_rate from roe_master where currency_id='$currency'"));
+$currency_rate=$currency_r['currency_rate'];
+
 $quotation_date = $sq_quotation['quotation_date'];
 $yr = explode("-", $quotation_date);
 $year =$yr[0];
@@ -53,7 +57,7 @@ if($bsmValues[0]->service != ''){   //inclusive service charge
 }
 else{
   // $tax_show = $service_tax_amount;
-  $tax_show =  rtrim($name, ', ').' : ' . ($service_tax_amount);
+  $tax_show =  rtrim($name, ', ').' : ' . ($service_tax_amount*$currency_rate);
   $newBasic = $tour_cost;
 }
 
@@ -114,7 +118,7 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
               <i class="fa fa-tag"></i>
             </div>
             <div class="detailBlockContent">
-              <h3 class="contentValue"><?= number_format($quotation_cost,2) ?></h3>
+              <h3 class="contentValue"><?= number_format(round($quotation_cost*$currency_rate),2) ?></h3>
               <span class="contentLabel">PRICE</span>
             </div>
           </div>
@@ -659,7 +663,7 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
             <?php if($sq_quotation['costing_type'] == 1){ ?>
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/tourCost.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= round($newBasic) ?></h4>
+              <h4 class="no-marg"><?= round($newBasic*$currency_rate) ?></h4>
               <p>TOUR COST</p>
             </div>
             <div class="col-md-4 text-center no-pad">
@@ -669,14 +673,14 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
             </div>
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p4/travelCost.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= number_format($sq_quotation['train_cost'] + $sq_quotation['flight_cost'] + $sq_quotation['cruise_cost'] + $sq_quotation['visa_cost']+ $sq_quotation['guide_cost']+ $sq_quotation['misc_cost'],2) ?></h4>
+              <h4 class="no-marg"><?= number_format(($sq_quotation['train_cost'] + $sq_quotation['flight_cost'] + $sq_quotation['cruise_cost'] + $sq_quotation['visa_cost']+ $sq_quotation['guide_cost']+ $sq_quotation['misc_cost'])*$currency_rate,2) ?></h4>
               <p>TRAVEL COST</p>              
             </div>
             <div class="col-md-4 text-center no-pad">
             </div>
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/quotationCost.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= round($quotation_cost) ?></h4>
+              <h4 class="no-marg"><?= round($quotation_cost*$currency_rate) ?></h4>
               <p>QUOTATION COST</p>
             </div>
             <div class="col-md-4 text-center no-pad">
@@ -687,26 +691,26 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
             <!-- Per person Costing -->
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/adultCost.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= number_format($sq_costing['adult_cost'],2) ?></h4>
+              <h4 class="no-marg"><?= number_format($sq_costing['adult_cost']*$currency_rate,2) ?></h4>
               <p>ADULT COST</p>
             </div>
             <div class="col-md-4 text-center no-pad">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/child-with-bed.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= number_format($sq_costing['child_with'],2) ?></h4>
+              <h4 class="no-marg"><?= number_format($sq_costing['child_with']*$currency_rate,2) ?></h4>
               <p>CWB</p>
             </div>
             <div class="col-md-4 text-center no-pad">
             </div>
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/child-with-out-bed.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= number_format($sq_costing['child_without'],2) ?></h4>
+              <h4 class="no-marg"><?= number_format($sq_costing['child_without']*$currency_rate,2) ?></h4>
               <p>CWOB</p>
             </div>
             <div class="col-md-4 text-center no-pad">
             </div>
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/adultCost.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= number_format($sq_costing['infant_cost'],2) ?></h4>
+              <h4 class="no-marg"><?= number_format($sq_costing['infant_cost']*$currency_rate,2) ?></h4>
               <p>INFANT COST</p>
             </div>
             <div class="col-md-4 text-center no-pad">

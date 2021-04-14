@@ -260,22 +260,22 @@ $in = 'in';
 
             <?php if($sq_quotation['costing_type'] == 1){ ?>
               <div class="row">
-                <li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10"><span>Tour Cost : </span><?= $currency.' '.number_format($newBasic*$currency_rate,2) ?></li>
+                <li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10"><span>Tour Cost : </span><?= number_format($newBasic*$currency_rate,2) ?></li>
                
                 <li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10 sm_r_brd_r8"><span>Tax : </span><?= $tax_show ?></li>
 
-                <li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10"><span>Travel + Other Cost  : </span><?=$currency.' '.number_format(($sq_quotation['train_cost'] + $sq_quotation['flight_cost'] + $sq_quotation['cruise_cost'] + $sq_quotation['visa_cost']+ $sq_quotation['guide_cost'] + $sq_quotation['misc_cost'])*$currency_rate,2); ?></li>
+                <li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10"><span>Travel + Other Cost  : </span><?=number_format(($sq_quotation['train_cost'] + $sq_quotation['flight_cost'] + $sq_quotation['cruise_cost'] + $sq_quotation['visa_cost']+ $sq_quotation['guide_cost'] + $sq_quotation['misc_cost'])*$currency_rate,2); ?></li>
 
-                <li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10_xs sm_r_brd_r8 highlight" style="font-weight: 600; color: #016d01;"><span class="highlight">Quotation Cost : </span><?= $currency.' '.number_format($quotation_cost*$currency_rate,2) ?></li>
+                <li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10_xs sm_r_brd_r8 highlight" style="font-weight: 600; color: #016d01;"><span class="highlight">Quotation Cost : </span><?= number_format($quotation_cost*$currency_rate,2) ?></li>
 
               </div>
               <?php }
               else{ ?>
               <div class="row">
-                <?php if($sq_costing['adult_cost']!='0'){?><li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10_sm_xs"><span>Adult Cost : </span><?=$currency.' '.number_format($sq_costing['adult_cost']*$currency_rate,2); ?></li> <?php } ?>         
-                <?php if($sq_costing['child_with']!='0'){?><li class="col-md-4 col-sm-6 col-xs-12"><span>Child with Bed Cost : </span><?=$currency.' '.number_format($sq_costing['child_with']*$currency_rate,2); ?></li> <?php } ?>
-                <?php if($sq_costing['child_without']!='0'){?><li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10_sm_xs"><span>Child w/o Bed Cost : </span><?=$currency.' '.number_format($sq_costing['child_without']*$currency_rate,2); ?></li> <?php } ?>      
-                <?php if($sq_costing['infant_cost']!='0'){?><li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10_sm_xs"><span>Infant Cost : </span><?=$currency.' '.number_format($sq_costing['infant_cost']*$currency_rate,2); ?></li> <?php } ?>
+                <?php if($sq_costing['adult_cost']!='0'){?><li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10_sm_xs"><span>Adult Cost : </span><?=number_format($sq_costing['adult_cost']*$currency_rate,2); ?></li> <?php } ?>         
+                <?php if($sq_costing['child_with']!='0'){?><li class="col-md-4 col-sm-6 col-xs-12"><span>Child with Bed Cost : </span><?=number_format($sq_costing['child_with']*$currency_rate,2); ?></li> <?php } ?>
+                <?php if($sq_costing['child_without']!='0'){?><li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10_sm_xs"><span>Child w/o Bed Cost : </span><?=number_format($sq_costing['child_without']*$currency_rate,2); ?></li> <?php } ?>      
+                <?php if($sq_costing['infant_cost']!='0'){?><li class="col-md-4 col-sm-6 col-xs-12 mg_bt_10_sm_xs"><span>Infant Cost : </span><?=number_format($sq_costing['infant_cost']*$currency_rate,2); ?></li> <?php } ?>
               </div>
               <?php } ?>
 

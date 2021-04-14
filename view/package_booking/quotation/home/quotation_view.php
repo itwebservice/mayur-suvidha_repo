@@ -84,7 +84,7 @@ else{
 		<div class="col-md-3 mg_bt_10" style="border-right: 1px solid #ddd;"> <label>To Date</label> : <?= date('d/m/Y', strtotime($sq_quotation['to_date'])) ?> </div>
 	</div>
 	<div class="row">
-		<div class="col-md-3 mg_bt_10" style="border-right: 1px solid #ddd;"> <label>Total Days</label> : <?= $sq_quotation['total_days'] ?> </div>
+		<div class="col-md-3 mg_bt_10" style="border-right: 1px solid #ddd;"> <label>Total Nights</label> : <?= $sq_quotation['total_days'] ?> </div>
 		<div class="col-md-3 mg_bt_10" style="border-right: 1px solid #ddd;"> <label>Customer Name</label> : <?= $sq_quotation['customer_name'] ?> </div>
 		<div class="col-md-3 mg_bt_10" style="border-right: 1px solid #ddd;"> <label>Adults</label> : <?= $sq_quotation['total_adult'] ?> </div>
 		<div class="col-md-3 mg_bt_10" style="border-right: 1px solid #ddd;"> <label>Infants</label> : <?= $sq_quotation['total_infant'] ?> </div>
