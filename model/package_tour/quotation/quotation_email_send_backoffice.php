@@ -70,7 +70,9 @@ public function quotation_email_backoffice()
 		$url = explode('uploads', $app_cancel_pdf);
 		$url = BASE_URL.'uploads'.$url[1];
 	}	
-
+	$currency=$sq_quotation['currency_code'];
+	$currency_r=mysql_fetch_assoc(mysql_query("select currency_rate from roe_master where currency_id='$currency'"));
+	$currency_rate=$currency_r['currency_rate'];
 	$content = '				
 		<tr>
 			<table width="85%" cellspacing="0" cellpadding="5" style="color: #888888;border: 1px solid #888888;margin: 0px auto;margin-top:20px; min-width: 100%;" role="presentation">
@@ -78,7 +80,7 @@ public function quotation_email_backoffice()
 				<tr><td style="text-align:left;border: 1px solid #888888;">Tour Name</td>   <td style="text-align:left;border: 1px solid #888888;" >'.$sq_package_program['package_name'].'</td></tr>
 				<tr><td style="text-align:left;border: 1px solid #888888;">Tour Type</td>   <td style="text-align:left;border: 1px solid #888888;" >Package Tour</td></tr>
 				<tr><td style="text-align:left;border: 1px solid #888888;">Tour Date</td>   <td style="text-align:left;border: 1px solid #888888;">'.date('d-m-Y', strtotime($sq_quotation['from_date'])).' to '.date('d-m-Y', strtotime($sq_quotation['to_date'])).'</td></tr>
-				<tr><td style="text-align:left;border: 1px solid #888888;">Selling Cost</td>   <td style="text-align:left;border: 1px solid #888888;">'.$currency_logo.' '.number_format($quotation_cost,2).'</td></tr>
+				<tr><td style="text-align:left;border: 1px solid #888888;">Selling Cost</td>   <td style="text-align:left;border: 1px solid #888888;">'.number_format($quotation_cost*$currency_rate,2).'</td></tr>
 				<tr><td style="text-align:left;border: 1px solid #888888;">Converted By</td>   <td style="text-align:left;border: 1px solid #888888;">'.$emp_name.'</td></tr>
 			</table>
 		</tr>

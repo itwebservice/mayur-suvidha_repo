@@ -118,7 +118,7 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
               <i class="fa fa-tag"></i>
             </div>
             <div class="detailBlockContent">
-              <h3 class="contentValue"><?= number_format(round($quotation_cost*$currency_rate),2) ?></h3>
+              <h3 class="contentValue"><?= number_format($quotation_cost*$currency_rate,2) ?></h3>
               <span class="contentLabel">PRICE</span>
             </div>
           </div>
@@ -680,7 +680,7 @@ $quotation_cost = $basic_cost +$service_charge+ $service_tax_amount+ $sq_quotati
             </div>
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/quotationCost.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= round($quotation_cost*$currency_rate) ?></h4>
+              <h4 class="no-marg"><?= $quotation_cost*$currency_rate ?></h4>
               <p>QUOTATION COST</p>
             </div>
             <div class="col-md-4 text-center no-pad">
