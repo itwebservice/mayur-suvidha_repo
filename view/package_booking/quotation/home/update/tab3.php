@@ -239,6 +239,7 @@ $package_name = $sq_package['package_name'];
 				        				}
 				        			}
 				        			?>
+									
 							        </table>
 							        </div>
 							    </div>
@@ -247,6 +248,7 @@ $package_name = $sq_package['package_name'];
 					    </div>
 					</div>
 				</div>
+				
   				<!-- Activity Information -->
 				<div class="accordion_content main_block mg_bt_10">
 					<div class="panel panel-default main_block">
@@ -378,13 +380,16 @@ $package_name = $sq_package['package_name'];
 
 	</div>
 
-
-
 </form>
+
+<div id="airport_save_modal_direct"></div>
+<div id="hotel_save_modal_direct"></div> 
+<div id="transfer_save_modal_direct"></div>
+<div id="category_save_modal_direct"></div>
 
 <?= end_panel(); ?>
 
-<div id="transfer_save_modal_direct"></div>
+
 <script>
 destinationLoading(".pickup_from", 'Pickup Location');
 destinationLoading(".drop_to", 'Drop-off Location');	

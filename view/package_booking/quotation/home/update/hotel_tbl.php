@@ -86,9 +86,6 @@
         </div>
     </div>
 </div>
-<div id="airport_save_modal_direct"></div>
-<div id="hotel_save_modal_direct"></div> 
-<div id="category_save_modal_direct"></div>
 <script>
 
 $('#check_in-1, #check_out-1').datetimepicker({ format:'d-m-Y',timepicker:false });

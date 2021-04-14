@@ -2,8 +2,8 @@
 include_once("../../../model/model.php");
 ?>
 
-<form id="frm_save1">
-<div class="modal fade" id="save_modal1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+<form id="frm_save_airport">
+<div class="modal fade" id="save_modal_airport" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
 
   <div class="modal-dialog modal-lg" role="document">
 
@@ -102,11 +102,11 @@ include_once("../../../model/model.php");
 
 <script>
 
-$('#save_modal1').modal('show');
+$('#save_modal_airport').modal('show');
 
 city_lzloading('#city_id1');
 
-$('#frm_save1').validate({
+$('#frm_save_airport').validate({
 
     submitHandler:function(form){
 
@@ -199,7 +199,7 @@ $('#frm_save1').validate({
 
 
               if(msg[0]!="error"){
-                $('#save_modal1').modal('hide');
+                $('#save_modal_airport').modal('hide');
                 msg_alert(result);
                 // SearchData();
                 list_reflect();

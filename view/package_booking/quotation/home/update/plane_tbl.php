@@ -100,7 +100,6 @@
         </div>
     </div>
 </div>
-<div id="airport_save_modal_direct"></div>
 <script>
 	event_airport('tbl_package_tour_quotation_dynamic_plane');
 </script>
