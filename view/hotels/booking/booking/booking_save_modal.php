@@ -20,6 +20,8 @@ $branch_status = $sq['branch_status'];
           <input type="hidden" id="hotel_taxes" name="hotel_taxes">
           <input type="hidden" id="hotel_markup_taxes" name="hotel_markup_taxes">
           <input type="hidden" id="hotel_tds" name="hotel_tds">
+          
+          <div class="panel panel-default panel-body app_panel_style feildset-panel">
           <legend>Quotation Details</legend>
           <div class="row">
             <div class="col-md-4">
