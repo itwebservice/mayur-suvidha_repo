@@ -85,8 +85,9 @@ foreach($enq_content as $rows){
     case 'tour_name' : $tour_name = $rows->value;break;
     case 'total_adult' : $tour_adults = $rows->value;break;
     case 'travel_from_date' : $travel_from_date = $rows->value;break;
+    case 'children_with_bed' : $children_with_bed = $rows->value;break;
+    case 'children_without_bed' : $children_without_bed = $rows->value;break;
     case 'total_infant' : $tour_infants = $rows->value;break;
-    case 'total_children' : $tour_child = $rows->value;break;
   }
 }
 
@@ -112,7 +113,8 @@ foreach($enq_content as $rows){
           $content .= '<tr><td style="text-align:left;border: 1px solid #888888;">Tour Name</td>   <td style="text-align:left;border: 1px solid #888888;">'.$tour_name.'</td></tr>
           <tr><td style="text-align:left;border: 1px solid #888888;">Tour Date</td>   <td style="text-align:left;border: 1px solid #888888;">'.$travel_from_date.'</td></tr>
           <tr><td style="text-align:left;border: 1px solid #888888;">Total Adult(s)</td>   <td style="text-align:left;border: 1px solid #888888;">'.$tour_adults.'</td></tr>
-          <tr><td style="text-align:left;border: 1px solid #888888;">Total Child(s)</td>   <td style="text-align:left;border: 1px solid #888888;">'.$tour_child.'</td></tr>
+          <tr><td style="text-align:left;border: 1px solid #888888;">Total CWB</td>   <td style="text-align:left;border: 1px solid #888888;">'.$children_with_bed.'</td></tr>
+          <tr><td style="text-align:left;border: 1px solid #888888;">Total CWOB</td>   <td style="text-align:left;border: 1px solid #888888;">'.$children_without_bed.'</td></tr>
           <tr><td style="text-align:left;border: 1px solid #888888;">Total Infant(s)</td>   <td style="text-align:left;border: 1px solid #888888;">'.$tour_infants.'</td></tr>';
           }
         $content  .= '</table>
@@ -143,11 +145,11 @@ function send_emp_enquiry_mail($enquiry_id, $assigned_emp_id,$name)
       case 'tour_name' : $tour_name = $rows->value;break;
       case 'total_adult' : $tour_adults = $rows->value;break;
       case 'travel_from_date' : $travel_from_date = $rows->value;break;
+      case 'children_with_bed' : $children_with_bed = $rows->value;break;
+      case 'children_without_bed' : $children_without_bed = $rows->value;break;
       case 'total_infant' : $tour_infants = $rows->value;break;
-      case 'total_children' : $tour_child = $rows->value;break;
-      case 'hotel_type' : $hotel_type = $rows->value;break;
     }
-    }
+  }
 
   if($assigned_emp_id == "0"){  
     $ass_email_id = $app_email_id;
@@ -171,7 +173,8 @@ function send_emp_enquiry_mail($enquiry_id, $assigned_emp_id,$name)
             $content .= '<tr><td style="text-align:left;border: 1px solid #888888;">Tour Name</td>   <td style="text-align:left;border: 1px solid #888888;">'.$tour_name.'</td></tr>
             <tr><td style="text-align:left;border: 1px solid #888888;">Tour Date</td>   <td style="text-align:left;border: 1px solid #888888;">'.$travel_from_date.'</td></tr>
             <tr><td style="text-align:left;border: 1px solid #888888;">Total Adult(s)</td>   <td style="text-align:left;border: 1px solid #888888;">'.$tour_adults.'</td></tr>
-            <tr><td style="text-align:left;border: 1px solid #888888;">Total Child(s)</td>   <td style="text-align:left;border: 1px solid #888888;">'.$tour_child.'</td></tr>
+            <tr><td style="text-align:left;border: 1px solid #888888;">Total CWB</td>   <td style="text-align:left;border: 1px solid #888888;">'.$children_with_bed.'</td></tr>
+            <tr><td style="text-align:left;border: 1px solid #888888;">Total CWOB</td>   <td style="text-align:left;border: 1px solid #888888;">'.$children_without_bed.'</td></tr>
             <tr><td style="text-align:left;border: 1px solid #888888;">Total Infant(s)</td>   <td style="text-align:left;border: 1px solid #888888;">'.$tour_infants.'</td></tr>
             <tr><td style="text-align:left;border: 1px solid #888888;">Preferred Hotels</td>   <td style="text-align:left;border: 1px solid #888888;">'.$hotel_type.'</td></tr>';
             }
@@ -565,6 +568,64 @@ function enq_form_send(){
 
   $model->app_email_send('6','Customer',$email_id, $content,$subject,'1');
   echo "Enquiry Form has been successfully sent.";
+}
+
+function whatsapp_send(){
+  global $app_contact_no, $encrypt_decrypt, $secret_key;
+
+  $enquiry_id = $_GET['enquiry_id'];
+  $sq_enquiry_details = mysql_fetch_assoc(mysql_query("select * from enquiry_master where enquiry_id='$enquiry_id'"));
+  
+  // $reference = mysql_fetch_assoc(mysql_query("SELECT * FROM `references_master` where reference_id = ".$sq_enquiry_details['reference_id']));
+  $Cust_name = $sq_enquiry_details['name'];
+  $enquiry_type = $sq_enquiry_details['enquiry_type'];
+  $assigned_emp_id = $sq_enquiry_details['assigned_emp_id'];
+  $enq_content = json_decode($sq_enquiry_details['enquiry_content']);
+  
+  foreach($enq_content as $rows){
+    switch($rows->name){
+      case 'tour_name' : $tour_name = $rows->value;break;
+      case 'total_adult' : $tour_adults = $rows->value;break;
+      case 'travel_from_date' : $travel_from_date = $rows->value;break;
+      case 'total_infant' : $tour_infants = $rows->value;break;
+      case 'children_with_bed' : $children_with_bed = $rows->value;break;
+      case 'children_without_bed' : $children_without_bed = $rows->value;break;
+      case 'hotel_type' : $hotel_type = $rows->value;break;
+    }
+  }
+
+  $sq_emp_info = mysql_fetch_assoc(mysql_query("select * from emp_master where emp_id= '$emp_id"));
+
+  if($emp_id == 0){
+    $contact = $app_contact_no;
+  }
+  else{
+    $contact = $sq_emp_info['mobile_no'];
+  }
+  
+  $whatsapp_msg = rawurlencode('Hello Dear '.$Cust_name.',
+We are glad to inform you that we\'ve received your tour request.
+We look forward to serving you in the best possible way we can. Your personal travel concierge will contact you soon! Please find the details of your query as below:-
+*Enquiry Date* : '.get_date_user($sq_enquiry_details[enquiry_date]).'
+*Customer Name* : '.$Cust_name.'
+*Mobile No* : '.$sq_enquiry_details['mobile_no'].'
+*Email ID* : '.$sq_enquiry_details['email_id']
+);
+
+if($sq_enquiry_details['enquiry_type'] == 'Package Booking' || $sq_enquiry_details['enquiry_type'] == 'Group Booking'){
+$whatsapp_msg .= rawurlencode('
+*Tour Name* : '.$tour_name.'
+*Tour Date* : '.get_date_user($travel_from_date).'
+*Total Adult(s)* : '.$tour_adults.'
+*Total CWB* : '.$children_with_bed.'
+*Total CWOB* : '.$children_without_bed.'
+*Total Infant(s)* : '.$tour_infants.'
+');}
+$whatsapp_msg .= rawurlencode('
+ Please contact for more details : '.$contact.'
+ Thank you.');
+  $link = 'https://web.whatsapp.com/send?phone='.$sq_enquiry_details['landline_no'].'&text='.$whatsapp_msg;
+  echo $link;
 }
 
 }

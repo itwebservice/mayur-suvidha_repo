@@ -2,6 +2,9 @@
     <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_transport_infomration');destinationLoading('select[name^=pickup_from]', 'Pickup Location');
         destinationLoading('select[name^=drop_to]', 'Drop-off Location');"><i class="fa fa-plus"></i></button>
     <button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_package_transport_infomration')"><i class="fa fa-trash"></i></button>
+    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="hotel_save_modal()"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Hotel</button>
+    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="airport_open_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="transport_save_direct('tbl_package_transport_infomration')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Transport</button>
 </div> </div>
 <div class="row main_block">
     <div class="col-xs-12"> 
@@ -30,3 +33,4 @@
         </div>
     </div>
 </div>
+<div id="transfer_save_modal_direct"></div>

@@ -4,7 +4,7 @@ $nofquotation = $_REQUEST['nofquotation'];
 ?>
 <div class="col-md-12 app_accordion">
   <div class="panel-group main_block" id="accordion" role="tablist" aria-multiselectable="true">
-        <?php 
+      <?php 
       for($i = 1; $i <= $nofquotation; $i++){
        ?>
         <div class="accordion_content package_content mg_bt_10">
@@ -19,23 +19,20 @@ $nofquotation = $_REQUEST['nofquotation'];
                         <div class="col-md-12 no-pad" id="div_list1">
                             <div class="row mg_bt_10">
                                 <div class="col-xs-12 text-right text_center_xs">
-                                <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
-                                    <button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_save_modal_direct('dynamic_table_list_h_<?= $i ?>')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
-                                    <button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_category_direct_save('dynamic_table_list_h_<?= $i ?>')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Room Category</button>
-                                    <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('dynamic_table_list_h_<?= $i ?>','<?= $i ?>');city_lzloading('.city_master_dropdown')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
-                                    <button type="button" class="btn btn-danger btn-sm ico_left" onclick="deleteRow('dynamic_table_list_h_<?= $i ?>')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
+                                    <button type="button" class="btn btn-excel btn-sm" onClick="addRow('dynamic_table_list_h_<?= $i ?>','<?= $i ?>');city_lzloading('.city_master_dropdown')"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('dynamic_table_list_h_<?= $i ?>')"><i class="fa fa-trash"></i></button>
                                 </div>
                             </div>
                             <div class="table-responsive">
                                 <table style="width: 100%" id="dynamic_table_list_h_<?= $i ?>" name="dynamic_table_list_h_<?= $i ?>" class="table table-bordered table-hover table-striped no-marg pd_bt_51 mg_bt_0">
                                     <tr>
                                         <td style="width: 50px;"><input class="css-checkbox mg_bt_10" id="chk_program-<?= $i ?>-1" type="checkbox" checked><label class="css-label" for="chk_program-<?= $i ?>-1"> <label>
-                                        </td>
+                            </td>
 
                                         <td style="width: 50px;"><input maxlength="15" value="1" type="text" name="username" placeholder="Sr. No." class="form-control mg_bt_10" disabled />
                                         </td>
 
-                                        <td><select id="city_name-<?= $i ?>-1" name="city_name-<?= $i ?>-1" class="city_master_dropdown" style="width:160px" title="Select City Name">
+                                        <td><select id="city_name-<?= $i ?>-1" name="city_name-<?= $i ?>-1" class="city_master_dropdown" style="width:160px" onchange="hotel_name_list_load(this.id);" title="Select City Name">
                                         </select>
                                         </td>
 
@@ -56,7 +53,7 @@ $nofquotation = $_REQUEST['nofquotation'];
 
                                         <td><input type="text" id="hotel_type-<?= $i ?>-1" name="hotel_type-1" placeholder="Hotel Type" title="Hotel Type" style="width:150px" readonly></td>
 
-                                        <td><input type="text" id="hotel_stay_days-<?= $i ?>-1" title="Total Nights" name="hotel_stay_days-<?= $i ?>-1" placeholder="Total Nights" onchange="validate_balance(this.id);" style="width:150px;" readonly></td>
+                                        <td><input type="text" id="hotel_stay_days-<?= $i ?>-1" title="Total Nights" name="hotel_stay_days-<?= $i ?>-1" placeholder="Total Nights" onchange="validate_balance(this.id);" style="width:150px;"></td>
 
                                         <td><input type="text" id="no_of_rooms-<?= $i ?>-1" title="Total Rooms" name="no_of_rooms-<?= $i ?>-1" placeholder="Total Rooms" onchange="validate_balance(this.id);get_hotel_cost('dynamic_table_list_h_<?= $i ?>');" style="width:110px"></td>
 
@@ -78,8 +75,5 @@ $nofquotation = $_REQUEST['nofquotation'];
 <script src="<?= BASE_URL ?>js/app/field_validation.js"></script>
 <script>
     city_lzloading('.city_master_dropdown');
-    $('.city_master_dropdown').on('change', function(){
-    	hotel_name_list_load($(this).attr('id'));
-	});
     $('.app_datepicker').datetimepicker({ format:'d-m-Y',timepicker:false });
 </script>

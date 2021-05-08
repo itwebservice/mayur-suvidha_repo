@@ -32,7 +32,7 @@
 
 		
 
-		<div class="row text-center mg_tp_30 mg_bt_30">
+		<div class="row text-center mg_tp_20">
 			<div class="col-xs-12">
 				<button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab1()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp Previous</button>
 				&nbsp;&nbsp;
@@ -41,10 +41,7 @@
 		</div>
 	</div>
 </form>
-<div id="airport_save_modal_direct"></div>
-<div id="hotel_save_modal_direct"></div> 
-<div id="transfer_save_modal_direct"></div>
-<div id="category_save_modal_direct"></div>
+
 
 <script>
 $('#dest_name').select2();
@@ -69,7 +66,6 @@ $('#frm_tab2').validate({
 			return false
 		}
 		var hotelcostArr = new Array();
-		var hcount = 0;
 		for(var quot = 1; quot <= Number(nofquotation); quot++){
 			var table = document.getElementById("dynamic_table_list_h_"+quot);
 			var rowCount = table.rows.length;
@@ -80,7 +76,6 @@ $('#frm_tab2').validate({
 				var row = table.rows[i];
 				if(row.cells[0].childNodes[0].checked){
 
-					hcount++;
 					var city_name = row.cells[2].childNodes[0].value;
 					var hotel_id = row.cells[3].childNodes[0].value;  
 					var hotel_cat = row.cells[4].childNodes[0].value;
@@ -133,10 +128,6 @@ $('#frm_tab2').validate({
 				get_hotel_cost("dynamic_table_list_h_"+quot);
 			}
 			hotelcostArr.push(hcostTotal);
-		}
-		if(parseInt(hcount) === 0){
-			error_msg_alert("Atleast one hotel is required to proceed!");
-			return false;
 		}
 		$.get("../get_options_costing.php", { nofquotation : nofquotation, hotelcostArr : hotelcostArr}, function(table){
 			$('#table_data').html(table);

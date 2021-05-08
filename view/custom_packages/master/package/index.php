@@ -71,6 +71,7 @@ function get_transport_cost(transport_vehicle){
         $('#cost'+offset).val(data);
     });
 }
+
 </script>
 <?php 
 include_once('../../../layouts/fullwidth_app_footer.php');

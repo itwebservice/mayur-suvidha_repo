@@ -91,7 +91,9 @@ $branch_status = $sq['branch_status'];
           <div class="row text-right mg_bt_10">
               <div class="col-xs-12">
                   <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('tbl_hotel_booking')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add </button>
-                  <button type="button" class="btn btn-danger btn-sm ico_left" onClick="deleteRow('tbl_hotel_booking')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete </button>    
+                  <button type="button" class="btn btn-danger btn-sm ico_left" onClick="deleteRow('tbl_hotel_booking')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete </button>   
+                  <button class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="hotel_save_modal()"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Hotel</button> 
+                  <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
               </div>
           </div>
           <div class="row"><div class="col-xs-12"><div class="table-responsive" id="hotel_booking_wrap">

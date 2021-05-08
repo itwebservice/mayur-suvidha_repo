@@ -58,7 +58,7 @@ else{
 	</div>
     <div class="row">
 		<div class="col-md-3 mg_bt_10" style="border-right: 1px solid #ddd;"> <label>Quotation Date</label> : <?= date('d/m/Y', strtotime($sq_quotation['quotation_date'])) ?> </div>
-		<div class="col-md-3 mg_bt_10_xs" style="border-right: 1px solid #ddd;"> <div class="highlighted_cost"><label>Quotation Cost</label> : <?= number_format($costDetails['total_amount'], 2) ?> </div></div>
+		<div class="col-md-3 mg_bt_10_xs" style="border-right: 1px solid #ddd;"> <div class="highlighted_cost"><label>Quotation Cost</label> : <?= $costDetails['total_amount'] ?> </div></div>
 		<div class="col-md-3" style="border-right: 1px solid #ddd;"> <div class="highlighted_cost"><label>Created By</label> : <?= $emp_name ?> </div></div>
 		<div class="col-md-3 mg_bt_10" style="border-right: 1px solid #ddd;"> <label class="highlighted_cost">Quotation ID : <?= get_quotation_id($sq_quotation['quotation_id'],$year) ?> </label></div>
 	</div>
@@ -77,7 +77,7 @@ else{
 			<th>Check_In</th>
             <th>Check_Out</th>
             <th>Hotel_Type</th>
-            <th>TOTAL_NIGHTS</th>
+            <th>Hotel_Days</th>
             <th>Total_Rooms</th>
             <th>Extra_Bed</th>
 		</tr>
@@ -122,12 +122,12 @@ else{
 	</thead>
 	<tbody>
 			<tr>
-				<td><?= number_format($costDetails['hotel_cost'],2) ?></td>
-				<td><?= number_format($costDetails['service_charge'],2) ?></pre></td>
-				<td><?= ($costDetails['tax_amount'] == '') ? 0.00 : $costDetails['tax_amount']  ?></td>
-				<td><?= number_format($costDetails['markup_cost'],2) ?></td>
-                <td><?= ($costDetails['markup_tax'] == '') ? 0.00 : $costDetails['markup_tax'] ?></td>
-                <td><?= number_format($costDetails['total_amount'],2) ?></td>
+				<td><?= $costDetails['hotel_cost'] ?></td>
+				<td><?= $costDetails['service_charge'] ?></pre></td>
+				<td><?= $costDetails['tax_amount'] ?></td>
+				<td><?= $costDetails['markup_cost'] ?></td>
+                <td><?= $costDetails['markup_tax'] ?></td>
+                <td><?= $costDetails['total_amount'] ?></td>
 			</tr>
 	</tbody>
 </table>

@@ -51,11 +51,9 @@ $role_id= $_SESSION['role_id'];
 						$sq_enq = mysql_query($q);
 					}
 					while($row_enq = mysql_fetch_assoc($sq_enq)){
-						$sq_enq1 = mysql_fetch_assoc(mysql_query("SELECT followup_status FROM `enquiry_master_entries` WHERE `enquiry_id` = '$row_enq[enquiry_id]' ORDER BY `entry_id` DESC"));
-						if($sq_enq1['followup_status'] != 'Dropped'){
 						?>
 						<option value="<?= $row_enq['enquiry_id'] ?>">Enq<?= $row_enq['enquiry_id'] ?> : <?= $row_enq['name'] ?></option>
-						<?php }
+						<?php
 					}
 					?>
 				</select>
@@ -121,8 +119,6 @@ $role_id= $_SESSION['role_id'];
 
 <script>
 $('#country_code').select2();
-
-// New Customization ----start
 $(document).ready(function(){
 	let searchParams = new URLSearchParams(window.location.search);
 	if( searchParams.get('enquiry_id') ){
@@ -130,7 +126,6 @@ $(document).ready(function(){
 		$('#enquiry_id').trigger('change');
 	}
 });
-// New Customization ----end
 $('#frm_tab1').validate({
 	rules:{
 		enquiry_id : { required : true },

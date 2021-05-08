@@ -5,6 +5,7 @@
     <div class="col-md-8 col-sm-6 text-right">
         <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_plane_travel_details_dynamic_row');event_airport('tbl_plane_travel_details_dynamic_row',3,4)" title="Add Row"><i class="fa fa-plus"></i></button>
         <button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_plane_travel_details_dynamic_row');calculate_plane_expense('tbl_plane_travel_details_dynamic_row',true)" title="Delete Row"><i class="fa fa-trash"></i></button>
+        <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="airport_open_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
         <!--  Code to uploadf button -->
         <div class="div-upload" id="div_upload_button">
             <div id="package_plane_upload" class="upload-button"><span>Ticket</span></div><span id="package_plane_status" ></span>

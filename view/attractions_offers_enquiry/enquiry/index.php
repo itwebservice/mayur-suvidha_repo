@@ -390,6 +390,13 @@ $('#vi_confirm_box').vi_confirm_box({
 	  }
 });
 }
+
+function send_whatsapp(enquiry_id){
+	var base_url = $('#base_url').val();
+	$.get(base_url + 'controller/attractions_offers_enquiry/whatsapp_send.php', { enquiry_id : enquiry_id}, function(url){
+		window.open(url);
+	});
+}
 /////////////////////////////////////////////////////////// Enquiry Loading Code End//////////////////////////////////////////////////////////////////
 
 function excel_report()

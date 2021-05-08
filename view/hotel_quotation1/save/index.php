@@ -10,7 +10,6 @@ $branch_status = $_POST['branch_status'];
 <!-- Tab panes -->
 <div id="site_alert"></div>
 <div id="vi_confirm_box"></div>
-<div id="markup_confirm"></div>
 <div class="bk_tab_head bg_light">
     <ul> 
         <li>
@@ -48,7 +47,7 @@ $branch_status = $_POST['branch_status'];
 <script>
 $('#enquiry_id, #currency_code').select2();
 
-$('#from_date, #to_date, #quotation_date1').datetimepicker({ timepicker:false, format:'d-m-Y' });
+$('#from_date, #to_date, #quotation_date').datetimepicker({ timepicker:false, format:'d-m-Y' });
 $('#txt_arrval1,#txt_dapart1,#train_arrival_date,#train_departure_date').datetimepicker({ format:'d-m-Y H:i:s' });
 
 /**Hotel Name load start**/

@@ -11,6 +11,7 @@
 		</div>
 		<div class="col-md-4 col-sm-12 col-xs-12 text-right">
 			<button type="button" class="btn btn-info btn-sm ico_left" onclick="addDyn('div_dynamic_ticket_info'); event_airport_s();copy_values()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Section</button>
+			<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="airport_open_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
 		</div>
 	</div>
 	<div class="dynform-wrap" id="div_dynamic_ticket_info" data-counter="1">

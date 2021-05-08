@@ -35,6 +35,7 @@
 					        <div class="panel-body">
 					        	<div class="row">
 								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
+									<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
 								        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_tour_quotation_dynamic_train');city_lzloading('.train_from','*From');city_lzloading('.train_to','*To')"><i class="fa fa-plus"></i></button>
 										<button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_package_tour_quotation_dynamic_train')"><i class="fa fa-trash"></i></button>
 								    </div>
@@ -188,7 +189,7 @@
 					        <div class="panel-body">
 							<div class="row">
 								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
-										
+									<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
 										<button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_save_modal_direct('tbl_package_tour_quotation_dynamic_hotel')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
 										<button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_category_direct_save('tbl_package_tour_quotation_dynamic_hotel')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Room Category</button>
 								    </div>
@@ -294,6 +295,7 @@
 					        <div class="panel-body">
 								<div class="row">
 								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
+									<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
 								        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_tour_quotation_dynamic_excursion');city_lzloading('.exc_city')"><i class="fa fa-plus"></i></button>
 										<button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_package_tour_quotation_dynamic_excursion')"><i class="fa fa-trash"></i></button>
 								    </div>

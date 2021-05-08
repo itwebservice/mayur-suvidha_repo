@@ -57,6 +57,8 @@ $branch_status = $sq['branch_status'];
 	                <div class="col-xs-12 text-right text_center_xs">
 	                    <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('tbl_dynamic_exc_booking');city_lzloading('.city_name_exc');"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
 	                    <button type="button" class="btn btn-danger btn-sm ico_left" onClick="deleteRow('tbl_dynamic_exc_booking');calculate_exc_expense('tbl_dynamic_exc_booking')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>
+						<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="new_activity_open()"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Activity</button>
+						<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
 	                </div>
 	            </div>    	            
 	            <div class="row">

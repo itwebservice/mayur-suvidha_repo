@@ -13,6 +13,10 @@ $enquiryDetails = json_decode($sq_quotation['enquiry_details'], true);
 $hotelDetails = json_decode($sq_quotation['hotel_details'], true);
 $costDetails = json_decode($sq_quotation['costing_details'], true);
 
+$currency=$sq_quotation['currency_code'];
+$currency_r=mysql_fetch_assoc(mysql_query("select currency_rate from roe_master where currency_id='$currency'"));
+$currency_rate=$currency_r['currency_rate'];
+
 $quotation_date = $sq_quotation['quotation_date'];
 $yr = explode("-", $quotation_date);
 $year =$yr[0];
@@ -59,15 +63,15 @@ if(($bsmValues[0]->service != '' || $bsmValues[0]->basic != '')  && $bsmValues[0
   $newBasic = $basic_cost1 + $costDetails['markup_cost'] + $markupservice_tax_amount + $service_charge + $service_tax_amount;
 }
 elseif(($bsmValues[0]->service == '' || $bsmValues[0]->basic == '')  && $bsmValues[0]->markup == ''){
-  $tax_show = $percent.' '. ($markupservice_tax_amount + $service_tax_amount);
+  $tax_show = $percent.' '. (($markupservice_tax_amount + $service_tax_amount)*$currency_rate);
   $newBasic = $basic_cost1 + $costDetails['markup_cost'] + $service_charge;
 }
 elseif(($bsmValues[0]->service != '' || $bsmValues[0]->basic != '') && $bsmValues[0]->markup == ''){
-  $tax_show = $percent.' '. ($markupservice_tax_amount);
+  $tax_show = $percent.' '. ($markupservice_tax_amount*$currency_rate);
   $newBasic = $basic_cost1 + $costDetails['markup_cost'] + $service_charge + $service_tax_amount;
 }
 else{
-  $tax_show = $percent.' '. ($service_tax_amount);
+  $tax_show = $percent.' '. ($service_tax_amount*$currency_rate);
   $newBasic = $basic_cost1 + $costDetails['markup_cost'] + $service_charge + $markupservice_tax_amount;
 }
 
@@ -110,7 +114,7 @@ else{
               <i class="fa fa-tag"></i>
             </div>
             <div class="detailBlockContent">
-              <h3 class="contentValue"><?= number_format($costDetails['total_amount'],2) ?></h3>
+              <h3 class="contentValue"><?= number_format($costDetails['total_amount']*$currency_rate,2) ?></h3>
               <span class="contentLabel">PRICE</span>
             </div>
           </div>
@@ -267,7 +271,7 @@ else{
             <!-- Group Costing -->
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/tourCost.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= number_format($newBasic + $costDetails['roundoff'],2) ?></h4>
+              <h4 class="no-marg"><?= number_format(($newBasic + $costDetails['roundoff'])*$currency_rate,2) ?></h4>
               <p>TOTAL FARE</p>
             </div>
             <div class="col-md-4 text-center no-pad">
@@ -277,7 +281,7 @@ else{
             </div>
             <div class="col-md-4 text-center no-pad constingBankingwhite">
               <div class="icon main_block"><img src="<?= BASE_URL ?>images/quotation/p5/quotationCost.png" class="img-responsive"></div>
-              <h4 class="no-marg"><?= number_format($costDetails['total_amount'],2) ?></h4>
+              <h4 class="no-marg"><?= number_format($costDetails['total_amount']*$currency_rate,2) ?></h4>
               <p>QUOTATION COST</p>
             </div>
             <div class="col-md-4 text-center no-pad">

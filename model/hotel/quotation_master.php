@@ -12,6 +12,7 @@ class quotation_master{
         $emp_id = $_SESSION['emp_id'];
         $branch_admin_id = $_SESSION['branch_admin_id'];
         $financial_year_id = $_SESSION['financial_year_id'];
+        $currency_code = $_POST['currency_code'];
         $quotation_date = date('Y-m-d',strtotime($_POST['quotation_date']));
         $created_at = date("Y-m-d");
         $costingDetails = json_decode(json_encode($costingJson), true);
@@ -37,7 +38,7 @@ class quotation_master{
             $sq_max = mysql_fetch_assoc(mysql_query("SELECT max(`quotation_id`) as max from `hotel_quotation_master`"));
             $quotationId = $sq_max['max'] + 1;
             
-            $sq_ins = mysql_query("INSERT INTO `hotel_quotation_master`(`quotation_id`,`login_id`, `emp_id`, `branch_admin_id`, `financial_year_id`, `hotel_details`,`costing_details`,`enquiry_details`, `quotation_date`,`created_at`,`bsmValues`) VALUES('$quotationId','$login_id','$emp_id','$branch_admin_id', '$financial_year_id','$hotelDetails_ins', '$costingDetails_ins', '$enquiryDetails', '$quotation_date', '$created_at', '$bsmValues_ins')");
+            $sq_ins = mysql_query("INSERT INTO `hotel_quotation_master`(`quotation_id`,`login_id`, `emp_id`, `branch_admin_id`, `financial_year_id`, `hotel_details`,`costing_details`,`currency_code`,`enquiry_details`, `quotation_date`,`created_at`,`bsmValues`) VALUES('$quotationId','$login_id','$emp_id','$branch_admin_id', '$financial_year_id','$hotelDetails_ins', '$costingDetails_ins','$currency_code', '$enquiryDetails', '$quotation_date', '$created_at', '$bsmValues_ins')");
             array_push($errorCont, ($sq_ins) ? true : false);
         }
         
@@ -94,6 +95,7 @@ class quotation_master{
         $costingDetails = json_decode(json_encode($_POST['costingDetails']), true);
         $bsmValues_val = json_decode(json_encode($_POST['bsmValues']));
         $enquiryDetails = json_encode($_POST['enquiryDetails']);
+        $currency_code = $_POST['currency_code'];
 
         begin_t();   
         
@@ -108,7 +110,7 @@ class quotation_master{
         $bsmValues_ins = json_encode($bsmValues_val);
         $costingDetails_ins = json_encode($costingDetails);
 
-        $sq_upd = mysql_query("UPDATE `hotel_quotation_master` SET  `hotel_details` = '$hotelDetails',`costing_details` = '$costingDetails_ins', `enquiry_details` = '$enquiryDetails', `bsmValues` = '$bsmValues_ins' WHERE `quotation_id` =".$quotationId);
+        $sq_upd = mysql_query("UPDATE `hotel_quotation_master` SET  `hotel_details` = '$hotelDetails',`costing_details` = '$costingDetails_ins', `currency_code` = '$currency_code',`enquiry_details` = '$enquiryDetails', `bsmValues` = '$bsmValues_ins' WHERE `quotation_id` =".$quotationId);
         
         if(!$sq_upd){
             rollback_t();
@@ -134,7 +136,7 @@ class quotation_master{
         $sq_max = mysql_fetch_assoc(mysql_query("SELECT max(`quotation_id`) as max from `hotel_quotation_master`"));
         $quotationId = $sq_max['max'] + 1;
 
-        $sq_ins = mysql_query("INSERT INTO `hotel_quotation_master`(`quotation_id`,`login_id`, `emp_id`, `branch_admin_id`, `financial_year_id`, `hotel_details`,`costing_details`,`enquiry_details`, `quotation_date`,`created_at`,`bsmValues`) VALUES('$quotationId','$login_id','$emp_id','$branch_admin_id', '$financial_year_id','$quotationValues[hotel_details]', '$quotationValues[costing_details]', '$quotationValues[enquiry_details]', '$quotationValues[quotation_date]', '$created_at','$quotationValues[bsmValues]')");
+        $sq_ins = mysql_query("INSERT INTO `hotel_quotation_master`(`quotation_id`,`login_id`, `emp_id`, `branch_admin_id`, `financial_year_id`, `hotel_details`,`costing_details`,`currency_code`,`enquiry_details`, `quotation_date`,`created_at`,`bsmValues`,`clone`) VALUES('$quotationId','$login_id','$emp_id','$branch_admin_id', '$financial_year_id','$quotationValues[hotel_details]', '$quotationValues[costing_details]', '$quotationValues[currency_code]','$quotationValues[enquiry_details]', '$quotationValues[quotation_date]', '$created_at','$quotationValues[bsmValues]','1')");
 
         if(!$sq_ins){
             echo "error--Sorry Hotel Quotation not cloned successfully!";
@@ -147,51 +149,67 @@ class quotation_master{
     }
 
     public function quotation_email(){
-        global $model, $currency_logo;
+        
+        global $model, $currency_logo, $app_name;
         $emp_id = $_SESSION['emp_id '];
         $quotation_id_arr = $_POST['quotation_id_arr'];
+        $content = '';
+        for($j = 0; $j < sizeof($quotation_id_arr);  $j++){
 
-        foreach($quotation_id_arr as $quotation_id){
-            $sq_hotel = mysql_fetch_assoc(mysql_query("SELECT * FROM `hotel_quotation_master` WHERE `quotation_id`=".$quotation_id));
-            
+            $sq_hotel = mysql_fetch_assoc(mysql_query("SELECT * FROM `hotel_quotation_master` WHERE `quotation_id`='$quotation_id_arr[$j]'"));
+            $content .= '<tr>
+            <table width="85%" cellspacing="0" cellpadding="5" style="color: #888888;border: 1px solid #888888;margin: 0px auto;margin-top:20px; min-width: 100%;" role="presentation"> <tr><td style="text-align:left;width:50%">Quotation ID:- '.get_quotation_id($quotation_id_arr[$j]).'</td></tr></table></tr>';
+
             $enquiryDetails = json_decode($sq_hotel['enquiry_details'], true);
             $hotelDetails = json_decode($sq_hotel['hotel_details'], true);
             $costDetails = json_decode($sq_hotel['costing_details'], true);
-            $content = '';
             for($i =0; $i < sizeof($hotelDetails);  $i++){
                 $hotelName = mysql_fetch_assoc(mysql_query("SELECT `hotel_name` FROM `hotel_master` WHERE `hotel_id`=".$hotelDetails[$i]['hotel_id']));
                 $cityName = mysql_fetch_assoc(mysql_query("SELECT `city_name` FROM `city_master` WHERE `city_id`=".$hotelDetails[$i]['city_id']));
                 if($hotelDetails[$i][total_rooms] == ''){
                     $hotelDetails[$i]['total_rooms'] = 0;
                 }
-                if($hotelDetails[$i][extra_bed]){
+                if($hotelDetails[$i][extra_bed] == ''){
                     $hotelDetails[$i]['extra_bed'] = 0;
                 }
                 $content .= '<tr>
                 <table width="85%" cellspacing="0" cellpadding="5" style="color: #888888;border: 1px solid #888888;margin: 0px auto;margin-top:20px; min-width: 100%;" role="presentation">
                 <tr><td style="text-align:left;border: 1px solid #888888; width:50%">City Name</td>   <td style="text-align:left;border: 1px solid #888888;">'.$cityName[city_name].'</td></tr>
-                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Hotel Name</td>   <td style="text-align:left;border: 1px solid #888888;">'.$hotelName[hotel_name].'</td></tr>
-                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Total Rooms</td>   <td style="text-align:left;border: 1px solid #888888;">'.$hotelDetails[$i][total_rooms].' Room(s)</td></tr>
-                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Extra Bed</td>   <td style="text-align:left;border: 1px solid #888888;">'.$hotelDetails[$i][extra_bed].' Bed(s)</td></tr>
+                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Hotel Name(Option-'.($i+1).')</td>   <td style="text-align:left;border: 1px solid #888888;">'.$hotelName[hotel_name].'</td></tr>
                 <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Check In Date</td>   <td style="text-align:left;border: 1px solid #888888;">'.get_date_user($hotelDetails[$i][checkin]).'</td></tr>
                 <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Check Out Date</td>   <td style="text-align:left;border: 1px solid #888888;">'.get_date_user($hotelDetails[$i][checkout]).'</td></tr>
                 <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Total Nights</td>   <td style="text-align:left;border: 1px solid #888888;">'.$hotelDetails[$i][hotel_stay_days].'</td></tr>
-                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Total Cost</td>   <td style="text-align:left;border: 1px solid #888888;">'.$currency_logo.' '.number_format($costDetails[total_amount],2).'</td></tr>
-                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Taxes Applied</td>   <td style="text-align:left;border: 1px solid #888888;">'.$currency_logo.' '.number_format(($costDetails[markup_tax] + $costDetails[tax_amount]),2).'</td></tr>
-                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Net Total</td>   <td style="text-align:left;border: 1px solid #888888;">'.$currency_logo.' '.number_format($costDetails[total_amount],2).'</td></tr>
+                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Total Rooms</td>   <td style="text-align:left;border: 1px solid #888888;">'.$hotelDetails[$i][total_rooms].' Room(s)</td></tr>
+                <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Extra Bed</td>   <td style="text-align:left;border: 1px solid #888888;">'.$hotelDetails[$i][extra_bed].' Bed(s)</td></tr>
                 </table>
                 </tr>
                 ';
-            } 
-            
-            $model->app_email_send('8',$enquiryDetails['customer_name'],$enquiryDetails['email_id'], $content, $subject);
-        
+            }
+
+            $currency=$sq_hotel['currency_code'];
+            $currency_r=mysql_fetch_assoc(mysql_query("select currency_rate from roe_master where currency_id='$currency'"));
+            $currency_rate=$currency_r['currency_rate'];
+
+            $tax = explode(':',$costDetails[tax_amount]);
+            $markup_tax = explode(':',$costDetails[markup_tax]);
+            $content .= '<tr>
+            <table width="85%" cellspacing="0" cellpadding="5" style="color: #888888;border: 1px solid #888888;margin: 0px auto;margin-top:10px; min-width: 100%;" role="presentation">
+            <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Total Cost</td>   <td style="text-align:left;border: 1px solid #888888;">'.$currency_logo.' '.number_format(($costDetails[hotel_cost]+$costDetails[service_charge]+$costDetails[markup_cost]+$costDetails[roundoff])*$currency_rate,2).'</td></tr>
+            <tr><td style="text-align:left;border: 1px solid #888888; width:50%">Taxes Applied</td>   <td style="text-align:left;border: 1px solid #888888;">'.$currency_logo.' '.number_format(($tax[2] + $markup_tax[2])*$currency_rate,2).'</td></tr>
+            <tr><td style="text-align:left;border: 1px solid #888888; color:#1a73e8;width:50%">Net Total</td>   <td style="text-align:left;border: 1px solid #888888;">'.$currency_logo.' '.number_format($costDetails[total_amount]*$currency_rate,2).'</td></tr>
+            </table>
+            </tr>
+            ';
         }
-        echo "Quotation Email Sent!!";
+        
+        $subject = 'New Quotation : ('.$app_name.' )';
+		$model->app_email_send('8',$enquiryDetails['customer_name'],$enquiryDetails['email_id'], $content,$subject,'1');
+        echo "Quotation Email Sent!";
+        exit;
     }
 
     public function whatsapp_send(){
-  
+        global $currency_logo;
         $emp_id = $_SESSION['emp_id '];
         $quotation_id = $_POST['quotation_id'];
         
@@ -208,6 +226,10 @@ class quotation_master{
         $enquiryDetails = json_decode($sq_hotel['enquiry_details'], true);
         $hotelDetails = json_decode($sq_hotel['hotel_details'], true);
         $costDetails = json_decode($sq_hotel['costing_details'], true);
+
+        $currency=$sq_hotel['currency_code'];
+        $currency_r=mysql_fetch_assoc(mysql_query("select currency_rate from roe_master where currency_id='$currency'"));
+        $currency_rate=$currency_r['currency_rate'];
         
         $whatsapp_msg = rawurlencode('Hello Dear '.$enquiryDetails[customer_name].',
 Hope you are doing great. Following are the hotel quotation details.');
@@ -218,25 +240,30 @@ Hope you are doing great. Following are the hotel quotation details.');
             if($hotelDetails[$i][total_rooms] == ''){
                 $hotelDetails[$i]['total_rooms'] = 0;
             }
-            if($hotelDetails[$i][extra_bed]){
+            if($hotelDetails[$i][extra_bed] == ''){
                 $hotelDetails[$i]['extra_bed'] = 0;
             }
+            $tax = explode(':',$costDetails[tax_amount]);
+            $markup_tax = explode(':',$costDetails[markup_tax]);
             $whatsapp_msg .= rawurlencode('
-
+*Option* : '.($i+1).'
 *City Name* : '.($cityName[city_name]).'
 *Hotel Name* : '.($hotelName[hotel_name]).'
-*Total Rooms* : '.($hotelDetails[$i][total_rooms]).' Room(s)
-*Extra Bed* : '.($hotelDetails[$i][extra_bed]).' Bed(s)
 *Check In Date* : '.get_date_user($hotelDetails[$i][checkin]).'
 *Check Out Date* : '.get_date_user($hotelDetails[$i][checkout]).'
 *Total Nights* : '.($hotelDetails[$i][hotel_stay_days]).'
-*Total Cost* : '.($costDetails[total_amount]).'
-*Taxes Applied* : '.($costDetails[markup_tax] + $costDetails[tax_amount]).'
-*Net Total* : '.($costDetails[total_amount])
+*Total Rooms* : '.($hotelDetails[$i][total_rooms]).' Room(s)
+*Extra Bed* : '.($hotelDetails[$i][extra_bed]).' Bed(s)'
 .' 
-
 ');
 }
+$whatsapp_msg .= rawurlencode('
+*Total Cost* : '.$currency_logo.' '.number_format(($costDetails[hotel_cost]+$costDetails[service_charge]+$costDetails[markup_cost]+$costDetails[roundoff])*$currency_rate,2).'
+*Taxes Applied* : '.$currency_logo.' '.number_format(($markup_tax[2] + $tax[2])*$currency_rate,2).'
+*Net Total* : '.$currency_logo.' '.number_format($costDetails[total_amount]*$currency_rate,2)
+.'
+
+');
         $whatsapp_msg .= rawurlencode('Please contact for more details : '.$contact.'
 Thank you.');
    $link = 'https://web.whatsapp.com/send?phone='.$enquiryDetails[country_code].$enquiryDetails[whatsapp_no].'&text='.$whatsapp_msg;

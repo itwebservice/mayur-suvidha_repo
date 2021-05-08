@@ -66,6 +66,8 @@ $reflections = json_decode($sq_exc_info['reflections']);
 				 <div class="row mg_bt_10">
 	                <div class="col-xs-12 text-right text_center_xs">
 	                    <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('tbl_dynamic_exc_booking_update')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+						<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="new_activity_open()"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Activity</button>
+						<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
 	                </div>
 	            </div>    
 	            

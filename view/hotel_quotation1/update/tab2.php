@@ -17,9 +17,8 @@
 	<div class="container">	
         <div class="row">
             <h3 class="editor_title main_block">Hotel Details</h3>
-            <div class="row mg_bt_10" style="margin-right:0px">
+            <div class="row mg_bt_10">
                 <div class="col-xs-12 text-right text_center_xs mg_tp_10">
-				<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
                     <button type="button" class="btn btn-excel btn-sm" onClick="addRow('hotel_quotation_update');city_lzloading('.city_master_dropdown')"><i class="fa fa-plus"></i></button>
                 </div>
                 </div>
@@ -69,7 +68,7 @@
                         <td><input type="text" id="hotel_type-u_<?= $count ?>" name="hotel_type-1" placeholder="Hotel Type" title="Hotel Type" style="width:150px" value="<?= $values['hotel_type'] ?>" readonly>
                         </td>
 
-                        <td><input type="text" id="hotel_stay_days-u_<?= $count ?>" title="Total Nights" name="hotel_stay_days-u_<?= $count ?>" placeholder="Total Nights" value="<?= $values['hotel_stay_days'] ?>" onchange="validate_balance(this.id);" style="width:150px;" readonly></td>
+                        <td><input type="text" id="hotel_stay_days-u_<?= $count ?>" title="Total Nights" name="hotel_stay_days-u_<?= $count ?>" placeholder="Total Nights" value="<?= $values['hotel_stay_days'] ?>" onchange="validate_balance(this.id);" style="width:150px;"></td>
 
                         <td><input type="text" id="no_of_rooms-u_<?= $count ?>" title="Total Rooms" name="no_of_rooms-u_<?= $count ?>" placeholder="Total Rooms" value="<?= $values['total_rooms'] ?>" onchange="validate_balance(this.id);" style="width:110px"></td>
 
@@ -82,7 +81,7 @@
             </div>
         </div>
     </div>
-		    <div class="row text-center mg_tp_30 mg_bt_30" style="margin-right:0px">
+		    <div class="row text-center mg_tp_20">
 			    <div class="col-xs-12">
 				    <button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab1()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp Previous</button>
 				    &nbsp;&nbsp;
@@ -94,7 +93,6 @@
 
 
 <script>
-$('.app_datepicker').datetimepicker({ format:'d-m-Y',timepicker:false });
 city_lzloading('.city_master_dropdown');
 $('#dest_name').select2();
 function switch_to_tab1(){ 
@@ -110,74 +108,77 @@ $('#frm_tab2').validate({
 	submitHandler:function(form,e)
 	{
 		e.preventDefault();
+		var nofquotation = $('#nofquotation').val();
+		if(nofquotation == ''){
+			error_msg_alert('Please Enter Number of Quotations');
+			$('#nofquotation').val('');
+			$('#nofquotation').css('border','1px solid red');
+			return false
+		}
 		var hotelcostArr = new Array();
-		var hcount = 0;
-	
-		var table = document.getElementById("hotel_quotation_update");
-		var rowCount = table.rows.length;
+		for(var quot = 1; quot <= Number(nofquotation); quot++){
+			var table = document.getElementById("dynamic_table_list_h_"+quot);
+			var rowCount = table.rows.length;
 
-		var hcostTotal = 0;
-		for(var i=0; i<rowCount; i++){
+			var hcostTotal = 0;
+			for(var i=0; i<rowCount; i++){
 
-			var row = table.rows[i];
-			if(row.cells[0].childNodes[0].checked){
+				var row = table.rows[i];
+				if(row.cells[0].childNodes[0].checked){
 
-				hcount++;
-				var city_name = row.cells[2].childNodes[0].value;
-				var hotel_id = row.cells[3].childNodes[0].value;  
-				var hotel_cat = row.cells[4].childNodes[0].value;
-				var check_in = row.cells[6].childNodes[0].value;  
-				var checkout = row.cells[7].childNodes[0].value;        
-				var hotel_stay_days1 = row.cells[9].childNodes[0].value;
-				var total_rooms = row.cells[10].childNodes[0].value;
-				var hotel_cost = row.cells[12].childNodes[0].value;  	      
-				hcostTotal += Number(hotel_cost);
+					var city_name = row.cells[2].childNodes[0].value;
+					var hotel_id = row.cells[3].childNodes[0].value;  
+					var hotel_cat = row.cells[4].childNodes[0].value;
+					var check_in = row.cells[6].childNodes[0].value;  
+					var checkout = row.cells[7].childNodes[0].value;        
+					var hotel_stay_days1 = row.cells[9].childNodes[0].value;
+					var total_rooms = row.cells[10].childNodes[0].value;
+					var hotel_cost = row.cells[12].childNodes[0].value;  	      
+					hcostTotal += Number(hotel_cost);
 
-				if(city_name==""){
-					error_msg_alert('Select Hotel city in Row '+(i+1));
-					$('.accordion_content').removeClass("indicator");
-					$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
-					return false;
-				}
+					if(city_name==""){
+						error_msg_alert('Select Hotel city in Row '+(i+1)+ ' in Option ' + quot);
+						$('.accordion_content').removeClass("indicator");
+						$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
+						return false;
+					}
 
-				if(hotel_id==""){
-					error_msg_alert('Enter Hotel in Row '+(i+1));
-					$('.accordion_content').removeClass("indicator");
-					$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
-					return false;
-				}
-				if(hotel_cat==""){
-					error_msg_alert('Enter Room Category in Row '+(i+1));
-					$('.accordion_content').removeClass("indicator");
-					$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
-					return false;
-				}
-				if(check_in==""){
-					error_msg_alert('Select Check-In date in Row '+(i+1));
-					$('.accordion_content').removeClass("indicator");
-					$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
-					return false;
-				}
+					if(hotel_id==""){
+						error_msg_alert('Enter Hotel in Row '+(i+1)+ ' in Option ' + quot);
+						$('.accordion_content').removeClass("indicator");
+						$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
+						return false;
+					}
+					if(hotel_cat==""){
+						error_msg_alert('Enter Room Category in Row '+(i+1)+ ' in Option ' + quot);
+						$('.accordion_content').removeClass("indicator");
+						$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
+						return false;
+					}
+					if(check_in==""){
+						error_msg_alert('Select Check-In date in Row '+(i+1)+ ' in Option ' + quot);
+						$('.accordion_content').removeClass("indicator");
+						$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
+						return false;
+					}
 
-				if(checkout==""){
-					error_msg_alert('Select Check-Out date in Row '+(i+1));
-					$('.accordion_content').removeClass("indicator");
-					$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
-					return false;
+					if(checkout==""){
+						error_msg_alert('Select Check-Out date in Row '+(i+1)+ ' in Option ' + quot);
+						$('.accordion_content').removeClass("indicator");
+						$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
+						return false;
+					}
+					if(hotel_stay_days1==""){
+						error_msg_alert('Enter Hotel total days in Row '+(i+1)+ ' of Option ' + quot);
+						$('.accordion_content').removeClass("indicator");
+						$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
+						return false;
+					}
 				}
-				if(hotel_stay_days1==""){
-					error_msg_alert('Enter Hotel total days in Row '+(i+1));
-					$('.accordion_content').removeClass("indicator");
-					$('#tbl_package_tour_quotation_dynamic_hotel').parent('div').closest('.accordion_content').addClass("indicator");
-					return false;
-				}
+				get_hotel_cost(quot);
 			}
+			hotelcostArr.push(hcostTotal);
 		}
-		if(parseInt(hcount) === 0){
-			error_msg_alert("Atleast one hotel is required to proceed!");
-			return false;
-		}
-		hotelcostArr.push(hcostTotal);
 			
 		$('#tab2_head').addClass('done');
 		$('#tab3_head').addClass('active');

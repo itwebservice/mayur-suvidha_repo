@@ -17,59 +17,43 @@ function total_passangers_calculate(offset = '') {
 function get_hotelenquiry_details(offset = '') {
 	var enquiry_id = $('#enquiry_id' + offset).val();
 	var base_url = $('#base_url').val();
-	if(enquiry_id == 0){
-		$('#customer_name' + offset).val('');
-		$('#email_id' + offset).val('');
-		$('#mobile_no' + offset).val('');
-		$('#total_adult' + offset).val('');
-		$('#total_infant' + offset).val('');
-		$('#total_adult' + offset).val('');
-		$('#children_without_bed' + offset).val('');
-		$('#children_with_bed' + offset).val('');
-		$('#hotel_requirements' + offset).wysiwyg("destroy")
-		$('#hotel_requirements' + offset).val('');
-		$('#whatsapp_no' + offset).val('');
-		$('#country_code' + offset).val('');
-		$('#total_members' + offset).val(0);
-	}else{
-		$.ajax({
-			type: 'post',
-			url: base_url + 'view/hotel_quotation/get_enquiry_details.php',
-			dataType: 'json',
-			data: { enquiry_id: enquiry_id },
-			success: function (result) {
-				
-				$('#customer_name' + offset).val(result.name);
-				$('#email_id' + offset).val(result.email_id);
-				$('#mobile_no' + offset).val(result.landline_no);
-				$('#total_adult' + offset).val(result.total_adult);
-				$('#total_infant' + offset).val(result.total_infant);
-				$('#total_adult' + offset).val(result.total_adult);
-				$('#children_without_bed' + offset).val(result.total_cwb);
-				$('#children_with_bed' + offset).val(result.total_cwob);
-				$('#hotel_requirements' + offset).wysiwyg("destroy")
-				$('#hotel_requirements' + offset).val(result.hotel_requirements);
-				$('#hotel_requirements' + offset).wysiwyg({
-					controls: 'bold,italic,|,undo,redo,image|h1,h2,h3,decreaseFontSize,highlight',
-					initialContent: ''
-				});
-				var whatsapp = result.landline_no;
-				whatsapp = whatsapp.split(result.country_code)[1];
-				$('#whatsapp_no' + offset).val(whatsapp);
-				$('#country_code' + offset).val(result.country_code);
-				$('#country_code').trigger('change');
+	$.ajax({
+		type: 'post',
+		url: base_url + 'view/hotel_quotation/get_enquiry_details.php',
+		dataType: 'json',
+		data: { enquiry_id: enquiry_id },
+		success: function (result) {
+			
+			$('#customer_name' + offset).val(result.name);
+			$('#email_id' + offset).val(result.email_id);
+			$('#mobile_no' + offset).val(result.landline_no);
+			$('#total_adult' + offset).val(result.total_adult);
+			$('#total_infant' + offset).val(result.total_infant);
+			$('#total_adult' + offset).val(result.total_adult);
+			$('#children_without_bed' + offset).val(result.total_cwb);
+			$('#children_with_bed' + offset).val(result.total_cwob);
+			$('#hotel_requirements' + offset).wysiwyg("destroy")
+			$('#hotel_requirements' + offset).val(result.hotel_requirements);
+			$('#hotel_requirements' + offset).wysiwyg({
+				controls: 'bold,italic,|,undo,redo,image|h1,h2,h3,decreaseFontSize,highlight',
+				initialContent: ''
+			});
+			var whatsapp = result.landline_no;
+			whatsapp = whatsapp.split(result.country_code)[1];
+			$('#whatsapp_no' + offset).val(whatsapp);
+			$('#country_code' + offset).val(result.country_code);
+			$('#country_code').trigger('change');
 
-				if (result.total_adult === undefined || result.total_adult === '') result.total_adult = 0;
-				if (result.total_infant === undefined || result.total_infant === '') result.total_infant = 0;
-				if (result.total_cwob === undefined || result.total_cwob === '') result.total_cwob = 0;
-				if (result.total_cwb === undefined || result.total_cwb === '') result.total_cwb = 0;
+			if (result.total_adult === undefined || result.total_adult === '') result.total_adult = 0;
+			if (result.total_infant === undefined || result.total_infant === '') result.total_infant = 0;
+			if (result.total_cwob === undefined || result.total_cwob === '') result.total_cwob = 0;
+			if (result.total_cwb === undefined || result.total_cwb === '') result.total_cwb = 0;
 
-				var total_pax = parseFloat(result.total_adult) + parseFloat(result.total_cwob) + parseFloat(result.total_cwb) + parseFloat(result.total_infant);
-				if (total_pax == '') total_pax = 0;
-				$('#total_members' + offset).val(total_pax);
-			},
-		});
-	}
+			var total_pax = parseFloat(result.total_adult) + parseFloat(result.total_cwob) + parseFloat(result.total_cwb) + parseFloat(result.total_infant);
+			if (total_pax == '') total_pax = 0;
+			$('#total_members' + offset).val(total_pax);
+		},
+	});
 }
 
 function options_dynamic_reflect(id) {

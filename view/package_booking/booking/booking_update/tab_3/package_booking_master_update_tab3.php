@@ -122,6 +122,9 @@
         else{ ?>
         <div class="row" style="margin-top: 5px"> <div class="col-md-12 text-right">
             <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_transport_infomration');destinationLoading('.pickup_from', 'Pickup Location');destinationLoading('.drop_to', 'Pickup Location');" title="Add Row"><i class="fa fa-plus"></i></button>
+            <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="hotel_save_modal()"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Hotel</button>
+    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="airport_open_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Airport</button>
+    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="transport_save_direct('tbl_package_transport_infomration')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Transport</button>
         </div> </div>
         <div class="row mg_tp_10">
             <div class="col-xs-12"> 
@@ -219,6 +222,7 @@
         else{ ?>
         <div class="row" style="margin-top: 5px"> <div class="col-md-12 text-right">
             <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_exc_infomration');destinationLoading('.pickup_from', 'Pickup Location');destinationLoading('.drop_to', 'Pickup Location');" title="Add Row"><i class="fa fa-plus"></i></button>
+            <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="new_activity_open()"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Activity</button>
         </div> </div>
         <div class="row mg_tp_10">
             <div class="col-xs-12"> 
@@ -266,7 +270,7 @@
         </div>
         
     <?php } ?>
-
+    <div id="transfer_save_modal_direct"></div>
 <div class="panel panel-default main_block bg_light pad_8 text-center mg_tp_10 mg_bt_150">
     <div class="text-center">
         <div class="col-xs-12">

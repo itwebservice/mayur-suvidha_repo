@@ -1,6 +1,7 @@
 <div class="row" style="margin-top: 5px"> <div class="col-md-12 text-right">
     <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_exc_infomration');city_lzloading('select[name=city_name-1]')"><i class="fa fa-plus"></i></button>
     <button type="button" class="btn btn-pdf btn-sm" onClick="deleteRow('tbl_package_exc_infomration')"><i class="fa fa-trash"></i></button>
+    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10_sm_xs" onclick="new_activity_open()"><i class="fa fa-plus"></i>&nbsp;&nbsp;New Activity</button>
 </div> </div>
 <div class="row main_block">
     <div class="col-xs-12"> 

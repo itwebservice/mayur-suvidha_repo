@@ -59,11 +59,9 @@ $costDetails = json_decode($sq_quotation['costing_details'], true);
 						$sq_enq = mysql_query($q);
 					}
 					while($row_enq = mysql_fetch_assoc($sq_enq)){
-						$sq_enq1 = mysql_fetch_assoc(mysql_query("SELECT followup_status FROM `enquiry_master_entries` WHERE `enquiry_id` = '$row_enq[enquiry_id]' ORDER BY `entry_id` DESC"));
-						if($sq_enq1['followup_status'] != 'Dropped'){
 						?>
 						<option value="<?= $row_enq['enquiry_id'] ?>">Enq<?= $row_enq['enquiry_id'] ?> : <?= $row_enq['name'] ?></option>
-						<?php }
+						<?php
 					}
 					?>
 				</select>

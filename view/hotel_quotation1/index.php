@@ -22,7 +22,7 @@ $branch_status = $sq['branch_status'];
             <div class="col-md-8">
             </div>
             <div class="col-md-4 text-right">
-                <form action="save/index.php" method="POST">
+                <form action="save/index.php" method="POST" target="_blank">
 					<button class="btn btn-info btn-sm ico_left" id="quot_save"><i class="fa fa-plus"></i>&nbsp;&nbsp;Quotation</button>
 				</form>
             </div>
@@ -31,7 +31,7 @@ $branch_status = $sq['branch_status'];
    <div class="app_panel_content Filter-panel">
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12 mg_bt_10_xs">
-                    <input type="text" id="from_date_filter" name="from_date_filter" placeholder="From Date" title="From Date" onchange="validate_validDate('from_date_filter','to_date_filter');get_to_date(this.id,'to_date_filter');quotation_list_reflect()">
+                    <input type="text" id="from_date_filter" name="from_date_filter" placeholder="From Date" title="From Date" onchange="quotation_list_reflect()">
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12 mg_bt_10_xs">
 			        <input type="text" id="to_date_filter" name="to_date_filter" placeholder="To Date" title="To Date" onchange="quotation_list_reflect();validate_validDate('from_date_filter', 'to_date_filter')">
@@ -111,7 +111,7 @@ function quotation_list_reflect()
 	var branch_status = $('#branch_status').val();
 
 	$.post('list_reflect.php', { from_date : from_date, to_date : to_date, quotation_id : quotation_id, branch_status : branch_status }, function(data){
-		pagination_load(data, columns, true, false, 20, 'hotel_quotation_table');
+		pagination_load(data, columns, false, false, 20, 'hotel_quotation_table');
 		$('.loader').remove();
 	})
 }

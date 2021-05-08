@@ -1,25 +1,24 @@
 <form id="frm_tab3">
 	<div class="app_panel"> 
 
+	<!--=======Header panel======-->
+		<div class="app_panel_head mg_bt_20">
+		<div class="container">
+			<h2 class="pull-left"></h2>
+			<div class="pull-right header_btn">
+				<button>
+					<a>
+						<i class="fa fa-arrow-right"></i>
+					</a>
+				</button>
+			</div>
+		</div>
+		</div> 
+	<!--=======Header panel end======-->
         <div class="container" id="table_data">
 		
 		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-4 col-xs-12 mg_bt_10">
-					<select name="currency_code" id="currency_code" title="Currency" style="width:100%" data-toggle="tooltip" required>
-						<option value=''>*Select Currency</option>
-						<?php
-						$sq_currency = mysql_query("select * from currency_name_master order by currency_code");
-						while($row_currency = mysql_fetch_assoc($sq_currency)){
-						?>
-						<option value="<?= $row_currency['id'] ?>"><?= $row_currency['currency_code'] ?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-		</div>
-		
+
 		<div class="row text-center mg_tp_20">
 			<div class="col-xs-12">
 				<button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab2()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp Previous</button>
@@ -44,11 +43,9 @@ $('#frm_tab3').validate({
 
 	submitHandler:function(form,e)
 	{
-		$('#btn_quotation_save').prop('disabled',false);
 		var nofquotation = $('#nofquotation').val();
 		var quotation_date = $('#quotation_date').val();
 		var base_url = $('#base_url').val();
-		var currency_code = $('#currency_code').val();
 
 		var enquiryDetails = {
 			enquiry_id : $('#enquiry_id').val(),
@@ -115,13 +112,12 @@ $('#frm_tab3').validate({
 				"markup" : $(row.cells[4].childNodes[0]).find('span').text()
 			});
 		}
-		$.post(base_url + '/controller/hotel/quotation/quotation_save.php',	{ nofquotation : nofquotation, optionJson : optionJson, costingJson : costingJson , enquiryDetails : enquiryDetails, quotation_date : quotation_date, bsmValues : bsmValues, currency_code : currency_code},	function(message){
+		$.post(base_url + '/controller/hotel/quotation/quotation_save.php',	{ nofquotation : nofquotation, optionJson : optionJson, costingJson : costingJson , enquiryDetails : enquiryDetails, quotation_date : quotation_date, bsmValues : bsmValues},	function(message){
 			
 			$('#btn_quotation_save').button('reset');
 			var msg = message.split('--');
 
 			if(msg[0]=="error"){
-				$('#btn_quotation_save').prop('disabled',true);
 				error_msg_alert(msg[1]);
 			}
 			else{
@@ -131,7 +127,6 @@ $('#frm_tab3').validate({
 						true_btn_text:'Ok',
 						callback: function(data1){
 							if(data1=="yes"){
-								$('#btn_quotation_save').prop('disabled',true);
 								$('#btn_quotation_save').button('reset');
 								window.location.href = base_url+'view/hotel_quotation/index.php';
 							}

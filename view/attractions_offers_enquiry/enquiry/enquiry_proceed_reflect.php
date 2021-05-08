@@ -256,6 +256,8 @@ while($row = mysql_fetch_assoc($sq_enquiries)){
 		
 	);
 	foreach($temp_arr2 as $vals) $actions_string .= $vals;
+	$actions_string .= '<button data-toggle="tooltip" style="display:inline-block" class="btn btn-info btn-sm" onclick="send_whatsapp('.$row['enquiry_id'].')" title="Send Whatsapp"><i class="fa fa-whatsapp"></i></button>';
+
 	if($role=="Admin" || $role=='Branch Admin'){ 
 		
 		$temp_arr3= '<button data-toggle="tooltip" style="display:inline-block" class="btn btn-danger btn-sm" onclick="enquiry_status_disable('.$row['enquiry_id'] .')" title="Delete Enquiry"><i class="fa fa-times"></i></button>';

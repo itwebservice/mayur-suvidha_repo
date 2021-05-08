@@ -1230,13 +1230,15 @@ function foo(tableID, quot_table_id) {
 		}
 	}
 	if (tableID == 'dynamic_table_list_h_' + quot_table_id || tableID == 'hotel_quotation_update') {
+
+		var counter = table.rows.length;
 		if(tableID == 'hotel_quotation_update'){
-			offset = 'u_' + foo.counter;
+			offset = 'u_' + (counter);
 		}
 		else{
-			offset = quot_table_id+'-' + foo.counter;
+			offset = quot_table_id+'-' + (counter);
 		}
-		row.cells[0].childNodes[0].setAttribute('id', 'chk_program-');
+		row.cells[0].childNodes[0].setAttribute('id', 'chk_program-'+quot_table_id+offset);
 		row.cells[0].childNodes[1].setAttribute('for', 'chk_program-'+offset);
 
 		row.cells[2].childNodes[0].setAttribute('id', 'city_name-'+offset);

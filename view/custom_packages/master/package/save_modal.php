@@ -99,6 +99,7 @@
            <small class="note">Note -  Pls ensure you added city wise hotel & tariff using Supplier Master</small>
           <div class="bg_white main_block panel-default-inner">
             <div class="col-xs-12 text-right mg_tp_10">
+              <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
               <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="hotel_save_modal_direct('tbl_package_hotel_master')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
               <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onClick="addRow('tbl_package_hotel_master');city_lzloading('select[name^=city_name1]')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
               <button type="button" class="btn btn-danger btn-sm ico_left mg_bt_10" onClick="deleteRow('tbl_package_hotel_master')"><i class="fa fa-times"></i>&nbsp;&nbsp;Delete</button>

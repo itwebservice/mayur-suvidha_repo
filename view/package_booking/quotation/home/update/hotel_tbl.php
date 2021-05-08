@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-xs-12 text-right mg_bt_20_sm_xs">
+    <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
         <button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_save_modal_direct('tbl_package_tour_quotation_dynamic_hotel_update')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
         <button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_category_direct_save('tbl_package_tour_quotation_dynamic_hotel_update')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Room Category</button>
         <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('tbl_package_tour_quotation_dynamic_hotel_update');city_lzloading('.city_name1');"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>

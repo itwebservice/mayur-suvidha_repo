@@ -58,11 +58,11 @@
 
                                         <td class="header_btn header_btn" style="padding:4px"><small id="basic_show-u_1" style="color:red"><?= ($inclusive_b == '') ? '&nbsp;' : 'Inclusive Amount : <span>'.$inclusive_b ?></span></small><input type="number" id="basic_cost-u_1" name="basic_cost-u_1" placeholder="Hotel Cost" title="Hotel Cost" value="<?= $basic_cost ?>"  onchange="validate_balance(this.id);get_auto_values('quotation_date1','basic_cost-u_1','payment_mode','service_charge-u_1','markup_cost-u_1','update','true','service_charge','discount1',true);"> </td>
 
-                                        <td class="header_btn header_btn" style="padding:4px"><small id="service_show-u_1" style="color:red"><?= ($inclusive_s == '') ? '&nbsp;' : 'Inclusive Amount : <span>'.$inclusive_s ?></span></small><input type="number" id="service_charge-u_1" name="service_charge-u_1" placeholder="Service Charge" title="Service Charge" value="<?= $service_charge ?>"  onchange="validate_balance(this.id);get_auto_values('quotation_date1','basic_cost-u_1','payment_mode','service_charge-u_1','markup_cost-u_1','update','false','service_charge','discount1',true);"></td>
+                                        <td class="header_btn header_btn" style="padding:4px"><small id="service_show-u_1" style="color:red"><?= ($inclusive_s == '') ? '&nbsp;' : 'Inclusive Amount : <span>'.$inclusive_s ?></span></small><input type="number" id="service_charge-u_1" name="service_charge-u_1" placeholder="Service Charge" title="Service Charge" value="<?= $service_charge ?>"  onchange="validate_balance(this.id);get_auto_values('quotation_date1','basic_cost-u_1','payment_mode','service_charge-u_1','markup_cost-u_1','update','true','service_charge','discount1',true);"></td>
 
                                         <td class="header_btn header_btn" style="padding:4px"><small>&nbsp;</small><input type="text" id="tax_amount-u_1" name="tax_amount-u_1" placeholder="Tax Amount" title="Tax Amount"  value="<?= $costDetails['tax_amount'] ?>" onchange="validate_balance(this.id)" readonly> </td>
 
-                                        <td class="header_btn header_btn" style="padding:4px"><small>&nbsp;</small><input type="number" id="markup_cost-u_1" name="markup_cost-u_1" placeholder="Markup Cost" title="Markup Cost" value="<?= $markup ?>"  onchange="validate_balance(this.id);get_auto_values('quotation_date1','basic_cost-u_1','payment_mode','service_charge-u_1','markup_cost-u_1','update','false','service_charge','discount1',true);" > </td>
+                                        <td class="header_btn header_btn" style="padding:4px"><small>&nbsp;</small><input type="number" id="markup_cost-u_1" name="markup_cost-u_1" placeholder="Markup Cost" title="Markup Cost" value="<?= $markup ?>"  onchange="validate_balance(this.id);get_auto_values('quotation_date1','basic_cost-u_1','payment_mode','service_charge-u_1','markup_cost-u_1','update','true','service_charge','discount1',true);" > </td>
 
                                         <td class="header_btn header_btn" style="padding:4px"><small id="markup_show-u_1" style="color:red"><?= ($inclusive_m == '') ? '&nbsp;' : 'Inclusive Amount : <span>'.$inclusive_m ?></span></small><input type="text" id="tax_markup-u_1" name="tax_markup-u_1" placeholder="Markup Tax" title="Markup Tax" value="<?= $costDetails['markup_tax'] ?>"  onchange="validate_balance(this.id)" readonly> </td>
 
@@ -78,26 +78,7 @@
                 </div>
             </div>
 		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-4 col-xs-12 mg_bt_10">
-					<select name="currency_code1" id="currency_code1" title="Currency" style="width:100%" data-toggle="tooltip" required>
-						<?php
-						$sq_currency = mysql_fetch_assoc(mysql_query("select * from currency_name_master where id=$sq_quotation[currency_code]"));
-								?>
-						<option value="<?= $sq_quotation['currency_code'] ?>"><?= $sq_currency['currency_code'] ?></option>
 
-							<option value=''>*Select Currency</option>
-							<?php
-							$sq_currency = mysql_query("select * from currency_name_master order by currency_code");
-							while($row_currency = mysql_fetch_assoc($sq_currency)){
-							?>
-							<option value="<?= $row_currency['id'] ?>"><?= $row_currency['currency_code'] ?></option>
-							<?php } ?>
-					</select>
-				</div>
-			</div>
-		</div>
 		<div class="row text-center mg_tp_20">
 			<div class="col-xs-12">
 				<button class="btn btn-info btn-sm ico_left" type="button" onclick="switch_to_tab2()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp Previous</button>
@@ -109,7 +90,7 @@
 </form>
 
 <script>
-$('#dest_name,#currency_code1').select2();
+$('#dest_name').select2();
 function switch_to_tab2(){ 
 	$('#tab3_head').addClass('done');
 	$('#tab2_head').addClass('active');
@@ -125,7 +106,6 @@ $('#frm_tab3').validate({
         e.preventDefault();
 		var quotation_id = $('#quotation_id').val();
 		var base_url = $('#base_url').val();
-		var currency_code = $('#currency_code1').val();
 
 		var enquiryDetails = {
 			enquiry_id : $('#enquiry_id1').val(),
@@ -186,7 +166,7 @@ $('#frm_tab3').validate({
 				"service" : $(row.cells[1].childNodes[0]).find('span').text(),
 				"markup" : $(row.cells[4].childNodes[0]).find('span').text()
 			}
-		$.post(base_url + '/controller/hotel/quotation/quotation_update.php',	{ hotelDetails : hotelDetails, costingDetails : costingDetails , enquiryDetails : enquiryDetails, quotation_id : quotation_id, bsmValues : bsmValues, currency_code : currency_code},	function(message){
+		$.post(base_url + '/controller/hotel/quotation/quotation_update.php',	{ hotelDetails : hotelDetails, costingDetails : costingDetails , enquiryDetails : enquiryDetails, quotation_id : quotation_id, bsmValues : bsmValues},	function(message){
 			
 			$('#btn_quotation_update').button('reset');
 			var msg = message.split('--');

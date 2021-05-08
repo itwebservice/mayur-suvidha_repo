@@ -368,6 +368,22 @@ function transport_save_direct(table_id){
 		$('#transfer_save_modal_direct').html(data);
 	});
 }
+function airport_open_new(){
+	var base_url = $("#base_url").val();
+	window.open(base_url+"/view/other_masters/index.php");
+  }
+  function transport_open_new(){
+	var base_url = $("#base_url").val();
+	window.open(base_url+"/view/b2b_transfer/index.php");
+  }
+function new_activity_open(){
+	var base_url = $('#base_url').val();
+	window.open(base_url+"/view/b2b_excursion/index.php");
+}
+function city_add_new(){
+	var base_url = $('#base_url').val();
+	window.open(base_url+"/view/other_masters/index.php");
+}
 function airport_direct_save(){
 	var base_url = $('#base_url').val();
 	$.post(base_url+'view/other_masters/airports/save_modal.php', {}, function(data){
