@@ -19,7 +19,7 @@ $nofquotation = $_REQUEST['nofquotation'];
                         <div class="col-md-12 no-pad" id="div_list1">
                             <div class="row mg_bt_10">
                                 <div class="col-xs-12 text-right text_center_xs">
-                                <button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
+                                <button type="button" class="btn btn-info btn-sm ico_left" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
                                     <button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_save_modal_direct('dynamic_table_list_h_<?= $i ?>')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Hotel</button>
                                     <button type="button" class="btn btn-info btn-sm ico_left" onclick="hotel_category_direct_save('dynamic_table_list_h_<?= $i ?>')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Room Category</button>
                                     <button type="button" class="btn btn-info btn-sm ico_left" onClick="addRow('dynamic_table_list_h_<?= $i ?>','<?= $i ?>');city_lzloading('.city_master_dropdown')"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
@@ -39,15 +39,15 @@ $nofquotation = $_REQUEST['nofquotation'];
                                         </select>
                                         </td>
 
-                                        <td><select id="hotel_name-<?= $i ?>-1" name="hotel_name-<?= $i ?>-1" onchange="hotel_type_load(this.id);get_hotel_cost('dynamic_table_list_h_<?= $i ?>');" style="width:160px" title="Select Hotel Name">
+                                        <td><select id="hotel_name-<?= $i ?>-1" name="hotel_name-<?= $i ?>-1" data-toggle="tooltip" onchange="hotel_type_load(this.id);get_hotel_cost('dynamic_table_list_h_<?= $i ?>');" style="width:160px" title="Select Hotel Name">
                                         <option value="">Hotel Name</option>
                                         </select>
                                         </td>
 
-                                        <td><select name="room_cat-<?= $i ?>-1" id="room_cat-<?= $i ?>-1" style="width:145px;" title="Room Category" class="form-control app_select2" onchange="get_hotel_cost('dynamic_table_list_h_<?= $i ?>');"><?php get_room_category_dropdown(); ?></select>
+                                        <td><select name="room_cat-<?= $i ?>-1" id="room_cat-<?= $i ?>-1" style="width:145px;" data-toggle="tooltip" title="Room Category" class="form-control app_select2" onchange="get_hotel_cost('dynamic_table_list_h_<?= $i ?>');"><?php get_room_category_dropdown(); ?></select>
                                         </td>
 
-                                        <td><select name="meal_plan-<?= $i ?>-1" id="meal_plan-<?= $i ?>-1" style="width:145px;" title="Room Category" class="form-control app_select2"><?php get_mealplan_dropdown(); ?></select>
+                                        <td><select name="meal_plan-<?= $i ?>-1" id="meal_plan-<?= $i ?>-1" style="width:145px;" data-toggle="tooltip" title="Meal Plan" class="form-control app_select2"><?php get_mealplan_dropdown(); ?></select>
                                         </td>
 
                                         <td><input type="text" style="width:150px;" class="app_datepicker" id="check_in-<?= $i ?>-1" name="check_in-<?= $i ?>-1" placeholder="Check-In Date" title="Check-In Date"  onchange="get_auto_to_date(this.id);get_hotel_cost('dynamic_table_list_h_<?= $i ?>');"></td>

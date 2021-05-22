@@ -368,6 +368,10 @@ function transport_save_direct(table_id){
 		$('#transfer_save_modal_direct').html(data);
 	});
 }
+function activity_add_new(){
+	var base_url = $('#base_url').val();
+	window.open(base_url+"/view/b2b_excursion/index.php");
+}
 function airport_open_new(){
 	var base_url = $("#base_url").val();
 	window.open(base_url+"/view/other_masters/index.php");

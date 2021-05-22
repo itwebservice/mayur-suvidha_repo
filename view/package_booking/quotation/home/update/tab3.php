@@ -261,6 +261,8 @@ $package_name = $sq_package['package_name'];
 					        <div class="panel-body">
 					        	<div class="row">
 								    <div class="col-xs-12 text-right mg_bt_20_sm_xs">
+									<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="city_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;City</button>
+									<button type="button" class="btn btn-info btn-sm ico_left mg_bt_10" onclick="activity_add_new()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Activity</button>
 								        <button type="button" class="btn btn-excel btn-sm" onClick="addRow('tbl_package_tour_quotation_dynamic_excursion','2')"><i class="fa fa-plus"></i></button>
 								    </div>
 								</div>
