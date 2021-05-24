@@ -130,7 +130,7 @@ $(function () {
 						return false;
 					}
 					else {
-						if($('#table_id_show_b2b').length != 0){
+						if($('#table_id_show_b2b').length != 0 && $('#table_id_show_b2b').val() != '' ){
 							var vehicle_id = msg[0].split(':')[0];
 							var vehicle_name = msg[0].split(':')[1];
 							var table=document.getElementById($('#table_id_show_b2b').val());
